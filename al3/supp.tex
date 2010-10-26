@@ -1,0 +1,163 @@
+\documentclass[10pt]{article}
+% Francais UTF8
+\usepackage[french]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{url}
+\usepackage{graphicx}
+\usepackage[small]{caption}
+% Maths de l'AMS. Dispo partout
+\usepackage{amsmath, amssymb}
+\usepackage{fullpage}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Z}{\mathbb{Z}}
+
+\newtheorem{theorem}{Théorème}
+\newtheorem{definition}{Définition}
+
+\newcounter{numeroexo}
+\newcommand{\exercice}{\par\noindent\stepcounter{numeroexo}
+	\hspace{-.25cm}\fbox{\textbf{Exercice \arabic{numeroexo}}}\quad}
+
+\begin{document}
+\title{Algèbre linéaire 3 : exercices supplémentaires}
+\maketitle
+\section{Espaces vectoriels}
+\exercice Montrer que toute matrice de rang $1$ s'écrit sous la forme
+$M = x y^T$
+
+\exercice (Opérations sur des espaces vectoriels) Soit $E$ un espace
+vectoriel, $S_1$ et $S_2$ deux sous-espaces. Dites si les espaces
+suivants sont des espaces vectoriels. Dans le cas o\`u $E$ est de
+dimension finie, en donner la dimension, et un procédé de construction
+de base à partir de celles de $S_1$ et $S_2$.
+\begin{align*}
+  E_1 &= S_1 \cap S_2\\
+  E_2 &= S_1 \cup S_2\\
+  E_3 &= S_1 + S_2 = \{x + y, x \in S_1, y \in S_2\}\\
+  E_4 &= S_1 \times S_2 = \{(x, y), x \in S_1, y \in S_2\}\\
+\end{align*}
+
+Pour $E_4$, qui n'est pas un sous-ensemble de $E$, définir les
+opérations d'addition et de multiplication pour un scalaire.
+
+Reprendre
+l'exercice 1 du TD1 
+
+\exercice (Interpolation) On considère le problème d'interpolation
+polynomiale : étant donné des réels $(x_i)_{1 \leq i \leq n}$ et
+$(y_i)_{1 \leq i \leq n}$, on cherche un polynome $P$ de degré $n-1$
+qui interpole le jeu de valeurs, c'est-à-dire tel que
+\begin{align*}
+  P(x_i) = y_i, 1 \leq i \leq n
+\end{align*}
+
+Réécrire ce problème sous la forme d'une équation matricielle $V A =
+Y$, o\`u $A$ est le vecteur des coefficients du polynome $P$ : $P(X) =
+a_0 + a_1 X + \dots + a_{n-1} X^{n-1}$. La matrice $V$ est appelée
+matrice de Vandermonde, et le calcul de son déterminant est un
+exercice classique en théorie des
+déterminants\footnote{\url{http://fr.wikipedia.org/wiki/Matrice_de_Vandermonde}}. Démontrer
+que si les $x_i$ sont tous distincts, la matrice $V$ est inversible,
+et ainsi prouver l'existence et l'unicité du problème d'interpolation
+polynomiale. Indice : on pourra montrer que si $V A = 0$, alors $P$
+est nul. Que se passe-t-il si on considère des polynomes de degré
+supérieur ou inférieur à $n-1$ ?
+
+\exercice (Polynomes trigonométriques) Montrer que $P$, l'espace des
+fonctions continues périodiques de période $2\pi$, est un espace
+vectoriel. Quelle est sa dimension ? Montrer que la famille $(\sin(x),
+\sin(2x), \sin(3x))$ est une sous- famille libre de $P$. Est-elle
+génératrice ? On peut montrer qu'en un certain sens, la famille
+$\{\sin(nx), \cos(nx), n \in \Z)$ est une ``base de dimension
+infinie'' de $P$. En d'autres termes, pour tout $f$ dans $P$, on a
+\begin{equation*}
+  f(x) = \sum_{n \in \Z} a_n \cos(nx) + b_n \sin(nx).
+\end{equation*}
+C'est la décomposition en série de Fourier, qui a d'innombrables
+applications, en mathématiques pures et appliquées
+(JPEG\footnote{Détails sur \url{http://fr.wikipedia.org/wiki/JPEG}}, MP3 ... à
+chaque fois le principe est de garder un nombre fini de coefficients
+$a_n$ et $b_n$ pour reconstituer le signal à partir d'un nombre réduit
+de variables)
+
+\exercice (Équivalence de normes) Prouver les inégalités suivantes sur $\R^N$. À chaque fois,
+donner un cas d'égalité, ce qui prouve que les inégalités sont
+optimales (on ne peut pas remplacer les constantes par des constantes
+plus faibles)
+\begin{align*}
+  ||x||_1 &\leq \sqrt N ||x||_2 \text{ indice : utiliser Cauchy-Schwartz}\\
+  ||x||_2 &\leq \sqrt N ||x||_\infty\\
+  ||x||_\infty &\leq N ||x||_1
+\end{align*}
+
+Ceci prouve que ces trois normes sont équivalentes (c'est-à-dire
+définissent la même topologie : même notions de continuité, de
+limites, etc.). Ce sont des cas particuliers du théorème fondamental :
+toutes les normes sont équivalentes en dimension finie.
+
+\exercice Soit $f$ une application linéaire sur $E$ de dimension
+finie. On définit
+\begin{align*}
+  N(f) = \sup_{||x|| = 1} {||f(x)||}.
+\end{align*}
+
+Montrer que $N$ est bien définie, puis que c'est une norme sur
+l'espace $\text{End}(E)$ des endomorphismes de $E$.
+
+\section{Produit scalaire}
+
+\exercice (Polynomes orthogonaux) On considère l'espace $E_n$ des
+polynomes de degré $n$. On considère la fonction
+\begin{align*}
+  <P, Q> &= \int_01 P Q.
+\end{align*}
+
+Montrer que c'est un produit scalaire. Donner une base orthonormée de
+$E_0, E_1, E_2$. Indice : on pourra orthonormaliser la base canonique
+de l'espace des polynomes grâce au procédé de Gram-Schmidt. La base
+ainsi obtenue forme les polynomes de Legendre. Il existe toute une
+ménagerie de polynomes orthogonaux pour différents produits
+scalaires\footnote{\url{http://fr.wikipedia.org/wiki/Polynomes_orthogonaux#Tableau_des_polynomes_orthogonaux_classiques}},
+avec des applications en physique, théorie de l'approximation, etc.
+
+
+\exercice (Polynomes trigonométriques, le retour) On considère la
+famille infinie $(\cos(nx), \sin(nx))$ d'éléments de $P$, espace des
+fonctions continues de période $2\pi$, muni du produit scalaire (le
+démontrer)
+\begin{align*}
+  <f,g> &= \int_0^{2\pi} f g.
+\end{align*}
+Montrer que cette famille est orthogonale. Comment pourrait-on obtenir une
+famille orthonormale ?
+
+\section{Projecteurs}
+\exercice Montrer que $M = x x^T$ représente la projection orthogonale
+sur le sous-espace engendré par $x$. En s'inspirant de cette forme,
+donner l'expression de la projection orthogonale sur un sous-espace.
+
+\exercice (Moindres carrés) Reformuler les résultats du cours en
+utilisant le langage matriciel, sous la forme: trouver $x \in \R^n$
+qui minimise
+\begin{align*}
+  F(x) = ||A x - b||_22,
+\end{align*}
+o\`u $b \in \R^m$ et $A \in M_{n,m}(\R)$ sont fixés. $n$ est le nombre
+de paramètres, $m$ le nombre d'observations, $m \gg n$.
+
+On rappelle les conditions nécessaires pour que $x$ soit le minimum de
+$F$:
+\begin{align*}
+  \frac{d}{d \varepsilon} F(x+\varepsilon y) = 0  
+\end{align*}
+En déduire que, pour le minimum, on a
+\begin{align*}
+  A^T A x = A^T b
+\end{align*}
+
+Ces équations expriment les conditions d'orthogonalité vues en cours
+(le vérifier sur le cas bien connu de la droite des moindres carrés)
+\end{document}
+
