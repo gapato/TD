@@ -9,7 +9,8 @@
 \usepackage[small]{caption}
 % Maths de l'AMS. Dispo partout
 \usepackage{amsmath, amssymb}
-\usepackage{fullpage}
+%\usepackage{fullpage}
+\usepackage[margin=2cm]{geometry}
 \newcommand{\R}{\mathbb{R}}
 \newcommand{\Z}{\mathbb{Z}}
 
@@ -17,7 +18,7 @@
 \newtheorem{definition}{Définition}
 
 \newcounter{numeroexo}
-\newcommand{\exercice}{\bigskip\par\noindent\stepcounter{numeroexo}
+\newcommand{\exercice}{\par\noindent\stepcounter{numeroexo}
 	\hspace{-.25cm}\fbox{\textbf{Exercice \arabic{numeroexo}}}\quad}
 
 \begin{document}
@@ -41,9 +42,6 @@ d'une base à partir de celles de $S_1$ et $S_2$.
 
 Pour $E_4$, qui n'est pas un sous-ensemble de $E$, définir les
 opérations d'addition et de multiplication pour un scalaire.
-
-Reprendre
-l'exercice 1 du TD1
 
 \exercice (Interpolation) On considère le problème d'interpolation
 polynomiale : étant donné des réels $(x_i)_{1 \leq i \leq n}$ et
@@ -132,7 +130,8 @@ avec des applications en physique, théorie de l'approximation, etc.
 
 \exercice (Polynomes trigonométriques, le retour) On considère la
 famille infinie $(\cos(nx), \sin(nx))$ d'éléments de $P$, espace des
-fonctions continues de période $2\pi$, muni du produit scalaire (vérifier que s'en est bien un)
+fonctions continues de période $2\pi$, muni du produit scalaire
+(vérifier que c'en est bien un)
 \begin{align*}
   \langle f,g \rangle &= \int_0^{2\pi} f g.
 \end{align*}
@@ -148,7 +147,7 @@ donner l'expression de la projection orthogonale sur un sous-espace.
 utilisant le langage matriciel, sous la forme: trouver $x \in \R^n$
 qui minimise
 \begin{align*}
-  F(x) = ||A x - b||_22,
+  F(x) = ||A x - b||_2^2,
 \end{align*}
 o\`u $b \in \R^m$ et $A \in M_{n,m}(\R)$ sont fixés. $n$ est le nombre
 de paramètres, $m$ le nombre d'observations, $m \gg n$.
@@ -156,9 +155,10 @@ de paramètres, $m$ le nombre d'observations, $m \gg n$.
 On rappelle les conditions nécessaires pour que $x$ soit le minimum de
 $F$:
 \begin{align*}
-  \frac{d}{d \varepsilon} F(x+\varepsilon y) = 0
+  \forall y \in \R^n, \frac{d}{d \varepsilon} F(x+\varepsilon y) = 0
 \end{align*}
-En déduire que, pour le minimum, on a
+(ou, autrement dit, $\nabla F(x) = 0$). En déduire que, pour le
+minimum, on a
 \begin{align*}
   A^T A x = A^T b
 \end{align*}
@@ -166,4 +166,3 @@ En déduire que, pour le minimum, on a
 Ces équations expriment les conditions d'orthogonalité vues en cours
 (le vérifier sur le cas bien connu de la droite des moindres carrés)
 \end{document}
-
