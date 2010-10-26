@@ -17,7 +17,7 @@
 \newtheorem{definition}{Définition}
 
 \newcounter{numeroexo}
-\newcommand{\exercice}{\par\noindent\stepcounter{numeroexo}
+\newcommand{\exercice}{\bigskip\par\noindent\stepcounter{numeroexo}
 	\hspace{-.25cm}\fbox{\textbf{Exercice \arabic{numeroexo}}}\quad}
 
 \begin{document}
@@ -25,13 +25,13 @@
 \maketitle
 \section{Espaces vectoriels}
 \exercice Montrer que toute matrice de rang $1$ s'écrit sous la forme
-$M = x y^T$
+$M = x y^T$ avec $(x,y)\in\mathbb{R}^n\times\mathbb{R}^n$.
 
 \exercice (Opérations sur des espaces vectoriels) Soit $E$ un espace
 vectoriel, $S_1$ et $S_2$ deux sous-espaces. Dites si les espaces
-suivants sont des espaces vectoriels. Dans le cas o\`u $E$ est de
-dimension finie, en donner la dimension, et un procédé de construction
-de base à partir de celles de $S_1$ et $S_2$.
+suivants sont des espaces vectoriels. En supposant que $E$ est de
+dimension finie, donner sa dimension, et un procédé de construction
+d'une base à partir de celles de $S_1$ et $S_2$.
 \begin{align*}
   E_1 &= S_1 \cap S_2\\
   E_2 &= S_1 \cup S_2\\
@@ -43,7 +43,7 @@ Pour $E_4$, qui n'est pas un sous-ensemble de $E$, définir les
 opérations d'addition et de multiplication pour un scalaire.
 
 Reprendre
-l'exercice 1 du TD1 
+l'exercice 1 du TD1
 
 \exercice (Interpolation) On considère le problème d'interpolation
 polynomiale : étant donné des réels $(x_i)_{1 \leq i \leq n}$ et
@@ -52,24 +52,31 @@ qui interpole le jeu de valeurs, c'est-à-dire tel que
 \begin{align*}
   P(x_i) = y_i, 1 \leq i \leq n
 \end{align*}
-
-Réécrire ce problème sous la forme d'une équation matricielle $V A =
+\begin{itemize}
+	\item Réécrire ce problème sous la forme d'une équation matricielle $V A =
 Y$, o\`u $A$ est le vecteur des coefficients du polynome $P$ : $P(X) =
-a_0 + a_1 X + \dots + a_{n-1} X^{n-1}$. La matrice $V$ est appelée
+a_0 + a_1 X + \dots + a_{n-1} X^{n-1}$.
+La matrice $V$ est appelée
 matrice de Vandermonde, et le calcul de son déterminant est un
 exercice classique en théorie des
-déterminants\footnote{\url{http://fr.wikipedia.org/wiki/Matrice_de_Vandermonde}}. Démontrer
-que si les $x_i$ sont tous distincts, la matrice $V$ est inversible,
-et ainsi prouver l'existence et l'unicité du problème d'interpolation
-polynomiale. Indice : on pourra montrer que si $V A = 0$, alors $P$
-est nul. Que se passe-t-il si on considère des polynomes de degré
-supérieur ou inférieur à $n-1$ ?
+déterminants\footnote{\url{http://fr.wikipedia.org/wiki/Matrice_de_Vandermonde}}.
+	\item Démontrer que si les $x_i$ sont tous distincts, la matrice $V$ est inversible, et ainsi
+		prouver l'existence et l'unicité du problème d'interpolation polynomiale.
+		\emph{Indice : on pourra montrer que si $V A = 0$, alors $P$ est nul.}
+	\item Que se passe-t-il si on considère des polynomes
+		de degré supérieur ou inférieur à $n-1$ ?
+\end{itemize}
 
-\exercice (Polynomes trigonométriques) Montrer que $P$, l'espace des
+\exercice (Polynomes trigonométriques)
+\begin{itemize}
+	\item Montrer que $P$, l'espace des
 fonctions continues périodiques de période $2\pi$, est un espace
-vectoriel. Quelle est sa dimension ? Montrer que la famille $(\sin(x),
+vectoriel. Quelle est sa dimension ?
+	\item Montrer que la famille $(\sin(x),
 \sin(2x), \sin(3x))$ est une sous- famille libre de $P$. Est-elle
-génératrice ? On peut montrer qu'en un certain sens, la famille
+génératrice ?
+\end{itemize}
+On peut montrer qu'en un certain sens, la famille
 $\{\sin(nx), \cos(nx), n \in \Z)$ est une ``base de dimension
 infinie'' de $P$. En d'autres termes, pour tout $f$ dans $P$, on a
 \begin{equation*}
@@ -111,7 +118,7 @@ l'espace $\text{End}(E)$ des endomorphismes de $E$.
 \exercice (Polynomes orthogonaux) On considère l'espace $E_n$ des
 polynomes de degré $n$. On considère la fonction
 \begin{align*}
-  <P, Q> &= \int_01 P Q.
+  \langle P, Q\rangle &= \int_0^1 P Q.
 \end{align*}
 
 Montrer que c'est un produit scalaire. Donner une base orthonormée de
@@ -125,10 +132,9 @@ avec des applications en physique, théorie de l'approximation, etc.
 
 \exercice (Polynomes trigonométriques, le retour) On considère la
 famille infinie $(\cos(nx), \sin(nx))$ d'éléments de $P$, espace des
-fonctions continues de période $2\pi$, muni du produit scalaire (le
-démontrer)
+fonctions continues de période $2\pi$, muni du produit scalaire (vérifier que s'en est bien un)
 \begin{align*}
-  <f,g> &= \int_0^{2\pi} f g.
+  \langle f,g \rangle &= \int_0^{2\pi} f g.
 \end{align*}
 Montrer que cette famille est orthogonale. Comment pourrait-on obtenir une
 famille orthonormale ?
@@ -150,7 +156,7 @@ de paramètres, $m$ le nombre d'observations, $m \gg n$.
 On rappelle les conditions nécessaires pour que $x$ soit le minimum de
 $F$:
 \begin{align*}
-  \frac{d}{d \varepsilon} F(x+\varepsilon y) = 0  
+  \frac{d}{d \varepsilon} F(x+\varepsilon y) = 0
 \end{align*}
 En déduire que, pour le minimum, on a
 \begin{align*}
