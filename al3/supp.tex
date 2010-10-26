@@ -10,7 +10,7 @@
 % Maths de l'AMS. Dispo partout
 \usepackage{amsmath, amssymb}
 %\usepackage{fullpage}
-\usepackage[margin=2cm]{geometry}
+\usepackage[margin=1.5cm]{geometry}
 \newcommand{\R}{\mathbb{R}}
 \newcommand{\Z}{\mathbb{Z}}
 
@@ -24,6 +24,8 @@
 \begin{document}
 \title{Algèbre linéaire 3 : exercices supplémentaires}
 \maketitle
+Exercices totalement optionels d'algèbre linéaire 3. Commencez par
+chercher sans lire les indices donnés en bas de page.
 \section{Espaces vectoriels}
 \exercice Montrer que toute matrice de rang $1$ s'écrit sous la forme
 $M = x y^T$ avec $(x,y)\in\mathbb{R}^n\times\mathbb{R}^n$.
@@ -43,7 +45,7 @@ d'une base à partir de celles de $S_1$ et $S_2$.
 Pour $E_4$, qui n'est pas un sous-ensemble de $E$, définir les
 opérations d'addition et de multiplication pour un scalaire.
 
-\exercice (Interpolation) On considère le problème d'interpolation
+\exercice (Interpolation, matrice de Vandermonde) On considère le problème d'interpolation
 polynomiale : étant donné des réels $(x_i)_{1 \leq i \leq n}$ et
 $(y_i)_{1 \leq i \leq n}$, on cherche un polynome $P$ de degré $n-1$
 qui interpole le jeu de valeurs, c'est-à-dire tel que
@@ -51,19 +53,35 @@ qui interpole le jeu de valeurs, c'est-à-dire tel que
   P(x_i) = y_i, 1 \leq i \leq n
 \end{align*}
 \begin{itemize}
-	\item Réécrire ce problème sous la forme d'une équation matricielle $V A =
-Y$, o\`u $A$ est le vecteur des coefficients du polynome $P$ : $P(X) =
-a_0 + a_1 X + \dots + a_{n-1} X^{n-1}$.
-La matrice $V$ est appelée
-matrice de Vandermonde, et le calcul de son déterminant est un
-exercice classique en théorie des
-déterminants\footnote{\url{http://fr.wikipedia.org/wiki/Matrice_de_Vandermonde}}.
-	\item Démontrer que si les $x_i$ sont tous distincts, la matrice $V$ est inversible, et ainsi
-		prouver l'existence et l'unicité du problème d'interpolation polynomiale.
-		\emph{Indice : on pourra montrer que si $V A = 0$, alors $P$ est nul.}
-	\item Que se passe-t-il si on considère des polynomes
-		de degré supérieur ou inférieur à $n-1$ ?
+\item Réécrire ce problème sous la forme d'une équation matricielle $V
+  A = Y$, o\`u $A$ est le vecteur des coefficients du polynome $P$ :
+  $P(X) = a_0 + a_1 X + \dots + a_{n-1} X^{n-1}$ et $Y$ le vecteur des
+  $y_i$.  La matrice $V$ est appelée matrice de Vandermonde associée
+  aux points $(x_i)$.
+\item Démontrer que si les $x_i$ sont tous distincts, la matrice $V$
+  est inversible, et ainsi prouver l'existence et l'unicité du
+  problème d'interpolation polynomiale. \footnote{Indice : on pourra
+    montrer que si $V A = 0$, alors $P$ est nul.}
+\item Donner l'expression explicite du polynome correspondant à la
+  $j$-ième colonne de l'inverse de $V$ (c'est-à-dire dont les
+  coefficients sont égaux à la $j$-ième colonne de $V^{-1}$)
+  \footnote{Indice: on pourra montrer qu'il correspond au problème
+    d'interpolation $P(x_i) = 1$ si $i = j$, 0 sinon, et résoudre ce
+    problème explicitement en factorisant $P$}. Ces polynômes sont
+  appelés polynômes de Lagrange.
+\item Que se passe-t-il si on considère des polynomes
+  de degré supérieur ou inférieur à $n-1$ ?
+\item On cherche à calculer le déterminant de la matrice de
+  Vandermonde $D_n(x_1, x_2, \dots, x_n)$. On admet que le déterminant
+  est une fonction polynomiale de degré $n-1$ des $x_i$ (le vérifier
+  sur $n = 2$ ou $n = 3$; on peut le démontrer avec une bonne
+  définition du déterminant). Factoriser ce polynome, et en déduire
+  $D_n(x_1, x_2, \dots, x_n)$ à une constante $k_n$ près. Calculer
+  $k_n$ pour $n = 1, 2, 3$ (prendre des $x_i$ où le calcul est
+  simple), et conjecturer la valeur de $k_n$. On peut démontrer cette
+  conjecture avec des notions plus avancées sur les déterminants.
 \end{itemize}
+
 
 \exercice (Polynomes trigonométriques)
 \begin{itemize}
@@ -82,7 +100,7 @@ infinie'' de $P$. En d'autres termes, pour tout $f$ dans $P$, on a
 \end{equation*}
 C'est la décomposition en série de Fourier, qui a d'innombrables
 applications, en mathématiques pures et appliquées
-(JPEG\footnote{Détails sur \url{http://fr.wikipedia.org/wiki/JPEG}}, MP3 ... à
+(JPEG, MP3 ... à
 chaque fois le principe est de garder un nombre fini de coefficients
 $a_n$ et $b_n$ pour reconstituer le signal à partir d'un nombre réduit
 de variables)
@@ -120,8 +138,8 @@ polynomes de degré $n$. On considère la fonction
 \end{align*}
 
 Montrer que c'est un produit scalaire. Donner une base orthonormée de
-$E_0, E_1, E_2$. Indice : on pourra orthonormaliser la base canonique
-de l'espace des polynomes grâce au procédé de Gram-Schmidt. La base
+$E_0, E_1, E_2$. \footnote{Indice : on pourra orthonormaliser la base canonique
+de l'espace des polynomes grâce au procédé de Gram-Schmidt.} La base
 ainsi obtenue forme les polynomes de Legendre. Il existe toute une
 ménagerie de polynomes orthogonaux pour différents produits
 scalaires\footnote{\url{http://fr.wikipedia.org/wiki/Polynomes_orthogonaux#Tableau_des_polynomes_orthogonaux_classiques}},
