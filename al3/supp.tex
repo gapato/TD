@@ -9,7 +9,7 @@
 \usepackage[small]{caption}
 % Maths de l'AMS. Dispo partout
 \usepackage{amsmath, amssymb}
-%\usepackage{fullpage}
+% \usepackage{fullpage}
 \usepackage[margin=1.5cm]{geometry}
 \newcommand{\R}{\mathbb{R}}
 \newcommand{\Z}{\mathbb{Z}}
@@ -22,7 +22,7 @@
 
 \newcounter{numeroexo}
 \newcommand{\exercice}{\medskip\par\noindent\stepcounter{numeroexo}
-	\hspace{-.25cm}\fbox{\textbf{Exercice \arabic{numeroexo}}}\quad}
+  \hspace{-.25cm}\fbox{\textbf{Exercice \arabic{numeroexo}}}\quad}
 
 \begin{document}
 \noindent Université Paris Dauphine\\
@@ -110,25 +110,33 @@ définissent la même topologie : même notions de continuité, de
 limites, etc.). Ce sont des cas particuliers du théorème fondamental :
 toutes les normes sont équivalentes en dimension finie.
 
-\exercice (Norme induite) Soit $f$ une application linéaire sur $(E,\norm{.})$ de dimension
-finie. On définit peut définir la \emph{norme induite} de $f$ par :
+\exercice (Norme induite) Soit $f$ une application linéaire sur
+$(E,\norm{.})$ de dimension finie. On définit la \emph{norme induite}
+par $\norm{.}$ :
 \begin{align*}
-	N(f) = \sup \left\{\frac{\norm{f(x)}}{\norm{x}}\; \Big|\; x\in E\right\} =  \sup
-	\left\{\norm{f(x)} \;\big|\; x\in
-	E,\;\norm{x} = 1\right\}.
+  N(f) = \sup \left\{\frac{\norm{f(x)}}{\norm{x}}\; \Big|\; x\in E
+    \setminus\{0\}\right\} =  \sup
+  \left\{\norm{f(x)} \;\big|\; x\in
+    E,\;\norm{x} = 1\right\}.
 \end{align*}
 
 Montrer que $N$ est bien définie, puis que c'est une norme sur
 l'espace $\text{End}(E)$ des endomorphismes de $E$.
 
-\exercice (Normes de matrices) En considérant la représentation matricielle d'une application
-linéaire, on peut définir une norme sur $\mathcal{M}_n(\mathbb{R})$ pour chaque norme sur
-$\mathbb{R}^n$.
+\exercice (Normes de matrices) Soit une norme $\norm{.}$ sur
+$\R^n$. La norme induite par $\norm{.}$ (cf exercice précédent)
+définit une norme sur l'espace des matrices $\mathcal{M}_n(\mathbb{R})$
 \begin{itemize}
-	\item Montrer que la norme induite par $\norm{.}_1$ s'exprime comme
-		\[N(A)=\max\limits_{1 \leq j \leq n} \sum _{i=1} ^n |a_{ij}|\quad\quad\text{(somme sur les lignes)}\]
-	\item Montrer que la norme induite par $\norm{.}_\infty$ s'exprime comme
-		\[N(A)=\max\limits_{1 \leq i \leq n} \sum _{j=1} ^n |a_{ij}|\quad\quad\text{(somme sur les colonnes)}\]
+\item Montrer que la norme induite par $\norm{.}_1$ s'exprime comme
+  \[N(A)=\max\limits_{1 \leq j \leq n} \sum _{i=1} ^n |a_{ij}|\quad\quad\text{(somme sur les lignes)}\]
+\item Montrer que la norme induite par $\norm{.}_\infty$ s'exprime comme
+  \[N(A)=\max\limits_{1 \leq i \leq n} \sum _{j=1} ^n |a_{ij}|\quad\quad\text{(somme sur les colonnes)}\]
+\item (Nécessite le théorème spectral, 4.4 du cours) Montrer que, pour
+  le cas particulier d'une matrice symétrique, la norme induite par
+  $\norm{.}_2$ est $|\lambda|_\text{max}$, la plus grande valeur
+  propre en valeur absolue. [Difficile] Généraliser à une matrice non
+  symétrique\footnote{Indice : écrire les conditions d'optimalité
+    obtenir que $x$ est vecteur propre de $A^T A$, et conclure.}.
 \end{itemize}
 
 \section{Produit scalaire}
@@ -141,7 +149,7 @@ polynomes de degré $n$. On considère la fonction
 
 Montrer que c'est un produit scalaire. Donner une base orthonormée de
 $E_0, E_1, E_2$. \footnote{Indice : on pourra orthonormaliser la base canonique
-de l'espace des polynomes grâce au procédé de Gram-Schmidt.} La base
+  de l'espace des polynomes grâce au procédé de Gram-Schmidt.} La base
 ainsi obtenue forme les polynomes de Legendre. Il existe toute une
 ménagerie de polynomes orthogonaux pour différents produits
 scalaires\footnote{\url{http://fr.wikipedia.org/wiki/Polynomes_orthogonaux#Tableau_des_polynomes_orthogonaux_classiques}},
@@ -171,8 +179,8 @@ s'obtiennent comme projection orthogonale de $f$ sur la base. On a
 donc
 \begin{align*}
   a_n &= \frac{\langle f, \cos(nx) \rangle}{\langle \cos(nx), \cos(nx)
-  \rangle}\\
-&= \frac 1 {2\pi} \int_0^{2\pi} f(x) \cos(nx) dx
+    \rangle}\\
+  &= \frac 1 {2\pi} \int_0^{2\pi} f(x) \cos(nx) dx
 \end{align*}
 et de même
 \begin{align*}
@@ -214,6 +222,7 @@ minimum, on a
   A^T A x = A^T b
 \end{align*}
 
-Ces équations expriment les conditions d'orthogonalité vues en cours
-(le vérifier sur le cas bien connu de la droite des moindres carrés)
+Ces équations (les ``équations normales'') expriment les conditions
+d'orthogonalité vues en cours (le vérifier sur le cas bien connu de la
+droite des moindres carrés).
 \end{document}
