@@ -91,28 +91,6 @@ qui interpole le jeu de valeurs, c'est-à-dire tel que
   conjecture avec des notions plus avancées sur les déterminants.
 \end{itemize}
 
-
-\exercice (Polynomes trigonométriques)
-\begin{itemize}
-	\item Montrer que $P$, l'espace des
-fonctions continues périodiques de période $2\pi$, est un espace
-vectoriel. Quelle est sa dimension ?
-\item Montrer que la famille $(\sin(x), \sin(2x), \sin(3x))$ est une
-  famille libre de $P$. Est-elle génératrice ?
-\end{itemize}
-On peut montrer qu'en un certain sens, la famille
-$\{\sin(nx), \cos(nx), n \in \Z)$ est une ``base de dimension
-infinie'' de $P$. En d'autres termes, pour tout $f$ dans $P$, on a
-\begin{equation*}
-  f(x) = \sum_{n \in \Z} a_n \cos(nx) + b_n \sin(nx).
-\end{equation*}
-C'est la décomposition en série de Fourier, qui a d'innombrables
-applications, en mathématiques pures et appliquées
-(JPEG, MP3 ... à
-chaque fois le principe est de garder un nombre fini de coefficients
-$a_n$ et $b_n$ pour reconstituer le signal à partir d'un nombre réduit
-de variables)
-
 \exercice (Équivalence de normes) Prouver les inégalités suivantes sur
 $\R^N$. À chaque fois, donner un cas d'égalité, ce qui prouve que les
 inégalités sont optimales (on ne peut pas remplacer les constantes par
@@ -155,15 +133,45 @@ scalaires\footnote{\url{http://fr.wikipedia.org/wiki/Polynomes_orthogonaux#Table
 avec des applications en physique, théorie de l'approximation, etc.
 
 
-\exercice (Polynomes trigonométriques, le retour) On considère la
-famille infinie $(\cos(nx), \sin(nx))$ d'éléments de $P$, espace des
-fonctions continues de période $2\pi$, muni du produit scalaire
-(vérifier que c'en est bien un)
+\exercice (Polynomes trigonométriques) On considère l'espace vectoriel
+(le vérifier) $E$ des fonctions continues, périodiques de période
+$2\pi$. Montrer que
 \begin{align*}
-  \langle f,g \rangle &= \int_0^{2\pi} f g.
+  \langle f,g \rangle &= \int_0^{2\pi} f g
 \end{align*}
-Montrer que cette famille est orthogonale. Comment pourrait-on obtenir une
-famille orthonormale ?
+est un produit scalaire sur $E$. On considère la famille infinie
+$\{\cos(nx), \sin(nx), n \in \Z\}$ d'éléments de $E$. Montrer que
+cette famille est orthogonale. Comment modifier cette famille pour
+l'orthonormaliser ? Comment modifier le produit scalaire sans toucher
+à la famille pour l'orthonormaliser ?
+
+On peut montrer qu'en un certain sens, la famille $\{\cos(nx),
+\sin(nx), n \in \Z)$ est une ``base de dimension infinie'' de $E$. En
+d'autres termes, pour tout $f$ dans $E$, on a
+\begin{equation*}
+  f(x) = \sum_{n \in \Z} a_n \cos(nx) + b_n \sin(nx).
+\end{equation*}
+Comme la base est orthogonale, les coefficients $a_n$ et $b_n$
+s'obtiennent comme projection orthogonale de $f$ sur la base. On a
+donc
+\begin{align*}
+  a_n &= \frac{\langle f, \cos(nx) \rangle}{\langle \cos(nx), \cos(nx)
+  \rangle}\\
+&= \frac 1 {2\pi} \int_0^{2\pi} f(x) \cos(nx) dx
+\end{align*}
+et de même
+\begin{align*}
+  b_n &= \frac 1 {2\pi} \int_0^{2\pi} f(x) \sin(nx) dx
+\end{align*}
+
+Cette décomposition de $f$ en somme de signaux élémentaires (appelés
+harmoniques) a d'innombrables applications, en mathématiques pures
+(équations aux dérivées partielles, théorie des nombres ...) et
+appliquées (JPEG, MP3 ... à chaque fois le principe est de garder un
+nombre fini de coefficients $a_n$ et $b_n$ pour reconstituer le signal
+à partir d'un nombre réduit de variables) ainsi qu'en physique
+(électronique, traitement du signal ... par exemple, les égaliseurs
+des chaînes hifi).
 
 \section{Projecteurs}
 \exercice Montrer que $M = x x^T$ représente la projection orthogonale
