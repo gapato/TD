@@ -17,6 +17,9 @@
 \newtheorem{theorem}{Théorème}
 \newtheorem{definition}{Définition}
 
+\providecommand{\abs}[1]{\lvert#1\rvert}
+\providecommand{\norm}[1]{\lVert#1\rVert}
+
 \newcounter{numeroexo}
 \newcommand{\exercice}{\medskip\par\noindent\stepcounter{numeroexo}
 	\hspace{-.25cm}\fbox{\textbf{Exercice \arabic{numeroexo}}}\quad}
@@ -97,9 +100,9 @@ inégalités sont optimales (on ne peut pas remplacer les constantes par
 des constantes plus faibles)\footnote{Indice : pour la première,
   utiliser Cauchy-Schwartz}
 \begin{align*}
-  ||x||_1 &\leq \sqrt N ||x||_2\\
-  ||x||_2 &\leq \sqrt N ||x||_\infty\\
-  ||x||_\infty &\leq N ||x||_1
+  \norm{x}_1 &\leq \sqrt N \norm{x}_2\\
+  \norm{x}_2 &\leq \sqrt N \norm{x}_\infty\\
+  \norm{x}_\infty &\leq N \norm{x}_1
 \end{align*}
 
 Ceci prouve que ces trois normes sont équivalentes (c'est-à-dire
@@ -107,14 +110,26 @@ définissent la même topologie : même notions de continuité, de
 limites, etc.). Ce sont des cas particuliers du théorème fondamental :
 toutes les normes sont équivalentes en dimension finie.
 
-\exercice Soit $f$ une application linéaire sur $E$ de dimension
-finie. On définit
+\exercice (Norme induite) Soit $f$ une application linéaire sur $(E,\norm{.})$ de dimension
+finie. On définit peut définir la \emph{norme induite} de $f$ par :
 \begin{align*}
-  N(f) = \sup_{||x|| = 1} {||f(x)||}.
+	N(f) = \sup \left\{\frac{\norm{f(x)}}{\norm{x}}\; \Big|\; x\in E\right\} =  \sup
+	\left\{\norm{f(x)} \;\big|\; x\in
+	E,\;\norm{x} = 1\right\}.
 \end{align*}
 
 Montrer que $N$ est bien définie, puis que c'est une norme sur
 l'espace $\text{End}(E)$ des endomorphismes de $E$.
+
+\exercice (Normes de matrices) En considérant la représentation matricielle d'une application
+linéaire, on peut définir une norme sur $\mathcal{M}_n(\mathbb{R})$ pour chaque norme sur
+$\mathbb{R}^n$.
+\begin{itemize}
+	\item Montrer que la norme induite par $\norm{.}_1$ s'exprime comme
+		\[N(A)=\max\limits_{1 \leq j \leq n} \sum _{i=1} ^n |a_{ij}|\quad\quad\text{(somme sur les lignes)}\]
+	\item Montrer que la norme induite par $\norm{.}_\infty$ s'exprime comme
+		\[N(A)=\max\limits_{1 \leq i \leq n} \sum _{j=1} ^n |a_{ij}|\quad\quad\text{(somme sur les colonnes)}\]
+\end{itemize}
 
 \section{Produit scalaire}
 
@@ -182,7 +197,7 @@ donner l'expression de la projection orthogonale sur un sous-espace.
 utilisant le langage matriciel, sous la forme: trouver $x \in \R^n$
 qui minimise
 \begin{align*}
-  F(x) = ||A x - b||_2^2,
+  F(x) = \norm{A x - b}_2^2,
 \end{align*}
 o\`u $b \in \R^m$ et $A \in M_{n,m}(\R)$ sont fixés. $n$ est le nombre
 de paramètres, $m$ le nombre d'observations, $m \gg n$.
