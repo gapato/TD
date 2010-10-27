@@ -68,7 +68,11 @@ qui interpole le jeu de valeurs, c'est-à-dire tel que
   \footnote{Indice: on pourra montrer qu'il correspond au problème
     d'interpolation $P(x_i) = 1$ si $i = j$, 0 sinon, et résoudre ce
     problème explicitement en factorisant $P$}. Ces polynômes sont
-  appelés polynômes de Lagrange.
+  appelés polynômes de Lagrange. Ils s'interprètent naturellement
+  comme étant la base antéduale de la base de l'espace dual $l_i : P
+  \to P(x_i)$ (la base antéduale d'une base de l'espace dual $l_i$ est
+  une base $e_i$ dont la base duale est $l_i$, c'est-à-dire vérifiant
+  $l_i(e_j) = \delta_{i,j}$)
 \item Que se passe-t-il si on considère des polynomes
   de degré supérieur ou inférieur à $n-1$ ?
 \item On cherche à calculer le déterminant de la matrice de
