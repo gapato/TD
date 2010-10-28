@@ -22,7 +22,7 @@
 
 \newcounter{numeroexo}
 \newcommand{\exercice}{\medskip\par\noindent\stepcounter{numeroexo}
-  \hspace{-.25cm}\fbox{\textbf{Exercice \arabic{numeroexo}}}\quad}
+  \hspace{-.25cm}{\textbf{Exercice \arabic{numeroexo}}}\quad}
 
 \begin{document}
 \noindent Université Paris Dauphine\\
@@ -33,15 +33,17 @@ Algèbre linéaire 3\\
 \end{center}
 \vspace{1cm}
 Exercices totalement optionnels. Commencez par
-chercher sans lire les indices donnés en bas de page.
+chercher sans lire les indices donnés en bas de page. (*) : il y a
+juste à écrire en étant rigoureux, (**), il faut un peu réfléchir, (***), il faut
+beaucoup réfléchir.
 \section{Espaces vectoriels}
-\exercice Montrer que toute matrice de rang $1$ s'écrit sous la forme
+\exercice (**) Montrer que toute matrice de rang $1$ s'écrit sous la forme
 $M = x y^T$ avec $(x,y)\in\mathbb{R}^n\times\mathbb{R}^n$.
 
-\exercice (Opérations sur des espaces vectoriels) Soit $E$ un espace
+\exercice (*) (Opérations sur des espaces vectoriels) Soit $E$ un espace
 vectoriel, $S_1$ et $S_2$ deux sous-espaces. Dites si les espaces
-suivants sont des espaces vectoriels. En supposant que $E$ est de
-dimension finie, donner sa dimension, et un procédé de construction
+suivants sont des espaces vectoriels. Dans le cas où $E$ est de
+dimension finie, donner leur dimension, et un procédé de construction
 d'une base à partir de celles de $S_1$ et $S_2$.
 \begin{align*}
   E_1 &= S_1 \cap S_2\\
@@ -51,9 +53,9 @@ d'une base à partir de celles de $S_1$ et $S_2$.
 \end{align*}
 
 Pour $E_4$, qui n'est pas un sous-ensemble de $E$, définir les
-opérations d'addition et de multiplication pour un scalaire.
+opérations d'addition et de multiplication par un scalaire.
 
-\exercice (Interpolation, matrice de Vandermonde) On considère le problème d'interpolation
+\exercice (***) (Interpolation, matrice de Vandermonde) On considère le problème d'interpolation
 polynomiale : étant donné des réels $(x_i)_{1 \leq i \leq n}$ et
 $(y_i)_{1 \leq i \leq n}$, on cherche un polynome $P$ de degré $n-1$
 qui interpole le jeu de valeurs, c'est-à-dire tel que
@@ -94,7 +96,7 @@ qui interpole le jeu de valeurs, c'est-à-dire tel que
   conjecture avec des notions plus avancées sur les déterminants.
 \end{itemize}
 
-\exercice (Équivalence de normes) Prouver les inégalités suivantes sur
+\exercice (*) (Équivalence de normes) Prouver les inégalités suivantes sur
 $\R^N$. À chaque fois, donner un cas d'égalité, ce qui prouve que les
 inégalités sont optimales (on ne peut pas remplacer les constantes par
 des constantes plus faibles)\footnote{Indice : pour la première,
@@ -110,7 +112,7 @@ définissent la même topologie : même notions de continuité, de
 limites, etc.). Ce sont des cas particuliers du théorème fondamental :
 toutes les normes sont équivalentes en dimension finie.
 
-\exercice (Norme induite) Soit $f$ une application linéaire sur
+\exercice (**) (Norme induite) Soit $f$ une application linéaire sur
 $(E,\norm{.})$ de dimension finie. On définit la \emph{norme induite}
 par $\norm{.}$ :
 \begin{align*}
@@ -123,7 +125,7 @@ par $\norm{.}$ :
 Montrer que $N$ est bien définie, puis que c'est une norme sur
 l'espace $\text{End}(E)$ des endomorphismes de $E$.
 
-\exercice (Normes de matrices) Soit une norme $\norm{.}$ sur
+\exercice (**) (Normes de matrices) Soit une norme $\norm{.}$ sur
 $\R^n$. La norme induite par $\norm{.}$ (cf exercice précédent)
 définit une norme sur l'espace des matrices $\mathcal{M}_n(\mathbb{R})$
 \begin{itemize}
@@ -144,22 +146,23 @@ définit une norme sur l'espace des matrices $\mathcal{M}_n(\mathbb{R})$
 
 \section{Produit scalaire}
 
-\exercice (Polynomes orthogonaux) On considère l'espace $E_n$ des
+\exercice (*) (Polynomes orthogonaux) On considère l'espace $E_n$ des
 polynomes de degré $n$. On considère la fonction
 \begin{align*}
   \langle P, Q\rangle &= \int_0^1 P Q.
 \end{align*}
 
 Montrer que c'est un produit scalaire. Donner une base orthonormée de
-$E_0, E_1, E_2$. \footnote{Indice : on pourra orthonormaliser la base canonique
-  de l'espace des polynomes grâce au procédé de Gram-Schmidt.} La base
-ainsi obtenue forme les polynomes de Legendre. Il existe toute une
-ménagerie de polynomes orthogonaux pour différents produits
+$E_0, E_1, E_2$\footnote{Indice : on pourra orthonormaliser la base
+  canonique de l'espace des polynomes grâce au procédé de
+  Gram-Schmidt.}. La base ainsi obtenue forme les polynomes de
+Legendre. Il existe toute une ménagerie de polynomes orthogonaux pour
+différents produits
 scalaires\footnote{\url{http://fr.wikipedia.org/wiki/Polynomes_orthogonaux#Tableau_des_polynomes_orthogonaux_classiques}},
 avec des applications en physique, théorie de l'approximation, etc.
 
 
-\exercice (Polynomes trigonométriques) On considère l'espace vectoriel
+\exercice (*) (Polynomes trigonométriques) On considère l'espace vectoriel
 (le vérifier) $E$ des fonctions continues, périodiques de période
 $2\pi$. Montrer que
 \begin{align*}
@@ -200,7 +203,7 @@ nombre fini de coefficients $a_n$ et $b_n$ pour reconstituer le signal
 des chaînes hifi).
 
 
-\exercice(Alternative de Fredholm) On s'intéresse à l'équation
+\exercice (***) (Alternative de Fredholm) On s'intéresse à l'équation
 linéaire $A x = b$ sur $\R^n$. On sait que quand $A$ est inversible,
 il existe une unique solution. Quand $A$ est non inversible, il y a
 soit une infinité soit aucune solution. On va préciser cette
@@ -223,16 +226,17 @@ alternative.
     d'équations}.
 \end{itemize}
 L'alternative de Fredholm donne les équations permettant de tester si
-$A x = b$ a une solution. Elle admet des généralisations à des cas
-beaucoup plus généraux (équations différentielles, intégrales ...).
+$A x = b$ a une solution. Elle admet des généralisations à certains
+cas en dimension infinie, qui sont par exemple utilisées pour des
+questions d'existence d'équations différentielles.
 
 \section{Projecteurs}
-\exercice Montrer que la matrice $M = x x^T$ représente la projection
+\exercice (*) Montrer que la matrice $M = x x^T$ représente la projection
 orthogonale sur le sous-espace engendré par $x$. En s'inspirant de
 cette forme, donner l'expression de la matrice de la projection
 orthogonale sur un sous-espace.
 
-\exercice (Moindres carrés) Reformuler les résultats du cours en
+\exercice (***) (Moindres carrés) Reformuler les résultats du cours en
 utilisant le langage matriciel, sous la forme: trouver $x \in \R^n$
 qui minimise
 \begin{align*}
