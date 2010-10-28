@@ -135,8 +135,11 @@ définit une norme sur l'espace des matrices $\mathcal{M}_n(\mathbb{R})$
   le cas particulier d'une matrice symétrique, la norme induite par
   $\norm{.}_2$ est $|\lambda|_\text{max}$, la plus grande valeur
   propre en valeur absolue. [Difficile] Généraliser à une matrice non
-  symétrique\footnote{Indice : écrire les conditions d'optimalité
-    obtenir que $x$ est vecteur propre de $A^T A$, et conclure.}.
+  symétrique\footnote{Indice : écrire les conditions d'optimalité pour
+    obtenir que le $x$ qui maximise $||Ax||/||x||$ est vecteur propre
+    de $A^T A$ (on peut utiliser la première forme de N(A) ou la
+    deuxième via la méthode des multiplicateurs de
+    Lagrange). Conclure.}.
 \end{itemize}
 
 \section{Produit scalaire}
@@ -195,6 +198,33 @@ nombre fini de coefficients $a_n$ et $b_n$ pour reconstituer le signal
 à partir d'un nombre réduit de variables) ainsi qu'en physique
 (électronique, traitement du signal ... par exemple, les égaliseurs
 des chaînes hifi).
+
+
+\exercice(Alternative de Fredholm) On s'intéresse à l'équation
+linéaire $A x = b$ sur $\R^n$. On sait que quand $A$ est inversible,
+il existe une unique solution. Quand $A$ est non inversible, il y a
+soit une infinité soit aucune solution. On va préciser cette
+alternative.
+\begin{itemize}
+\item Montrer que si il existe $x$ tel que $A x = b$, alors pour tout
+  $y \in \ker(A^T)$, $y^T b = 0$.
+\item Montrer que $\dim(\ker(A)) = \dim(\ker(A^T))$
+\item En déduire que $\text{Im}(A)$ est un supplémentaire orthogonal
+  de $\ker(A^T)$.
+\item Conclure l'alternative de Fredholm : soit $b \in
+  \ker(A^T)^\perp$, auquel cas $A x = b$ admet une infinité de
+  solutions, soit $b \not \in \ker(A^T)^\perp$, auquel cas $A x = b$
+  n'admet pas de solutions.
+\item Vérifier sur un exemple simple que cette formulation formalise
+  la notion intuitive : pour qu'un système avec des équations qui se
+  déduisent les unes des autres ait une solution, il faut que les
+  équations soient compatibles entre elles\footnote{Indice : $y \in
+    \ker(A^T)$ est le vecteur des combinaisons linéaires
+    d'équations}.
+\end{itemize}
+L'alternative de Fredholm donne les équations permettant de tester si
+$A x = b$ a une solution. Elle admet des généralisations à des cas
+beaucoup plus généraux (équations différentielles, intégrales ...).
 
 \section{Projecteurs}
 \exercice Montrer que la matrice $M = x x^T$ représente la projection
