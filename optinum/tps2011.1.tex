@@ -168,7 +168,8 @@ pour maximiser  $F_{\mu}$, on va cr\'{e}er une \textit{structure} : \tt{algo} co
 \offit
 \item \textbf{Choix de l'initialisation}
 \onit
-\item Entrer la commande : \tt{cppfun(eye(3))}. Elle retourne les valeurs respectives
+\item Entrer la commande : \tt{cppfun([1 0 0]')}. Elle retourne le
+    kurtosis du premier signal de \tt X. Pourquoi ?  Entrer la commande : \tt{cppfun(eye(3))}. Elle retourne les valeurs respectives
 du kurtosis des trois signaux contenus dans \tt X \footnote{Utiliser l'aide en ligne pour comprendre \'{e}ventuellement l'utilisation de la fonction pr\'{e}d\'{e}finie : \tt{eye}.}. Pourquoi ? Qu'est-ce que ce r\'{e}sultat vous apprend ?
 \item Entrer alors la commande\footnote{Attention \`{a} n'oublier ni le point entre \tt{algo} et \tt{init}, ni le prime de la transposition.} : \tt{algo.init=[1 0 0]'} cr\'{e}ant le premier champ de la variable \tt{algo}, d\'{e}finie comme une structure par cette affectation.
 \offit
