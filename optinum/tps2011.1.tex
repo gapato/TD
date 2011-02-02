@@ -232,6 +232,11 @@ contenu du champ \tt{algo.stepsize},
 \section{ Approche par relaxation}
 Une approche plus directe consiste \`{a} \textit{relaxer} la contrainte $\| w\|=1$, c'est-\`{a}-dire \`{a} maximiser $E[(X\star w)^4]$ sous la contrainte d'\textit{in\'{e}galit\'{e}} $\| w \|^2 \leq 1$. L'ensemble admissible devenant \textit{convexe}, il devient possible d'impl\'{e}menter l'algorithme du \textit{Gradient Projet\'{e}}.
 \onit
+\item Pourquoi est-il légitime de relaxer la contrainte ? Lors de
+  l'application de l'algorithme du gradient projeté à partir d'un
+  point de départ $w_0$ tel que $\|w_0\| \geq 1$, $w$ peut-il entrer
+  dans la boule ouverte ? Donner l'expression de la projection de $w$
+  sur la boule unité.
 \item \'Editer le fichier \tt{pcpp.m} contenu dans le r\'{e}pertoire \tt{optinum-tp1}, l'enregistrer sous le nom \tt{projcpp.m}, puis modifier le code contenu dans ce nouveau fichier en supprimant
 \onit
 \item la fonction auxiliaire \tt{pcppfun} qui sera remplac\'{e}e dans le corps de la boucle par \tt{cppfun},
