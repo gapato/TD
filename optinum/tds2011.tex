@@ -65,7 +65,7 @@ Tous les exercices de cette première série concernent les propriétés de  la 
 \rien
 \begin{questions}
 \item Déterminer  $ \grad F(w)$ et  la forme quadratique associée à $\hess F(w)$.
-\item Déduire que $F$ est convexe sur $\R^N$.
+\item Déduire que $F$ est convexe sur $\R^n$.
 \item Vérifier que:
 \mbox{$ E[(S\star w)^2]=E\left[\,\left( \,\sum w_j\,S_j\,\right)^2\,\right] =w'\star D\star w $},
 où $D$ est la matrice de dispersion de $S$ . En déduire que $F$ est strictement convexe si  $D$ est DP.
@@ -100,11 +100,13 @@ function[f,g,H]= CPPcrit(R,w)
 On suppose les $S_j$ non corrélés, de moyennes nulles, et de variances :  $\sigma_j^2=1$, et on se propose de maximiser le \it kurtosis \rm :
 \on  k(S\star w)= E[(S\star w)^4] -3\,E[(S\star w)^2] ^2 \off
 de $S\star w$  sous la contrainte de normalisation : \mbox{$E[(S\star w)^2]=1$}, problème qui se réduit  au problème :
-\on ( \P)  \push{5} \underset{ s. c. \|w\|^2=1}{\push 3\mbox{Max}\push 5 F(w)}  \off
- Pour le résoudre, on décide de maximiser le critère  pénalisé :
+  \begin{questions}
+  \item Montrer que ce problème se réduit au problème
+    \on ( \P)  \push{5} \underset{ s. c. \|w\|^2=1}{\push
+      3\mbox{Max}\push 5 F(w)}  \off
+     Pour le résoudre, on décide de maximiser le critère  pénalisé :
  \on F_{\mu}(w)=F(w)-\frac{\mu}{4}\,\left(\,\|w\|^2-1\,\right)^2 \off
  où $\mu$ est un paramètre positif destiné à tendre vers l'infini.
-  \begin{questions}
 \item Prouver que :
 \begin{subquestions}
 \item$M_{\mu}= \sup F_{\mu}$ (éventuellement : $+\infty$) est une fonction décroissante de $\mu$, minorée par $M=\sup (\P)$
@@ -125,7 +127,6 @@ Que risque-t-on d'observer si on cherche a maximiser $F_{\mu}$ par une méthode 
 \begin{exercice}[(Extrema locaux du kurtosis)]
 On suppose les $S_j$ non corrélés, de moyennes nulles et de variances :  $\sigma_j^2=E(S_j^2)>0$ .
 \begin{questions}
-\item  Prouver que: $E\left[\left(\sum w_jS_j\right)^2\right]=\sum w_j^2\, \sigma_j^2$
 \item  Prouver que, si les $S_j$ sont  \it indépendants \rm :
 \on k(\sum w_jS_j)=\sum w_j^4\, k(S_j) \off
 où : $k(S)=E(S^4)-3\,E(S^2)^2$. Ce résultat reste-il vrai si on suppose seulement les $Sj$ non corrélés?

@@ -118,12 +118,12 @@ variables globales \tt X et \tt N pour le reste de la session.
 
 \section{\'Ecoute d'un signal num\'{e}rique}
 
-Vous pouvez \textit{\'{e}couter} \`{a} tout moment un signal num\'{e}ris\'{e} en entrant une commande du type \tt{sound(R(:,1), 22050)}. Le premier argument est le signal que l'on veut \'{e}couter. Dans cet exemple : \tt{ R(:,1)} c'est-\`{a}-dire\footnote{R(i,j) est l'\'{e}l\'{e}ment de R situ\'{e} dans la $i$\textsuperscript{\`{e}me} ligne et la $j$\textsuperscript{\`{e}me} colonne. Les deux points remplacent ``tous les indices''.} le signal dont l'enregistrement est contenu dans la premi\`{e}re colonne de \tt R. Le second donne la fr\'{e}quence d'\'{e}chantillonnage utilis\'{e}e : $22,05$ kHz, soit $22050$ captures du signal analogique par seconde. En comparant \`{a} l'\'{e}coute les signaux de \tt R et ceux de \tt X, vous pouvez observer l'effet de la d\'{e}corr\'{e}lation.
+Vous pouvez \textit{\'{e}couter} \`{a} tout moment un signal num\'{e}ris\'{e} en entrant une commande du type \tt{soundsc(R(:,1), 22050)}. Le premier argument est le signal que l'on veut \'{e}couter. Dans cet exemple : \tt{ R(:,1)} c'est-\`{a}-dire\footnote{R(i,j) est l'\'{e}l\'{e}ment de R situ\'{e} dans la $i$\textsuperscript{\`{e}me} ligne et la $j$\textsuperscript{\`{e}me} colonne. Les deux points remplacent ``tous les indices''.} le signal dont l'enregistrement est contenu dans la premi\`{e}re colonne de \tt R. Le second donne la fr\'{e}quence d'\'{e}chantillonnage utilis\'{e}e : $22,05$ kHz, soit $22050$ captures du signal analogique par seconde. En comparant \`{a} l'\'{e}coute les signaux de \tt R et ceux de \tt X, vous pouvez observer l'effet de la d\'{e}corr\'{e}lation.
 
 \section{ Ecriture d'un oracle}
 
 Un \textit{oracle} est une proc\'{e}dure qui prend pour argument un
-vecteur \tt w de $\R^N$ et retourne la valeur $f$ du crit\`{e}re
+vecteur \tt w de $\R^3$ et retourne la valeur $f$ du crit\`{e}re
 $F(w)$  ainsi, \'{e}ventuellement, que celle de son gradient $g =
 \grad F(w)$, ou de sa matrice Hessienne : $H = \hess F(w)$ en ce
 point. Noter qu'ici on travaille sur les données décorrélées,
@@ -232,6 +232,11 @@ contenu du champ \tt{algo.stepsize},
 \section{ Approche par relaxation}
 Une approche plus directe consiste \`{a} \textit{relaxer} la contrainte $\| w\|=1$, c'est-\`{a}-dire \`{a} maximiser $E[(X\star w)^4]$ sous la contrainte d'\textit{in\'{e}galit\'{e}} $\| w \|^2 \leq 1$. L'ensemble admissible devenant \textit{convexe}, il devient possible d'impl\'{e}menter l'algorithme du \textit{Gradient Projet\'{e}}.
 \onit
+\item Pourquoi est-il légitime de relaxer la contrainte ? Lors de
+  l'application de l'algorithme du gradient projeté à partir d'un
+  point de départ $w_0$ tel que $\|w_0\| \geq 1$, $w$ peut-il entrer
+  dans la boule ouverte ? Donner l'expression de la projection de $w$
+  sur la boule unité.
 \item \'Editer le fichier \tt{pcpp.m} contenu dans le r\'{e}pertoire \tt{optinum-tp1}, l'enregistrer sous le nom \tt{projcpp.m}, puis modifier le code contenu dans ce nouveau fichier en supprimant
 \onit
 \item la fonction auxiliaire \tt{pcppfun} qui sera remplac\'{e}e dans le corps de la boucle par \tt{cppfun},
@@ -259,7 +264,7 @@ source que l'on ajoutera \`{a} \tt S par la commande :\tt{ S(:,2)=X*w}, qui affe
 \onit
 \item[-] calculer leur kurtosis avec la commande : \tt{X=S; cppfun(eye(3))},
 \item[-]  tester leur ind\'{e}pendance avec la commande : \tt{cov(S)},
-\item[-] ou simplement les \'{e}couter avec les commandes : \tt{sound(S(:,i),22050)}, $i = 1, 2, 3$.
+\item[-] ou simplement les \'{e}couter avec les commandes : \tt{soundsc(S(:,i),22050)}, $i = 1, 2, 3$.
 \offit
 
 \offit
