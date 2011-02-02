@@ -6,7 +6,6 @@
 \usepackage[T1]{fontenc}
 \usepackage{lmodern}
 \usepackage{oldstyle}
-\usepackage{parallel}
 \usepackage{url}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \renewcommand{\thesection}{ \textbf{\Large \arabic{section}.}}
@@ -55,7 +54,7 @@
 \end{center}
 
 
-\section*{Objectif} 
+\section*{Objectif}
 
 On se propose, dans ce premier travail, de r\'{e}soudre le Cocktail Party Problem -- simplement
 d\'{e}sign\'{e} dans la suite par son acronyme CPP -- en cherchant \`{a} maximiser la fonction
@@ -75,7 +74,7 @@ ind\'{e}pendantes.
 puis utiliser la commande \textsc{unix} \tt{tar -xvfz optnum-tp1.tgz} pour cr\'{e}er le r\'{e}pertoire
 \tt{optinum-tp1} et en extraire les fichiers qui seront utilis\'{e}s durant la s\'{e}ance. Lancer alors
 \matlab\  et se placer dans le r\'{e}pertoire : \tt{optinum-tp1}.
-\item Dans la fen\^{e}tre de commande de \matlab, entrer la commande\footnote{Une commande \matlab\ est une cha\^ine de caract\`{e}res, saisie au clavier dans la fen\^{e}tre de commande apr\`{e}s le prompt \matlab~: \tt{>\,>}, et qui se termine par un retour chariot. \matlab\ \'{e}value l'expression contenue dans cette cha\^ine de caract\`{e}res, et, le cas \'{e}ch\'{e}ant, retourne le r\'{e}sultat de l'\'{e}valuation. Lorsqu'un point-virgule termine la cha\^ine de caract\`{e}res pr\'{e}c\'{e}dent le retour chariot, l'expression est \'{e}valu\'{e}e normalement, 
+\item Dans la fen\^{e}tre de commande de \matlab, entrer la commande\footnote{Une commande \matlab\ est une cha\^ine de caract\`{e}res, saisie au clavier dans la fen\^{e}tre de commande apr\`{e}s le prompt \matlab~: \tt{>\,>}, et qui se termine par un retour chariot. \matlab\ \'{e}value l'expression contenue dans cette cha\^ine de caract\`{e}res, et, le cas \'{e}ch\'{e}ant, retourne le r\'{e}sultat de l'\'{e}valuation. Lorsqu'un point-virgule termine la cha\^ine de caract\`{e}res pr\'{e}c\'{e}dent le retour chariot, l'expression est \'{e}valu\'{e}e normalement,
 mais l'affichage \'{e}ventuel du r\'{e}sultat supprim\'{e}.}~: \tt{format short}. Cette commande ne g\'{e}n\`{e}re aucune \'{e}valuation -- il n'est donc pas n\'{e}cessaire de
 la faire suivre d'un point-virgule -- mais indique simplement au noyau de \matlab\  de repr\'{e}senter les r\'{e}els en sortie avec seulement quatre d\'{e}cimales.
 \offit
@@ -128,7 +127,7 @@ Un \textit{oracle} est une proc\'{e}dure qui prend pour argument un vecteur \tt 
 \end{verbatim}
 
 Vous pourrez d\'{e}sormais calculer la valeur du crit\`{e}re et de son gradient en un point quelconque en appelant cette fonction dans la fen\^{e}tre de commande, comme s'il s'agissait d'une fonction \matlab\  pr\'{e}d\'{e}finie.
-\item Tester votre code en entrant les commandes : \tt{w=1/3$\mathtt{\star}$ones(3,1);[f,g]=cppfun(w)}. 
+\item Tester votre code en entrant les commandes : \tt{w=1/3$\mathtt{\star}$ones(3,1);[f,g]=cppfun(w)}.
 Le r\'{e}sultat qui s'affiche doit \^{e}tre
 
 \centerline{\texttt{f = 0.8554 ; \push{5} g = (5.6261; 3.7246; 0.9144)}}

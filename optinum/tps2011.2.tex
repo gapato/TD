@@ -6,7 +6,6 @@
 \usepackage[T1]{fontenc}
 \usepackage{lmodern}
 \usepackage{oldstyle}
-\usepackage{parallel}
 \usepackage{url}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \renewcommand{\thesection}{ \textbf{\Large \arabic{section}.}}
@@ -55,7 +54,7 @@
 \end{center}
 
 
-\section*{Objectif} 
+\section*{Objectif}
 \'Etant donn\'e un panier de $N$ actifs dont le vecteur des rendements moyens $r$ et la matrice des variances-covariances $\Sigma$ sont connus, d\'eterminer la composition d'un portefeuille constitu\'e \`a partir de ces $N$ actifs assurant un rendement minimal anticip\'e $\rho$ en minimisant, pour $\rho$ et $c$ fix\'es, la fonction barri\`ere logarithmique~:
 \[
 f(x,\mu,\rho)=\frac{1}{2}\,x^T\Sigma\,x-\mu\,\sum_{i=1}^N\ln(x_i)-\mu\,\ln\left(r^Tx-\rho\right),
@@ -90,7 +89,7 @@ Le fichier \texttt{lbpfun.m} contenu dans le répertoire \tt{optinum-tp2} contie
       f=inf ; g=r ; g(:)=NaN ; H=Sigma ; H(:,:)=NaN ;
    end
 \end{verbatim}
-\'Editer le fichier \tt{lbpfun.m}, compl\'eter le code manquant dans l'\'ecriture de la fonction (c'est-\`-dire les d\'efinitions de \tt{g} et de \tt{H}), et sauvegarder. 
+\'Editer le fichier \tt{lbpfun.m}, compl\'eter le code manquant dans l'\'ecriture de la fonction (c'est-\`-dire les d\'efinitions de \tt{g} et de \tt{H}), et sauvegarder.
 
 \section{Acquisition des donn\'ees}
 
@@ -110,7 +109,7 @@ soit encore, pour le probl\`eme trait\'e, simplement \tt{pb.eqc.mat=[1,1,...,1]}
 Trois jeux de donn\'ees pourront être utilis\'es. Ils sont stock\'es dans un fichier \tt{data.m} contenant une \textit{structure} \tt{stocks}. Les trois jeux de donn\'ees \tt{stocks(pos)}, \tt{pos=1,2,3}, peuvent \^etre automatiquement charg\'es en utilisant la commande \tt{initialize(pos)} avec la valeur 1, 2, ou 3 de l'argument \tt{pos}. Cette commande affecte une valeur aux variables globales \tt{Sigma}, \tt{r}, \tt{mu},  \tt{rho}, et~\tt{pb}.  Les valeurs par d\'efaut de \tt{rho} et \tt{mu} sont \tt{rho=0} \footnote{0n cherche donc  \textit{a priori} le portefeuille de variance minimale sans contrainte de rendement.},  et \tt{mu=0.1}. Elles peuvent être modifiées à tout moment par une nouvelle affectation
 
 \smallskip
- \onit 
+ \onit
 \addtocounter{enumi}{1}
 \item  Entrez par exemple la commande \texttt{initialize(1)} qui charge un premier jeu de données~: c'est un exemple \og jouet \fg\ de dimension trois.
 \item Entrez alors les commandes \tt Sigma, puis~: \tt r -- sans la faire suivre d'un point-virgule -- pour \og voir \fg\ les valeurs des données correspondantes.
@@ -118,20 +117,20 @@ Trois jeux de donn\'ees pourront être utilis\'es. Ils sont stock\'es dans un fi
 
 \section{\textsc{GUMP}: une bo\^ite \`a  outils commode}
 
-Pour pouvoir comparer simplement l'application de diff\'erentes proc\'edures de recherche lin\'eaire et/ou de  diff\'erents choix de la direction de descente, on a cod\'e une proc\'edure \tt{gump} (\tt{GUMP} est l'acronyme pour \textbf{G}eneralized \textbf{U}nconstrained \textbf{M}inimization \textbf{P}rocedure) prenant pour argument deux structures: 
+Pour pouvoir comparer simplement l'application de diff\'erentes proc\'edures de recherche lin\'eaire et/ou de  diff\'erents choix de la direction de descente, on a cod\'e une proc\'edure \tt{gump} (\tt{GUMP} est l'acronyme pour \textbf{G}eneralized \textbf{U}nconstrained \textbf{M}inimization \textbf{P}rocedure) prenant pour argument deux structures:
 \smallskip
 
 \begin{itemize}
 \item \tt{pb}, qui contient le probl\`eme \`a  r\'esoudre,
-\item \tt{algo}, qui contient la description de l'algorithme utilis\'e. 
+\item \tt{algo}, qui contient la description de l'algorithme utilis\'e.
 \end{itemize}
 
 \medskip
 
 \onit
 \item Pour comprendre l'utilisation de \tt{gump}, entrez d'abord la commande \tt{help gump}, et lire attentivement l'aide en ligne retourn\'ee par \matlab.
-\item Entrez alors -- sans la faire suivre d'un point virgule -- la commande \tt{algo=gradopt},  qui charge dans la structure \tt{algo} l'algorithme de Gradient \`a pas optimal, puis la commande -- suivie cette fois d'un point-virgule -- \texttt{pts=gump(pb,algo,100)}. 
-\item  R\'ecup\'erez le dernier point calcul\'e par l'algorithme en tapant la commande \texttt{x=pts(:,end)}, qui extrait la derni\`ere colonne de la matrice \texttt{pts}\footnote{Rappelez-vous la signification des deux points.}, et v\'erifiez \`a  l'aide des variables globales \texttt{r} et \texttt{Sigma} que le r\'esultat obtenu fournit un portefeuille de rendement anticip\'e sup\'erieur \`a $5$, et de risque (\'ecart-type ?) associ\'e inf\'erieur \`a $2$. 
+\item Entrez alors -- sans la faire suivre d'un point virgule -- la commande \tt{algo=gradopt},  qui charge dans la structure \tt{algo} l'algorithme de Gradient \`a pas optimal, puis la commande -- suivie cette fois d'un point-virgule -- \texttt{pts=gump(pb,algo,100)}.
+\item  R\'ecup\'erez le dernier point calcul\'e par l'algorithme en tapant la commande \texttt{x=pts(:,end)}, qui extrait la derni\`ere colonne de la matrice \texttt{pts}\footnote{Rappelez-vous la signification des deux points.}, et v\'erifiez \`a  l'aide des variables globales \texttt{r} et \texttt{Sigma} que le r\'esultat obtenu fournit un portefeuille de rendement anticip\'e sup\'erieur \`a $5$, et de risque (\'ecart-type ?) associ\'e inf\'erieur \`a $2$.
 \offit
 
 Bien, vous avez d\'ecouvert le principe de diversification du risque qui a fait la fortune de H. Markowitz, laur\'eat du prix Nobel d'\'economie en 1990\footnote{En d\'emontrant  dans sa th\`ese, en 1952,  qu'il \'etait possible de r\'eduire le risque par diversification, il a fait entrer le loup des math\'ematiques dans la bergerie de la Finance. }. Passons maintenant aux choses s\'erieuses...
@@ -145,7 +144,7 @@ Bien, vous avez d\'ecouvert le principe de diversification du risque qui a fait 
 \onit
 
 \item Entrez la commande \texttt{initialize(3)} qui charge dans \texttt{pb} le probl\`eme de dimension 12 associ\'e \`a  \texttt{stocks(3)}. Les données correspondantes sont tirées de l'article :  \url{http://www.geo.ut.ee/nbc/paper/lapsina.htm} et
-concernent douze actifs financiers, dont les actions les plus attractives des plus grandes compagnies -- les \textit{``Blue Chips''} -- du marché russe en 1997\footnote{Les estimations de la moyenne et de la matrice de dispersion du vecteur des rendements moyens de ces douze actifs sont obtenues à partir du relevé des rendements hebdomadaires de ces douze actions du 14.08.1996 au 13.08.1997.}. 
+concernent douze actifs financiers, dont les actions les plus attractives des plus grandes compagnies -- les \textit{``Blue Chips''} -- du marché russe en 1997\footnote{Les estimations de la moyenne et de la matrice de dispersion du vecteur des rendements moyens de ces douze actifs sont obtenues à partir du relevé des rendements hebdomadaires de ces douze actions du 14.08.1996 au 13.08.1997.}.
 \item Entrez la commande \texttt{gump(pb,algo,100);}. Qu'observe-t-on? Expliquez.
 \item Entrez alors la commande \verb+ algo.stepsize=@(phi)goldensearch(phi,10 ^-6);+ qui change la tol\'erance utilis\'ee par \texttt{goldensearch}. Tapez \texttt{algo} pour visualiser le changement effectu\'e dans la d\'efinition de l'algorithme, puis \texttt{pts=gump(pb,algo,1000);}. \textbf{Attention~:} n'oubliez-pas un z\'ero dans \tt{itermax} et n'oubliez pas le point-virgule !
 \item Vous avez trouv\'e un r\'esultat raisonnable, mais pouvait-on faire mieux? Entrez maintenant la commande \texttt{algo.stepsize=@backtrack}. Puis essayez \`a  nouveau \texttt{gump(pb,algo,1000);}. Qu'en pensez-vous?
@@ -159,8 +158,8 @@ Maintenant, c'est \`a vous de jouer.
 \bigskip
 
 \onit \setcounter{enumi}{5}
-\item La proc\'edure \tt{backtrack} utilise l'interpolation quadratique de la fonction \tt{phi}  qui lui est pass\'ee pour argument pour trouver un pas \tt t v\'erifiant la \textit{condition d'Armijo}~: 
-\tt{ phi(t)< phi(0)+ alpha*t*phi'(0)}. 
+\item La proc\'edure \tt{backtrack} utilise l'interpolation quadratique de la fonction \tt{phi}  qui lui est pass\'ee pour argument pour trouver un pas \tt t v\'erifiant la \textit{condition d'Armijo}~:
+\tt{ phi(t)< phi(0)+ alpha*t*phi'(0)}.
 \onit
 \item D\'eterminez l'\'equation de la parabole passant par les points \tt{(0,phi(0))} et \texttt{(t,phi(t))}, tangente en \tt{t=0} au graphe de \tt{phi}, puis l'abscisse du sommet de cette parabole en fonction de \tt{phi(t)}, \tt{phi(0)} et \tt{phi'(0)}.
 \item \'Editez ensuite le fichier \tt{backtrack.m} et expliquez pourquoi la proc\'edure finit n\'ecessairement par trouver un pas \tt t v\'erifiant la condition d'Armijo (\textbf{indication}~: v\'erifier que l'abscisse du sommet de la parabole interpolante reste toujours strictement inf\'erieure \`a \tt{t/2(1-alpha))}.
@@ -190,9 +189,9 @@ Qu'observe-t-on? \'Editez le fichier \tt{BarzilaiBorwein.m} et expliquez ce qui 
 
 \onit
 \item \'Editez le fichier \tt{Cauchy.m} et expliquez le r\^ole de la matrice \texttt{trial.M} apparaissant dans le code de ce fichier (\textbf{indication}~: souvenez-vous que l'on minimise en fait $G(u)=F(x+N\,u)$).
-\item Comment calculer alors la direction de recherche du gradient conjugu\'e ? (\textbf{indication}~: la formule g\'en\'erale d'actualisation est $\mathtt d_{k+1}=-g_{k+1}+\|g_{k+1}\|^2/\|g_k\|^2\,d_k$. Le probl\`eme est de prendre en compte l'existence \'eventuelle de contraintes d'\'egalit\'e lin\'eaires. Par cons\'equant, la matrice \tt{trial.M} doit intervenir quelquepart...). 
+\item Comment calculer alors la direction de recherche du gradient conjugu\'e ? (\textbf{indication}~: la formule g\'en\'erale d'actualisation est $\mathtt d_{k+1}=-g_{k+1}+\|g_{k+1}\|^2/\|g_k\|^2\,d_k$. Le probl\`eme est de prendre en compte l'existence \'eventuelle de contraintes d'\'egalit\'e lin\'eaires. Par cons\'equant, la matrice \tt{trial.M} doit intervenir quelquepart...).
  \item Donnez le code d'une fonction \texttt{FR} prenant pour argument la structure \texttt{trial} et retournant la direction de  descente de Fletcher-Reeves (\textbf{attention}~: la premi\`ere direction de recherche doit \^etre la direction de Cauchy et \tt{trial.old.g}  vaut z\'ero \`a  l'initialisation.).
-\item \'Ecrire alors une fonction \tt{gradconj} sur le mod\`ele de \tt{gradopt}. N'oubliez pas de mettre \tt{algo.memory} \`a  un. 
+\item \'Ecrire alors une fonction \tt{gradconj} sur le mod\`ele de \tt{gradopt}. N'oubliez pas de mettre \tt{algo.memory} \`a  un.
 \item Entrez alors la suite de commandes:
 \tt{ initialize(2);} \tt{algo=gradconj;} \tt{pts=gump(pb,algo,1000);},
 puis corrigez la valeur de \texttt{algo.stepsize} en augmentant progressivement la pr\'ecision de \texttt{goldensearch} et recommencez. Qu'observe-t-on ? Expliquez.
