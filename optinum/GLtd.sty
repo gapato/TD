@@ -1,25 +1,17 @@
-%%%%%% Definitions des environnements:%% "exercice", "questions", et "subquestions". %%%%%%
-\newcommand{\titre}[1]{ \noindent {\large \bfseries #1}}
-\newcounter{exercise}[chapter]
-\newcounter{question}
-\newcounter{subquestion}
-\newcommand{\rien}{\mbox{}\vspace{-0.5\baselineskip}}
-%%%%%%%% d√©finition de "l'√©tiquette": "Exercice"% utilise un "strut" pour regler% le positionnement vertical de l'√©tiquette.
-\newcommand{\exname}{\rule[-\baselineskip]{0pt}{2.3\baselineskip} Exercice}
-\newcommand{\exlabel}[1]{\parbox[b]{\labelwidth}{ \makebox[0pt][l]{\bfseries\exname\ \theexercise\ #1}}}
-%%%%% commandes permettant de r√©gler le positionnement horizontal%% des marges et de l'√©tiquette.
-\newcommand{\shift}[1]{\setlength{\leftmargin}{#1}}
-\newcommand{\setlabel}[1]{\setlength{\labelsep}{#1}}
-\newenvironment{exercice}[1][]{ \setcounter{question}{0} \stepcounter{exercise}
-    \begin{list}{}{\shift{1.6em}\setlabel{0em}}
-        \item[\exlabel{#1}]\\
-    \end{list}
-}
-\newenvironment{questions}[1][\arabic]{
-    \begin{list}{\setcounter{subquestion}{0} \stepcounter{question} #1{question}.}{\shift{5pt}\setlabel{0.5em}}
-    \end{list}
-}
-\newenvironment{subquestions}[1][\alph]{%
-    \begin{list}{\stepcounter{subquestion} #1{subquestion}.}{\shift{15pt}\setlabel{0.5em}}
-    \end{list}
-}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Definitions des environnements:%% "exercice", "questions", et "subquestions".
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\titre}[1]{\noindent {\large \bfseries #1}}\newcounter{exercise}[chapter]\newcounter{question}\newcounter{subquestion}\newcommand{\rien}{\mbox{}\vspace{-0.5\baselineskip}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% définition de "l'étiquette": "Exercice"% utilise un "strut" pour regler% le positionnement vertical de l'étiquette.
+\newcommand{\exname}{\rule[-\baselineskip]{0pt}{2.3\baselineskip} Exercice}  \newcommand{\exlabel}[1]{\parbox[b]{\labelwidth}{%
+\makebox[0pt][l]{\bfseries\exname\ \theexercise\ #1}}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% commandes permettant de régler le positionnement horizontal%% des marges et de l'étiquette.
+\newcommand{\shift}[1]{\setlength{\leftmargin}{#1}}\newcommand{\setlabel}[1]{\setlength{\labelsep}{#1}}%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newenvironment{exercice}[1][]%
+  {\setcounter{question}{0}\stepcounter{exercise}   \begin{list}{}{\shift{1.6em}\setlabel{0em}}                        \item[\exlabel{#1}] \  \\}%
+     {\end{list}}\newenvironment{questions}[1][\arabic]{%
+       \begin{list}{\setcounter{subquestion}{0}                 \stepcounter{question}                    #1{question}.}{\shift{5pt}\setlabel{0.5em}}}%
+           {\end{list}}
+       \newenvironment{subquestions}[1][\alph]{%
+           \begin{list}{\stepcounter{subquestion}                    #1{subquestion}.}{\shift{15pt}\setlabel{0.5em}}}%
+               {\end{list}}
+           %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

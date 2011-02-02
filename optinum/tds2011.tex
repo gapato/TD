@@ -6,7 +6,6 @@
 \usepackage[T1]{fontenc}
 \usepackage{lmodern}
 \usepackage{oldstyle}
-\usepackage{parallel}
 \usepackage{url}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \usepackage{GLtd}
@@ -58,19 +57,19 @@
 \section{Cocktail Party Problem}
 
 Soit $S$ un vecteur aléatoire $n$-dimensionnel  \it de moyenne nulle \rm (identifié dans toute la suite à un vecteur ligne de $\R^n$ : $S=[S_1\ S_2\ \ldots\ S_n]$).
-On définit une fonction $F$ sur $\R^n$ en posant : 
+On définit une fonction $F$ sur $\R^n$ en posant :
 \on F(w)=E[(S\star w)^4]=E\left[\,\left( \,\sum_{j=1}^N w_j\,S_j\,\right)^4\,\right] \off
-Tous les exercices de cette première série concernent les propriétés de  la fonction $F$ ainsi que le problème de la détermination des extrema de $F(w)$ sous la contrainte : $\|w\|^2=1$. 
+Tous les exercices de cette première série concernent les propriétés de  la fonction $F$ ainsi que le problème de la détermination des extrema de $F(w)$ sous la contrainte : $\|w\|^2=1$.
 
 \begin{exercice}[Gradient, Hessienne et Propriétés de Convexité de $F$]
 \rien
 \begin{questions}
 \item Déterminer  $ \grad F(w)$ et  la forme quadratique associée à $\hess F(w)$.
 \item Déduire que $F$ est convexe sur $\R^N$.
-\item Vérifier que: 
-\mbox{$ E[(S\star w)^2]=E\left[\,\left( \,\sum w_j\,S_j\,\right)^2\,\right] =w'\star D\star w $}, 
+\item Vérifier que:
+\mbox{$ E[(S\star w)^2]=E\left[\,\left( \,\sum w_j\,S_j\,\right)^2\,\right] =w'\star D\star w $},
 où $D$ est la matrice de dispersion de $S$ . En déduire que $F$ est strictement convexe si  $D$ est DP.
-\item Réciproquemment, montrer que, si $D$ n'est pas DP, il existe un vecteur $w\neq 0$ tel que: $S\star w=0$ p.s. En déduire que $F$ n'est pas strictement convexe.  
+\item Réciproquemment, montrer que, si $D$ n'est pas DP, il existe un vecteur $w\neq 0$ tel que: $S\star w=0$ p.s. En déduire que $F$ n'est pas strictement convexe.
 \item Prouver que la norme spectrale de $\hess F(w)$  est majorée par :  $12\,\sqrt{F(w)}\,\sqrt{ \mbox{E} [(\| S\|^4)]}$\end{questions}
 \end{exercice}
 
@@ -85,7 +84,7 @@ function[f,g,H]= CPPcrit(R,w)
 % CPPcrit : CPP objective function.
  N=size(R,1); f=sum((R*w).^4)/N;
  if nargout > 1
-     g=... 
+     g=...
  end
  if nargout > 2
      H=...
@@ -98,19 +97,19 @@ function[f,g,H]= CPPcrit(R,w)
 
 
 \begin{exercice}[(Méthode de  pénalisation)]
-On suppose les $S_j$ non corrélés, de moyennes nulles, et de variances :  $\sigma_j^2=1$, et on se propose de maximiser le \it kurtosis \rm :  
+On suppose les $S_j$ non corrélés, de moyennes nulles, et de variances :  $\sigma_j^2=1$, et on se propose de maximiser le \it kurtosis \rm :
 \on  k(S\star w)= E[(S\star w)^4] -3\,E[(S\star w)^2] ^2 \off
 de $S\star w$  sous la contrainte de normalisation : \mbox{$E[(S\star w)^2]=1$}, problème qui se réduit  au problème :
 \on ( \P)  \push{5} \underset{ s. c. \|w\|^2=1}{\push 3\mbox{Max}\push 5 F(w)}  \off
- Pour le résoudre, on décide de maximiser le critère  pénalisé :  
+ Pour le résoudre, on décide de maximiser le critère  pénalisé :
  \on F_{\mu}(w)=F(w)-\frac{\mu}{4}\,\left(\,\|w\|^2-1\,\right)^2 \off
- où $\mu$ est un paramètre positif destiné à tendre vers l'infini. 
+ où $\mu$ est un paramètre positif destiné à tendre vers l'infini.
   \begin{questions}
-\item Prouver que : 
+\item Prouver que :
 \begin{subquestions}
 \item$M_{\mu}= \sup F_{\mu}$ (éventuellement : $+\infty$) est une fonction décroissante de $\mu$, minorée par $M=\sup (\P)$
 \item $\mu\leq 4\,M \Rightarrow M_{\mu}=+\infty$ (considérer~: $\hat w\in ArgMax \{F(w)   |   \|w\|^2=1   \}$)
-\item Prouver~: $\forall w\in\R^N \quad F(w)\leq M \|w\|^4$. En déduire~: $\mu> 4\,M \Rightarrow \mathrm{ArgMax}\ F_{\mu} \neq \emptyset$ 
+\item Prouver~: $\forall w\in\R^N \quad F(w)\leq M \|w\|^4$. En déduire~: $\mu> 4\,M \Rightarrow \mathrm{ArgMax}\ F_{\mu} \neq \emptyset$
 \end{subquestions}
 \item On suppose : $\mu> 4\,M$ et : $w_{\mu}\in\mathrm{ArgMax}\ F_{\mu}$. Etablir successivement :
 \begin{subquestions}
@@ -127,13 +126,13 @@ Que risque-t-on d'observer si on cherche a maximiser $F_{\mu}$ par une méthode 
 On suppose les $S_j$ non corrélés, de moyennes nulles et de variances :  $\sigma_j^2=E(S_j^2)>0$ .
 \begin{questions}
 \item  Prouver que: $E\left[\left(\sum w_jS_j\right)^2\right]=\sum w_j^2\, \sigma_j^2$
-\item  Prouver que, si les $S_j$ sont  \it indépendants \rm : 
+\item  Prouver que, si les $S_j$ sont  \it indépendants \rm :
 \on k(\sum w_jS_j)=\sum w_j^4\, k(S_j) \off
 où : $k(S)=E(S^4)-3\,E(S^2)^2$. Ce résultat reste-il vrai si on suppose seulement les $Sj$ non corrélés?
-\item On suppose toujours les $S_j$ \it indépendants\rm, et on cherche maintenant à déterminer les extrema locaux de :  
+\item On suppose toujours les $S_j$ \it indépendants\rm, et on cherche maintenant à déterminer les extrema locaux de :
 \on k(S\star w)=k(\sum w_jS_j) \off
 sous la contrainte de normalisation : $E[(S\star w)^2]=\sum w_j^2\,\sigma_j^2=1$.
-Pour tout indice $j$, on note : $k_j:=k(S_j)$, et on suppose tous les $k_j$, \it sauf au plus un\rm, non nuls (donc au plus un des $S_j$ est Gaussien).  Prouver que si $w$ est un extremum local de $k(S\star w)$ : 
+Pour tout indice $j$, on note : $k_j:=k(S_j)$, et on suppose tous les $k_j$, \it sauf au plus un\rm, non nuls (donc au plus un des $S_j$ est Gaussien).  Prouver que si $w$ est un extremum local de $k(S\star w)$ :
 \begin{subquestions}
 \item Il existe un réel $\lambda$ tel que, pour tout $j$:
 $ w_j=0\;$  ou:  $ k_j\,w_j^2= \lambda\,\sigma_j^2 $, et:  $k(S\star w)=\lambda$.
@@ -142,7 +141,7 @@ $ w_j=0\;$  ou:  $ k_j\,w_j^2= \lambda\,\sigma_j^2 $, et:  $k(S\star w)=\lambda$
 \end{subquestions}
 \item Trouver tous les extrema locaux de $k(S\star w)$ pour lesquels: $k(S\star w)\neq 0$, et déterminer  leur nature en fonction du signe de $k(S\star w)$.
 \item Déduire que $w$ est un \it maximum \rm  local de $|k|$ sous la contrainte : $\sum w_j^2\,\sigma_j^2=1$, si et seulement si il existe un indice $j$ tel que:  $k_j\neq 0$,
-$  \sigma_j w_j=\pm 1$, et : $w_i = 0\push{10}\mbox{pour :}\push 5 i\neq j $ . 
+$  \sigma_j w_j=\pm 1$, et : $w_i = 0\push{10}\mbox{pour :}\push 5 i\neq j $ .
 \end{questions}
 \end{exercice}
 
@@ -151,8 +150,8 @@ $  \sigma_j w_j=\pm 1$, et : $w_i = 0\push{10}\mbox{pour :}\push 5 i\neq j $ .
 \begin{exercice}[(Réduction à un problème de Point Fixe)]
 On suppose : $F(w_0)>0$ pour au moins un vecteur $w_0\in\R^N$.
 \begin{questions}
-\item  Montrer que : \mbox{$\hat w \in \mathrm{ArgMax}\,\{ F(w)\ | \ \|w\|^2=1\ \} \Rightarrow \grad F(\hat w) = \| \grad F(\hat w) \|\,\hat w$} 
-\item Cette implication suggère de s'intéresser à la suite de premier terme $w_0$ définie par la formule de récurrence : 
+\item  Montrer que : \mbox{$\hat w \in \mathrm{ArgMax}\,\{ F(w)\ | \ \|w\|^2=1\ \} \Rightarrow \grad F(\hat w) = \| \grad F(\hat w) \|\,\hat w$}
+\item Cette implication suggère de s'intéresser à la suite de premier terme $w_0$ définie par la formule de récurrence :
 \mbox{$ w_{k+1}= \| \grad F(w_k) \| ^{-1}  \, \grad F(w_k)$}. Prouver que
  $\grad F(w_k)$ ne s'annule jamais - donc que la suite $w_k$ est bien définie - et que la suite $F(w_k)$ est croissante (remarquer que : $\grad F(w_k)'\star w_k= 4\,F(w_k)$ et utiliser l'inégalité de convexité).
 \item Etablir alors successivement :
@@ -170,19 +169,19 @@ On suppose : $F(w_0)>0$ pour au moins un vecteur $w_0\in\R^N$.
 
 \section{Zooming Problem}
 
-Les exercices de cette seconde s\'erie ont pour but de reconnaître la nature du \og Zooming Problem \fg\ (ex. 8) et de permettre l'\'ecriture \matlab\ d'un \og oracle \fg\ associ\'e au crit\`ere de ce probl\`eme (ex. 6,7) qui sera impl\'ement\'e lors des s\'eances de Travaux Pratiques. On travaille dans l'espace vectoriel $\mathcal E=\mathcal M_{M,N}(\R)$ des $M\times N$ matrices r\'eelles que l'on munit de la norme 
-\on \|Z\|=\sqrt{\mathrm{tr}(Z\star Z')}=\sqrt{\mathrm{tr}(Z'\star Z)}\off 
+Les exercices de cette seconde s\'erie ont pour but de reconnaître la nature du \og Zooming Problem \fg\ (ex. 8) et de permettre l'\'ecriture \matlab\ d'un \og oracle \fg\ associ\'e au crit\`ere de ce probl\`eme (ex. 6,7) qui sera impl\'ement\'e lors des s\'eances de Travaux Pratiques. On travaille dans l'espace vectoriel $\mathcal E=\mathcal M_{M,N}(\R)$ des $M\times N$ matrices r\'eelles que l'on munit de la norme
+\on \|Z\|=\sqrt{\mathrm{tr}(Z\star Z')}=\sqrt{\mathrm{tr}(Z'\star Z)}\off
 associ\'ee au produit scalaire $<X,Y>=\mathrm{tr}(X\star Y')=\mathrm{tr}(X'\star Y)$.
- 
+
 \begin{exercice}[(gradient du smoother)]
 On d\'efinit une fonction $\varphi$ d\'efinie sur en posant :
 \on \varphi(Z)=\frac{1}{2} \sum_{i=1}^M \sum_{j=1}^{N-1} \left| \, Z_i^j -Z_i^{j+1}\,\right|^2 \off
 \begin{questions}
 \item Expliciter $\|Z\|^2$ en fonction des coefficients $Z_i^j$ de $Z$.
 \item D\'eduire que l'on peut \'ecrire $\varphi(Z)=(1/2)\, \|Z\star T\|^2$ o\`u $T$ est une matrice tridiagonale que l'on d\'eterminera.
-\item D\'eterminer la d\'eriv\'ee $\varphi'(Z)$ de $\varphi$ au point $Z$ et montrer que $\grad \varphi(Z)$ peut être identifi\'e \`a la matrice $Z\star T \star T'$. 
-\item \'Ecrire le code d'une fonction \matlab\ prenant $N$ pour argument et retournant la $N\times N$ matrice sym\'etrique $A=T\star T'$ 
-\item En d\'eduire le code d'une fonction \matlab, qui prend pour argument une matrice $Z$ et retourne la valeur du smoother 
+\item D\'eterminer la d\'eriv\'ee $\varphi'(Z)$ de $\varphi$ au point $Z$ et montrer que $\grad \varphi(Z)$ peut être identifi\'e \`a la matrice $Z\star T \star T'$.
+\item \'Ecrire le code d'une fonction \matlab\ prenant $N$ pour argument et retournant la $N\times N$ matrice sym\'etrique $A=T\star T'$
+\item En d\'eduire le code d'une fonction \matlab, qui prend pour argument une matrice $Z$ et retourne la valeur du smoother
 \on S(Z) = \frac{1}{2}\, \sum_{i=1}^M \sum_{j=1}^{N-1} \left| \, Z_i^j -Z_i^{j+1}\,\right|^2 +
 \frac{1}{2}\,\sum_{i=1}^{M-1} \sum_{j=1}^N \left| \, Z_i^j -Z_{i+1}^j \,\right|^2 \off
 dans une variable \texttt{s} et, lorsqu'elle est appel\'ee avec deux arguments, celle de $\grad S(Z)$ dans une variable \texttt{g}.
@@ -196,7 +195,7 @@ On suppose $N$ et $M$ \it pairs \rm et on se donne une $M\times N$ matrice $D$ a
 \item D\'eterminer $\mathrm{ArgMin}\,\{ \ \sum_{i=1}^4 (Z_i-P)^2 \ | \ P \in \R \ \}$
 \item D\'eduire comment calculer la projection $p(Z)$ d'une $M\times N$ matrice $Z$ de $\mathcal E$ sur $\mathcal F$.
 \item Trouver des matrices sym\'etriques $S_1$ et $S_2$ telles que, pour tout $Z\in\mathcal E$, $p(Z)=S_1\star Z\star S_2$ (indication : trouver $S_1$ et $S_2$ si $N=M=2$).
-\item D\'eduire que le gradient de la fonction $E$ d\'efinie sur $\mathcal E$ par : 
+\item D\'eduire que le gradient de la fonction $E$ d\'efinie sur $\mathcal E$ par :
 \on E(Z)= \frac{1}{2}\,\| p(Z)-D\|^2 \off
 peut être identifi\'e \`a la matrice $S_1\star (Z-D)\star S_2$
 \end{questions}
@@ -208,7 +207,7 @@ peut être identifi\'e \`a la matrice $S_1\star (Z-D)\star S_2$
 \item Prouver que le crit\`ere $F$ du \og Zooming Problem\fg, d\'efini sur $\mathcal E$ par
 \on F(Z)= \frac{1}{2}\, \sum_{i=1}^M \sum_{j=1}^{N-1} \left| \, Z_i^j -Z_i^{j+1}\,\right|^2 +
 \frac{1}{2}\,\sum_{i=1}^{M-1} \sum_{j=1}^N \left| \, Z_i^j -Z_{i+1}^j \,\right|^2 + \frac{\mu}{2}\,\| p(Z)-D\|^2 \off
-o\`u $\mu$ est un r\'eel strictement positif, est une fonction \it quadratique elliptique\rm. 
+o\`u $\mu$ est un r\'eel strictement positif, est une fonction \it quadratique elliptique\rm.
 \item D\'eduire qu'il admet un unique minimiseur $\hat Z_\mu$ dans $\mathcal E$.
 \item Prouver que $\hat Z_\mu$ est solution d'un syst\`eme d'\'equations lin\'eaires que l'on peut expliciter. Si $N=M=256$, quelle est la taille de ce syst\`eme ?
 \end{questions}
@@ -222,7 +221,7 @@ Cette derni\`ere s\'erie d'exercices est consacr\'ee \`a une m\'ethode de r\'eso
 \begin{exercice}[(utilisation d'une barri\`ere logarithmique)]
 Pour r\'esoudre le probl\`eme :
 \mbox{$ (\P) \push{2} \underset{s. c.\push{3}\begin{array}[t]{l} e'\star x=1\\ \push{-3}x\geq 0, r'\star x\geq \rho\end{array}}%
-{Min\push{5} (x'\star Q\star x)}$}, o\`u $Q$ est une $N\times N$ matrice sym\'etrique DP, $e= \mathtt{ones(N,1)}$, 
+{Min\push{5} (x'\star Q\star x)}$}, o\`u $Q$ est une $N\times N$ matrice sym\'etrique DP, $e= \mathtt{ones(N,1)}$,
 $r=[r_1\ r_2\ .. r_N]$ est le vecteur des rendements moyens des actifs constituant le portefeuille, et $\rho$ est le rendement esp\'er\'e, on choisit de minimiser la fonction $F_{\varepsilon}$ d\'efinie par
 \on F_{\varepsilon}(x)=\frac{1}{2}\,x'\star Q\star x -\varepsilon\sum_{i=1}^N\,\ln (x_i) -\varepsilon\,\ln (r'\star x-\rho), \off
 o\`u $\varepsilon$ est une constante positive \it destin\'ee \`a tendre vers z\'ero\rm, sous la contrainte $e'\star x=1$.
@@ -279,7 +278,7 @@ Soit $F:\Omega\mapsto \R$ convexe et de classe $\mathcal C^2$ sur un ouvert conv
 \[
 S=\{\ x\in\R^N\ | \ e'\star x=1,\push{5} x\geq 0 \ \}
 \]
-o\`u $e$ d\'esigne le vecteur de $\R^N$ dont toutes les coordonn\'ees sont des \og uns\fg, et on cherche \`a minimiser $F$ sur $S$. On note $(\P)$ ce probl\`eme, et 
+o\`u $e$ d\'esigne le vecteur de $\R^N$ dont toutes les coordonn\'ees sont des \og uns\fg, et on cherche \`a minimiser $F$ sur $S$. On note $(\P)$ ce probl\`eme, et
 $
 m=\underset{x\in S}{\inf} F(x)= \inf\;(\P).
 $
@@ -291,7 +290,7 @@ $
 \P(x)\push{15} \underset{\mbox{$u\in S$}}{\inf} \ (\grad F(x)'\star u)
 \]
 Prouver l'implication $x\in \mbox{arg} \min \P(x) \Rightarrow x\in \mbox{arg} \min (\P)$.
-\item On note $e_i$ ($i=1..N$) le vecteur de $\R^N$ dont toutes les coordonn\'ees sont nulles, sauf la $i^{\mbox{\scriptsize \`eme}}$ qui vaut un. Prouver que si $x\not\in \mbox{arg} \min (\P)$, et $j=\mbox{arg} \underset{i=1..N}{\min} \grad F(x)'\star e_i$ $d=e_j-x$ est une direction de descente pour $F$ au point $x$. 
+\item On note $e_i$ ($i=1..N$) le vecteur de $\R^N$ dont toutes les coordonn\'ees sont nulles, sauf la $i^{\mbox{\scriptsize \`eme}}$ qui vaut un. Prouver que si $x\not\in \mbox{arg} \min (\P)$, et $j=\mbox{arg} \underset{i=1..N}{\min} \grad F(x)'\star e_i$ $d=e_j-x$ est une direction de descente pour $F$ au point $x$.
 \item On consid\`ere alors l'algorithme suivant :
 \begin{itemize}
 \item \`A l'\'etape $k+1$ ($k\geq 0$), $x_k$ est connu.
@@ -304,11 +303,11 @@ Prouver l'implication $x\in \mbox{arg} \min \P(x) \Rightarrow x\in \mbox{arg} \m
 \end{itemize}
 \medskip
 
-On note $(x_k)_k$ la suite des points calcul\'es par l'algorithme. L'initialisation $x_0$ est al\'eatoire dans $S$. 
+On note $(x_k)_k$ la suite des points calcul\'es par l'algorithme. L'initialisation $x_0$ est al\'eatoire dans $S$.
 \begin{subquestions}
 \item Expliquer pourquoi $(x_k)_k$ reste toujours dans $S$.
 \item Prouver que la suite $(F(x_k))_k$ est convergente.
-\item Prouver que, s'il existe une sous-suite $(x_{\xi(k)})_k$ extraite de $(x_k)_k$ telle que: 
+\item Prouver que, s'il existe une sous-suite $(x_{\xi(k)})_k$ extraite de $(x_k)_k$ telle que:
 \[
 \grad F(x_{\xi(k)})'*(e_{j_{\xi(k)}}-x_{\xi(k)})\rightarrow 0 \push{5} \mbox{et}\push{5} x_{\xi(k)}\rightarrow \bar x
 \]
@@ -321,7 +320,7 @@ On note $(x_k)_k$ la suite des points calcul\'es par l'algorithme. L'initialisat
 \end{exercice}
 
 \begin{exercice} On suppose que $F\in \mathcal C^2(\Omega,\R)$, o\`u $\Omega$ est un ouvert de $\R^N$, et $0<c\,I_n\leq \hess F\leq K\,I_n$
-sur l'ensemble de niveau $S=\{ \ x\in \Omega\ | \ F(x)\leq c\ \}$ de $F$ dans $\Omega$. 
+sur l'ensemble de niveau $S=\{ \ x\in \Omega\ | \ F(x)\leq c\ \}$ de $F$ dans $\Omega$.
 \begin{questions}
 \item Prouver que, si $x\in S$, et $d$ est une direction de descente pour $F$ au point $x$, le pas
 \[
@@ -334,7 +333,7 @@ v\'erifie toujours les conditions de Wolfe avec $0<\alpha<0.5$ et $\beta>1-c/K$.
 
 \begin{exercice}[(application : radioth\'erapie de la prostate)]
 La prostate a grossi\`erement la forme d'une chataîgne. Lors de son traitement par radioth\'erapie, on essaie de focaliser le rayonnement \'emis sur le centre de la plus petite boule tridimensionnelle qui l'englobe. Localiser le centre $x$ de cette boule \'equivaut \`a minimiser : $ F(x)=\underset{i=1..N}{\max} ||\,x-a_i\,|| $, o\`u les $a_i$, $i=1,\ldots,N$, sont $N$ points donn\'es de $\R^3$ d\'elimitant le volume occup\'e par la prostate dans $\R^3$ (d\'etermin\'es manuellement par le praticien sur diff\'erentes coupes scanner).
-Le probl\`eme se r\'e\'ecrit: 
+Le probl\`eme se r\'e\'ecrit:
 \[
  (\P) \push{15}\underset{\rule{0pt}{15pt}\mbox{s.c.}\push{5}\parbox[t]{100pt}{$\frac{1}{2}\,||a_i||^2\leq x'\star a_i + \xi$ \\ \rule{0pt}{11pt}$i=1..N$}}{\mbox{Min \rule{60pt}{0pt}}} \push{10}\left( \frac{1}{2} \| x\|^2 +\xi \right).
 \]
@@ -348,10 +347,10 @@ Le probl\`eme se r\'e\'ecrit:
 \item On d\'ecide d'utiliser l'algorithme d\'efini dans l'exercice 12 pour r\'esoudre ($\P^{\star}$). \'Ecrire le code \matlab\ d'une proc\'edure, d\'eclarant comme variable globale la matrice \texttt M, et prenant pour arguments un vecteur \texttt{theta} et une direction de descente \texttt d pour $F$ au point \texttt{theta}, qui retourne toujours un pas $t\leq 1$ de mani\`ere \`a garantir la convergence de l'algorithme (indication : utiliser le r\'esultat de l'exercice pr\'ec\'edent).
 \end{questions}
 \end{exercice}
- 
+
  \begin{exercice}[(scoring)]
- On cherche \`a construire un classificateur automatique permettant de classer des points de $\R^M$ (des \og clients \fg\ identifi\'es par un jeu de $M$ donn\'ees num\'eriques : âge, situation familiale, d\'epartement de residence, revenu imposable, etc...) dans l'une ou l'autre de deux classes \textit{disjointes} $C_1$ et $C_2$ recouvrant tout l'espace $\R^M$ (les \og bons \fg\ et les \og mauvais \fg\ clients). 
- 
+ On cherche \`a construire un classificateur automatique permettant de classer des points de $\R^M$ (des \og clients \fg\ identifi\'es par un jeu de $M$ donn\'ees num\'eriques : âge, situation familiale, d\'epartement de residence, revenu imposable, etc...) dans l'une ou l'autre de deux classes \textit{disjointes} $C_1$ et $C_2$ recouvrant tout l'espace $\R^M$ (les \og bons \fg\ et les \og mauvais \fg\ clients).
+
  Le mod\`ele \textit{Logit} suppose la probabilit\'e d'appartenance \`a la classe $C_1$ d'un \'el\'ement \mbox{$x\in \R^M$} donn\'ee par
 \[
 P[\,x\in C_1\,]=\left[\,1+\exp (<p,x> +q)\,\right]^{-1}
@@ -362,7 +361,7 @@ P[\,x\in C_2\,] =1- P[\,x\in C_1\,] = \left[\,1+\exp (-<p,x> -q)\,\right]^{-1}
 \]
 On cherche \`a estimer les param\`etres $p$ et $q$ de ce mod\`ele \`a partir d'un \'echantillon de $N$ points ($N\gg M$) dont la classe est connue en minimisant la log-vraisemblance de l'\'echantillon
 \[
- F=\sum_{i=1}^N \ln (1+\exp [\,\xi_i(<p,x_i>+q)\,]) 
+ F=\sum_{i=1}^N \ln (1+\exp [\,\xi_i(<p,x_i>+q)\,])
 \]
 o\`u, pour tout indice $i$, $\xi_i=\pm 1$ est un \og marqueur \fg\ de la classe de $x_i$ ($\xi_i=1$ si $x_i\in C_1$, $\xi_i=-1$ si $x_i\in C_2$).
 \begin{questions}
@@ -377,7 +376,7 @@ o\`u $\alpha_i=\frac{\xi_i}{2}\,(<p, x_i>+q)$.
 \[
 S_0=\{ \ (p,q)\in \R^{M+1} \ | \ F(p,q)\leq F(p_0,q_0) \ \}.
 \]
-\item En d\'eduire que, si $(p_k,q_k)$ est la suite des points calcul\'es par l'algorithme \texttt{GradOpt}, 
+\item En d\'eduire que, si $(p_k,q_k)$ est la suite des points calcul\'es par l'algorithme \texttt{GradOpt},
 $\grad F(p_k,q_k)\rightarrow 0$ quelle que soit l'initialisation $(p_0,q_0)$ de l'algorithme.
 \item On suppose d\'esormais qu'il n'existe aucun hyperplan de $\R^M$ contenant tous les points de l'\'echantillon. Montrer que, s'il existe alors un hyperplan \textit{s\'eparant} les points, $F$ n'admet aucun minimiseur (remarquer qu'un tel hyperplan fournit une direction de descente en \textit{tout} point de $\R^M$).
 \item Finalement, prouver l'alternative suivante:
