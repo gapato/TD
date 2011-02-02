@@ -57,9 +57,9 @@
 
 \section{Cocktail Party Problem}
 
-Soit $S$ un vecteur aléatoire $N$-dimensionnel  \it de moyenne nulle \rm (identifié dans toute la suite à un vecteur ligne de $\R^N$ : $S=[S_1\ S_2\ \ldots\ S_N]$).
-On définit une fonction $F$ sur $\R^N$ en posant : 
-\on F(w)=E[(S\star w)^4]=E\left[\,\left( \,\sum w_j\,S_j\,\right)^4\,\right] \off
+Soit $S$ un vecteur aléatoire $n$-dimensionnel  \it de moyenne nulle \rm (identifié dans toute la suite à un vecteur ligne de $\R^n$ : $S=[S_1\ S_2\ \ldots\ S_n]$).
+On définit une fonction $F$ sur $\R^n$ en posant : 
+\on F(w)=E[(S\star w)^4]=E\left[\,\left( \,\sum_{j=1}^N w_j\,S_j\,\right)^4\,\right] \off
 Tous les exercices de cette première série concernent les propriétés de  la fonction $F$ ainsi que le problème de la détermination des extrema de $F(w)$ sous la contrainte : $\|w\|^2=1$. 
 
 \begin{exercice}[Gradient, Hessienne et Propriétés de Convexité de $F$]
@@ -76,7 +76,7 @@ où $D$ est la matrice de dispersion de $S$ . En déduire que $F$ est strictemen
 
 \begin{exercice}[(Ecriture \matlab\  d'un \og oracle \fg)]
 
-On suppose que l'on a observé $n$ réalisations de $S$, stockées dans une $n\times N$ matrice $R$. Chaque ligne de $R$ correspond  à une réalisation et chaque colonne à une variable.  On fait l'hypothèse de travail simplificatrice que la loi de $S$ est la loi empirique correspondante, c'est-à-dire que $S$ égale chaque ligne de $R$ avec une probabilité :  $1/n$.
+On suppose que l'on a observé $N$ réalisations de $S$, stockées dans une $N\times n$ matrice $R$. Chaque ligne de $R$ correspond  à une réalisation et chaque colonne à une variable.  On fait l'hypothèse de travail simplificatrice que la loi de $S$ est la loi empirique correspondante, c'est-à-dire que $S$ égale chaque ligne de $R$ avec une probabilité :  $1/N$.
 \begin{questions}
 \item Ecrire le code d'une fonction  \matlab\  prenant pour arguments $R$ et $w$, et retournant : $F(w)$ dans une variable $f$, $\grad F(w)$ dans une variable $g$, et :  $\hess F(w)$ dans une variable $H$, selon le modèle suivant :
 
