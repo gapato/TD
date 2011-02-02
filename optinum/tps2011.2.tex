@@ -71,7 +71,13 @@ puis extraire les fichiers qui seront utilis\'{e}s durant la s\'{e}ance dans le 
 
 \section{\'Ecriture d'un oracle}
 
-Le fichier \texttt{lbpfun.m} contenu dans le répertoire \tt{optinum-tp2} contient le modèle d'un oracle associé au critère du problème. Le code, reproduit ci-après,  déclare quatre variables \textit{globales} \tt{Sigma}, \tt r, \tt{mu}, et \tt{rho} destin\'ees \`a contenir respectivement la matrice des variances-covariances des rendements du panier d'actifs consid\'er\'e et le vecteur des rendements moyens, ainsi que les valeurs des paramètres$\mu$ et $\rho$~:
+Le fichier \texttt{lbpfun.m} contenu dans le répertoire
+\tt{optinum-tp2} contient le modèle d'un oracle associé au critère du
+problème. Le code, reproduit ci-après,  déclare quatre variables
+\textit{globales} \tt{Sigma}, \tt r, \tt{mu}, et \tt{rho} destin\'ees
+\`a contenir respectivement la matrice des variances-covariances des
+rendements du panier d'actifs consid\'er\'e et le vecteur des
+rendements moyens, ainsi que les valeurs des paramètres $\mu$ et $\rho$~:
 
 \begin{verbatim}
    lbpfun[f,g,H]=function(x)
@@ -89,7 +95,7 @@ Le fichier \texttt{lbpfun.m} contenu dans le répertoire \tt{optinum-tp2} contie
       f=inf ; g=r ; g(:)=NaN ; H=Sigma ; H(:,:)=NaN ;
    end
 \end{verbatim}
-\'Editer le fichier \tt{lbpfun.m}, compl\'eter le code manquant dans l'\'ecriture de la fonction (c'est-\`-dire les d\'efinitions de \tt{g} et de \tt{H}), et sauvegarder.
+\'Editer le fichier \tt{lbpfun.m}, compl\'eter le code manquant dans l'\'ecriture de la fonction (c'est-\`a-dire les d\'efinitions de \tt{g} et de \tt{H}), et sauvegarder.
 
 \section{Acquisition des donn\'ees}
 
@@ -146,7 +152,13 @@ Bien, vous avez d\'ecouvert le principe de diversification du risque qui a fait 
 \item Entrez la commande \texttt{initialize(3)} qui charge dans \texttt{pb} le probl\`eme de dimension 12 associ\'e \`a  \texttt{stocks(3)}. Les données correspondantes sont tirées de l'article :  \url{http://www.geo.ut.ee/nbc/paper/lapsina.htm} et
 concernent douze actifs financiers, dont les actions les plus attractives des plus grandes compagnies -- les \textit{``Blue Chips''} -- du marché russe en 1997\footnote{Les estimations de la moyenne et de la matrice de dispersion du vecteur des rendements moyens de ces douze actifs sont obtenues à partir du relevé des rendements hebdomadaires de ces douze actions du 14.08.1996 au 13.08.1997.}.
 \item Entrez la commande \texttt{gump(pb,algo,100);}. Qu'observe-t-on? Expliquez.
-\item Entrez alors la commande \verb+ algo.stepsize=@(phi)goldensearch(phi,10 ^-6);+ qui change la tol\'erance utilis\'ee par \texttt{goldensearch}. Tapez \texttt{algo} pour visualiser le changement effectu\'e dans la d\'efinition de l'algorithme, puis \texttt{pts=gump(pb,algo,1000);}. \textbf{Attention~:} n'oubliez-pas un z\'ero dans \tt{itermax} et n'oubliez pas le point-virgule !
+\item Entrez alors la commande
+  \verb+ algo.stepsize=@(phi)goldensearch(phi,1e-6);+ qui met la
+  tol\'erance utilis\'ee par \texttt{goldensearch} à $10^{-6}$. Tapez
+  \texttt{algo} pour visualiser le changement effectu\'e dans la
+  d\'efinition de l'algorithme, puis
+  \texttt{pts=gump(pb,algo,1000);}. \textbf{Attention~:} n'oubliez-pas
+  un z\'ero dans \tt{itermax} et n'oubliez pas le point-virgule !
 \item Vous avez trouv\'e un r\'esultat raisonnable, mais pouvait-on faire mieux? Entrez maintenant la commande \texttt{algo.stepsize=@backtrack}. Puis essayez \`a  nouveau \texttt{gump(pb,algo,1000);}. Qu'en pensez-vous?
 \item \`A l'\'et\'e 1997, \`a partir des estimations obtenues, quel portefeuille de variance minimale eussiez-vous conseill\'e de constituer avec les \textit{Blue Chips} du march\'e russe ? Donnez le rendement moyen et la variance de ce portefeuille.
 \offit
