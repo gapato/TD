@@ -123,7 +123,12 @@ Vous pouvez \textit{\'{e}couter} \`{a} tout moment un signal num\'{e}ris\'{e} en
 
 \section{ Ecriture d'un oracle}
 
-Un \textit{oracle} est une proc\'{e}dure qui prend pour argument un vecteur \tt w de $\R^N$ et retourne la valeur $f$ du crit\`{e}re $F(w)$  ainsi, \'{e}ventuellement, que celle de son gradient $g = \grad F(w)$, ou de sa matrice Hessienne : $H = \hess F(w)$ en ce point.
+Un \textit{oracle} est une proc\'{e}dure qui prend pour argument un
+vecteur \tt w de $\R^N$ et retourne la valeur $f$ du crit\`{e}re
+$F(w)$  ainsi, \'{e}ventuellement, que celle de son gradient $g =
+\grad F(w)$, ou de sa matrice Hessienne : $H = \hess F(w)$ en ce
+point. Noter qu'ici on travaille sur les données décorrélées,
+c'est-à-dire la matrice \tt X au lieu de la matrice \tt R.
 
 \onit
 \item \'Editer le fichier \tt{cppfun.m} et compl\'eter le code de l'oracle du probl\`eme selon le mod\`{e}le suivant :
