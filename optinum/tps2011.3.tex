@@ -1,13 +1,14 @@
 \documentclass[10pt,a4paper,fleqn]{report}
 \usepackage{a4wide}
 \usepackage{amsmath,amssymb}
-\usepackage[francais]{babel}
+\usepackage[french]{babel}
+\usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
+\usepackage{lmodern}
 \usepackage{oldstyle}
 \usepackage{parallel}
 \usepackage{url}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\usepackage[applemac]{inputenc} %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \renewcommand{\thesection}{ \textbf{\Large \arabic{section}.}}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\`{u}\`{u}
 \setlength{\oddsidemargin}{1pt}
@@ -55,16 +56,16 @@
 
 
 \section*{Objectif} 
-Effectuer un zoom dans une image numérique \tt{img} en retournant~: 
+Effectuer un zoom dans une image num√©rique \tt{img} en retournant~: 
 $
 Z= \mbox{arg} \min \left(\, S(Z)+ \mu\ E(Z)\,\right)
 $
-où~: 
+o√π~: 
 \[
 S(Z)=\frac{1}{2}\,\sum_{i=1}^M \sum_{j=1}^{N-1} |\,Z_i^j-Z_i^{j+1}\,|^2 +
 \frac{1}{2}\,\sum_{i=1}^{M-1} \sum_{j=1}^N |\ Z_i^j-Z_{i+1}^j\,|^2
 \]
-est le \og Smoother \fg\ qui régularise l'image, $ E(Z)=\frac{1}{2}\,\|\ p(Z)-D\,\|^2$ mesure l'erreur commise en remplaçant la matrice $D$ -- obtenue en doublant grossièrement la taille de \tt{img} -- par $Z$, et $\mu$ est un paramètre permettant de régler l'arbitrage entre lissage et distorsion dans le rendu de l'image.
+est le \og Smoother \fg\ qui r√©gularise l'image, $ E(Z)=\frac{1}{2}\,\|\ p(Z)-D\,\|^2$ mesure l'erreur commise en rempla√ßant la matrice $D$ -- obtenue en doublant grossi√®rement la taille de \tt{img} -- par $Z$, et $\mu$ est un param√®tre permettant de r√©gler l'arbitrage entre lissage et distorsion dans le rendu de l'image.
 
 
 \section{Pr\'{e}liminaires}
@@ -77,97 +78,97 @@ puis extraire les fichiers qui seront utilis\'{e}s durant la s\'{e}ance dans le 
 \section{Acquisition des donn\'ees}
 \onit
 \item Entrez la commande \tt{load zoom} chargeant l'environnement de travail \matlab\ \tt{zoom.mat}.
-\item Entrez alors la commande \tt{whos} qui liste les variables définies dans cet environnement, la nature et la taille mémoire de chacune d'elles~:
+\item Entrez alors la commande \tt{whos} qui liste les variables d√©finies dans cet environnement, la nature et la taille m√©moire de chacune d'elles~:
 \onit
-\item[–] les variables \tt{visage} et \tt{singe} sont des $256\times 256$ matrices d'entiers codés sur huit bits (\tt{uint8}) correspondant à des images numérisées,
-\item[–] la variable \tt{grayscale} est une matrice contenant une \og carte de couleur \fg\ (\tt{colormap}) permettant un affichage noir et blanc des images contenues dans \tt{visage} et \tt{singe},
-\item[–] la variable \tt{mu} est destinée à contenir la valeur du paramètre $\mu$. Cette variable, déclarée comme \textit{globale}, pourra être modifiée à tout moment au moyen d'une simple commande d'affectation. 
+\item[‚Äì] les variables \tt{visage} et \tt{singe} sont des $256\times 256$ matrices d'entiers cod√©s sur huit bits (\tt{uint8}) correspondant √† des images num√©ris√©es,
+\item[‚Äì] la variable \tt{grayscale} est une matrice contenant une \og carte de couleur \fg\ (\tt{colormap}) permettant un affichage noir et blanc des images contenues dans \tt{visage} et \tt{singe},
+\item[‚Äì] la variable \tt{mu} est destin√©e √† contenir la valeur du param√®tre $\mu$. Cette variable, d√©clar√©e comme \textit{globale}, pourra √™tre modifi√©e √† tout moment au moyen d'une simple commande d'affectation. 
 \offit
 
 \medskip
 
 Le fichier \tt{optinum-tp3} contient le fichier \tt{draw.m} permettant un affichage des images utilisant la carte \tt{grayscale}. Vous pouvez ainsi:
 \onit
-\item[–] visualiser les images \tt{visage} ou \tt{singe} en entrant la commande \tt{draw(visage)}, ou \tt{draw(singe)}.
-\item[–] convertir sous forme d'une matrice d'entiers une nouvelle image de votre choix en utilisant la commande \tt{imread(img.fmt)}, où \tt{img} est l'image à convertir, et \tt{fmt} le format \tt{jpeg}, \tt{png}, \tt{tiff}, etc...
+\item[‚Äì] visualiser les images \tt{visage} ou \tt{singe} en entrant la commande \tt{draw(visage)}, ou \tt{draw(singe)}.
+\item[‚Äì] convertir sous forme d'une matrice d'entiers une nouvelle image de votre choix en utilisant la commande \tt{imread(img.fmt)}, o√π \tt{img} est l'image √† convertir, et \tt{fmt} le format \tt{jpeg}, \tt{png}, \tt{tiff}, etc...
 \offit
 \offit
 
 \smallskip
 
-En utilisant les résultats de ce tp, vous pourrez également extraire des morceaux de vos photos num\'eris\'ees noir et blanc personnelles et les agrandir...
+En utilisant les r√©sultats de ce tp, vous pourrez √©galement extraire des morceaux de vos photos num\'eris\'ees noir et blanc personnelles et les agrandir...
 
 \section{Extraction d'une partie de l'image}
 \onit
-\item Entrez par exemple la commande \tt{draw(singe)} et observez la manière dont \matlab\ indexe les pixels de l'image.
-\item \'Ecrire dans un fichier le code d'une fonction \tt{cutout} prenant pour paramètre une matrice de pixels \tt{img} de format quelconque et deux couples d'entiers \tt{upperleft} et \tt{lowerright} extrayant la partie de \tt{img} dont les indices des coins supérieur gauche et inférieur droit sont respectivement contenus dans \tt{upperleft} et \tt{lowerright}. Inclure un test retournant un message d'erreur si \tt{any(size(img)<q)} ou \tt{any(q<p)}\footnote{\matlab\ se charge d'envoyer un message d'erreur si les composantes de \tt p et \tt q ne sont pas toutes des entiers strictement positifs, mais se contente de retourner une matrice vide lorsque la s\'election est invalide.}. Enregistrez ce fichier dans le répertoire \tt{optinum-tp3}.
-\item Testez votre procédure en extrayant diverses parties des images \tt{visage} ou \tt{singe} que vous visualiserez en utilisant \tt{draw}.
+\item Entrez par exemple la commande \tt{draw(singe)} et observez la mani√®re dont \matlab\ indexe les pixels de l'image.
+\item \'Ecrire dans un fichier le code d'une fonction \tt{cutout} prenant pour param√®tre une matrice de pixels \tt{img} de format quelconque et deux couples d'entiers \tt{upperleft} et \tt{lowerright} extrayant la partie de \tt{img} dont les indices des coins sup√©rieur gauche et inf√©rieur droit sont respectivement contenus dans \tt{upperleft} et \tt{lowerright}. Inclure un test retournant un message d'erreur si \tt{any(size(img)<q)} ou \tt{any(q<p)}\footnote{\matlab\ se charge d'envoyer un message d'erreur si les composantes de \tt p et \tt q ne sont pas toutes des entiers strictement positifs, mais se contente de retourner une matrice vide lorsque la s\'election est invalide.}. Enregistrez ce fichier dans le r√©pertoire \tt{optinum-tp3}.
+\item Testez votre proc√©dure en extrayant diverses parties des images \tt{visage} ou \tt{singe} que vous visualiserez en utilisant \tt{draw}.
 \offit
 
 \section{Principe de l'algorithme}
 
-Le problème consiste à minimiser une fonction quadratique elliptique $F$ de la variable matricelle $Z$. La difficulté est la dimension de $Z$ 
-($\simeq60000$ coefficients pour une image $256\times 256$) et la nature matricielle de la variable, qui rendent le système des conditions nécessaires -- un système linéaire de plusieurs milliers d'inconnues -- difficile à formuler et à résoudre. On utilisera ici l'algorithme du \textit{gradient conjugué}, parfaitement adapté à cette situation, qui, dans le cas d'un critère \textit{quadratique elliptique}, converge -- théoriquement -- en un nombre fini d'itérations.
+Le probl√®me consiste √† minimiser une fonction quadratique elliptique $F$ de la variable matricelle $Z$. La difficult√© est la dimension de $Z$ 
+($\simeq60000$ coefficients pour une image $256\times 256$) et la nature matricielle de la variable, qui rendent le syst√®me des conditions n√©cessaires -- un syst√®me lin√©aire de plusieurs milliers d'inconnues -- difficile √† formuler et √† r√©soudre. On utilisera ici l'algorithme du \textit{gradient conjugu√©}, parfaitement adapt√© √† cette situation, qui, dans le cas d'un crit√®re \textit{quadratique elliptique}, converge -- th√©oriquement -- en un nombre fini d'it√©rations.
 
 
 
 \section{Utilisation de l'algorithme}
 
-Le fichier \tt{zoom.m} du répertoire \tt{optinum-tp3} contient le code d'une fonction prenant pour arguments~:
+Le fichier \tt{zoom.m} du r√©pertoire \tt{optinum-tp3} contient le code d'une fonction prenant pour arguments~:
 \onit
-\item[–] \tt{img}~: la matrice obtenue en extrayant une partie d'une image numérisée, par exemple~: une partie des images \tt{singe} ou \tt{visage},
-\item[–] \tt{itermax}~: un entier indiquant le nombre d'itérations du gradient conjugué qui seront effectuées par l'algorithme.
+\item[‚Äì] \tt{img}~: la matrice obtenue en extrayant une partie d'une image num√©ris√©e, par exemple~: une partie des images \tt{singe} ou \tt{visage},
+\item[‚Äì] \tt{itermax}~: un entier indiquant le nombre d'it√©rations du gradient conjugu√© qui seront effectu√©es par l'algorithme.
 \offit
 
 La commande \tt{[Z,sqn]=zoom(img, itermax)} retourne~:
 \onit
-\item[–] \tt{Z}~: l'image \tt{img} doublée dans ses deux dimensions et lissée par \tt{itermax} passages dans la boucle du gradient conjugué. Cette variable est \textit{optionnelle}~: la commande \tt{zoom(img)} retourne simplement la matrice brute obtenue en doublant le nombre de pixels dans chaque dimension, sans qu'aucun lissage de l'image ne soit effectué.
-\item[ –] \tt{sqn}~: (acronyme de \tt{SQuareNorm}) le carré de la norme du gradient du critère $F$ au point \tt{Z}.
+\item[‚Äì] \tt{Z}~: l'image \tt{img} doubl√©e dans ses deux dimensions et liss√©e par \tt{itermax} passages dans la boucle du gradient conjugu√©. Cette variable est \textit{optionnelle}~: la commande \tt{zoom(img)} retourne simplement la matrice brute obtenue en doublant le nombre de pixels dans chaque dimension, sans qu'aucun lissage de l'image ne soit effectu√©.
+\item[ ‚Äì] \tt{sqn}~: (acronyme de \tt{SQuareNorm}) le carr√© de la norme du gradient du crit√®re $F$ au point \tt{Z}.
 \offit
 
-\noindent La fonction \tt{zoom} déclare \tt{mu}comme une variable \textit{globale}, lui permettant d'utiliser la valeur de \tt{mu} prédéfinie dans l'environnement de travail \tt{zoom.mat}\footnote{En cas d'utilisation de l'algorithme en dehors de cet environnement, il sera nécessaire de déclarer au préalable \tt{mu} comme une variable globale et de lui affecter une valeur. Il est également préférable de charger la \og carte de couleurs \fg\ \tt{grayscale} contenue dans \tt{zoom.mat} et d'utiliser \tt{draw} pour visualiser correctement les images utilisées. \`A défaut, on utilisera la fonction \tt{imshow} contenue dans la \og boîte à outils\fg\ \tt{Image Processing Toolbox} de \matlab.}. Cette valeur peut être actualisée à tout moment par simple affectation.
+\noindent La fonction \tt{zoom} d√©clare \tt{mu}comme une variable \textit{globale}, lui permettant d'utiliser la valeur de \tt{mu} pr√©d√©finie dans l'environnement de travail \tt{zoom.mat}\footnote{En cas d'utilisation de l'algorithme en dehors de cet environnement, il sera n√©cessaire de d√©clarer au pr√©alable \tt{mu} comme une variable globale et de lui affecter une valeur. Il est √©galement pr√©f√©rable de charger la \og carte de couleurs \fg\ \tt{grayscale} contenue dans \tt{zoom.mat} et d'utiliser \tt{draw} pour visualiser correctement les images utilis√©es. \`A d√©faut, on utilisera la fonction \tt{imshow} contenue dans la \og bo√Æte √† outils\fg\ \tt{Image Processing Toolbox} de \matlab.}. Cette valeur peut √™tre actualis√©e √† tout moment par simple affectation.
 
 
 \onit
 \item Afficher l'une des deux images \tt{visage} ou \tt{singe} et choisir une zone significative pour le zoom (ex~: l'oeil du singe)
-\item Extraire la zone choisie en utilisant la fonction \tt{cutout}, et la stocker dans une variable \tt{small}. Vérifier le résultat obtenu en entrant la commande \tt{draw(small)}.
+\item Extraire la zone choisie en utilisant la fonction \tt{cutout}, et la stocker dans une variable \tt{small}. V√©rifier le r√©sultat obtenu en entrant la commande \tt{draw(small)}.
 \item Utiliser la commande \tt{raw=zoom(small);} pour stocker l'image brute de dimensions doubles dans une variable: \tt{raw}. Visualiser avec \tt{draw(raw)} l'effet de pixelisation.
-\item Expérimenter l'action du lissage à l'aide de la commande \tt{Z=zoom(small,itermax);} en faisant varier \tt{itermax} et/ou la valeur du paramètre \tt{mu}. Observer seulement les valeurs du réel \tt{sqn} et visualiser, de temps en temps, le résultat correspondant en entrant \tt{draw(Z)}.
+\item Exp√©rimenter l'action du lissage √† l'aide de la commande \tt{Z=zoom(small,itermax);} en faisant varier \tt{itermax} et/ou la valeur du param√®tre \tt{mu}. Observer seulement les valeurs du r√©el \tt{sqn} et visualiser, de temps en temps, le r√©sultat correspondant en entrant \tt{draw(Z)}.
 
-\noindent \textbf{Attention~: n'oubliez pas le point virgule si vous ne voulez pas être inondés de chiffres, car \tt{Z} est une grosse matrice !}
+\noindent \textbf{Attention~: n'oubliez pas le point virgule si vous ne voulez pas √™tre inond√©s de chiffres, car \tt{Z} est une grosse matrice !}
 \offit
 
 \medskip
 
-Comment varie le résultat obtenu en fonction du choix du paramètre \tt{mu}? Quelle valeur de \tt{mu} vous parait fournir un arbitrage raisonnable entre lissage et distorsion? Si l'on devait modifier l'algorithme en incluant le test d'arrêt \tt{sqn<tol}, quelle valeur de l'argument \tt{tol} vous paraitrait judicieuse?
+Comment varie le r√©sultat obtenu en fonction du choix du param√®tre \tt{mu}? Quelle valeur de \tt{mu} vous parait fournir un arbitrage raisonnable entre lissage et distorsion? Si l'on devait modifier l'algorithme en incluant le test d'arr√™t \tt{sqn<tol}, quelle valeur de l'argument \tt{tol} vous paraitrait judicieuse?
 
 \section{Analyse de l'algorithme}
 
-Souvenez vous que, lorsqu'on munit l'espace des $M\times N$ matrices réelles du produit scalaire 
+Souvenez vous que, lorsqu'on munit l'espace des $M\times N$ matrices r√©elles du produit scalaire 
 \[
 \left<A,B\right>= \mbox{tr}(A\star B')=\mbox{tr}(A'\star B)=\sum_{i=1}^M\sum_{j=1}^NA_i^j\,B_i^j,
 \]
-le gradient de $F$ peut être identifié à
+le gradient de $F$ peut √™tre identifi√© √†
 \[
  \nabla F(Z)= A\star Z + Z\star B + \mu\star S\star Z\star T 
  \]
-où $A$, $B$, $S$ et $T$ sont des matrices symétriques \textit{creuses}. L'algorithme construit ces matrices à l'aide des fonctions \tt{makeA}, et \tt{makeS} dont les codes sont contenus dans les fichiers éponymes du répertoire \tt{optinum-tp3}. Il fabrique une image brute en doublant les dimensions de l'image passée comme argument par appel à la fonction \tt{magnify}, et place le résultat dans une variable \tt{Z}, qui sera actualisée à chaque passage dans la boucle du gradient conjugué. Il crée et actualise deux autres variables \tt{G} et \tt{D}, destinées à contenir respectivement le gradient de $F$ au point courant \tt{Z}, et l'\textit{opposé}\footnote{Pour éviter des signes moins redondants.} de la direction du gradient conjugué en ce point. 
+o√π $A$, $B$, $S$ et $T$ sont des matrices sym√©triques \textit{creuses}. L'algorithme construit ces matrices √† l'aide des fonctions \tt{makeA}, et \tt{makeS} dont les codes sont contenus dans les fichiers √©ponymes du r√©pertoire \tt{optinum-tp3}. Il fabrique une image brute en doublant les dimensions de l'image pass√©e comme argument par appel √† la fonction \tt{magnify}, et place le r√©sultat dans une variable \tt{Z}, qui sera actualis√©e √† chaque passage dans la boucle du gradient conjugu√©. Il cr√©e et actualise deux autres variables \tt{G} et \tt{D}, destin√©es √† contenir respectivement le gradient de $F$ au point courant \tt{Z}, et l'\textit{oppos√©}\footnote{Pour √©viter des signes moins redondants.} de la direction du gradient conjugu√© en ce point. 
 
 \onit
-\item \'Editez le fichier \tt{zoom.m} contenu dans le répertoire \tt{optinum-tp3} et expliquez le code de la fonction auxiliaire \tt{mult}. 
-\item Expliquez le calcul du pas optimal utilisé pour l'actualisation de \tt Z à chaque passage dans la boucle \tt{while}. Pourquoi est-il inutile d'utiliser une procédure de recherche linéaire ? Quelle propriété de la fonction $F$ permet de se passer ici d'une telle procédure ? 
+\item \'Editez le fichier \tt{zoom.m} contenu dans le r√©pertoire \tt{optinum-tp3} et expliquez le code de la fonction auxiliaire \tt{mult}. 
+\item Expliquez le calcul du pas optimal utilis√© pour l'actualisation de \tt Z √† chaque passage dans la boucle \tt{while}. Pourquoi est-il inutile d'utiliser une proc√©dure de recherche lin√©aire ? Quelle propri√©t√© de la fonction $F$ permet de se passer ici d'une telle proc√©dure ? 
 \item Utilisation de la commande \tt{sparse}~:
 \onit
-\item \'Editez le fichier \tt{makeA.m} puis entrez la commande \tt{help sparse} pour comprendre la manière dont est codée la procédure.
-\item Entrez la commande \tt{A=makeA(6)} -- sans point-virgule -- puis \tt{B=full(A)}, et observez la différence. Puis entrez les commandes \tt{A=makeA(60);} -- suivie cette fois du point virgule ! -- puis \tt{B=full(A);}, et enfin \tt{whos}, et comparez les tailles mémoire des variables \tt A et \tt B.
-\item \'Editez de même le fichier \tt{makeS.m} et observez la manière dont est codée la procédure.
-\item \'Editez alors le fichier \tt{magnify.m} et essayez d'expliquer la manière utilisée pour doubler la taille d'une image dans ses deux dimensions sans utiliser de boucle.
+\item \'Editez le fichier \tt{makeA.m} puis entrez la commande \tt{help sparse} pour comprendre la mani√®re dont est cod√©e la proc√©dure.
+\item Entrez la commande \tt{A=makeA(6)} -- sans point-virgule -- puis \tt{B=full(A)}, et observez la diff√©rence. Puis entrez les commandes \tt{A=makeA(60);} -- suivie cette fois du point virgule ! -- puis \tt{B=full(A);}, et enfin \tt{whos}, et comparez les tailles m√©moire des variables \tt A et \tt B.
+\item \'Editez de m√™me le fichier \tt{makeS.m} et observez la mani√®re dont est cod√©e la proc√©dure.
+\item \'Editez alors le fichier \tt{magnify.m} et essayez d'expliquer la mani√®re utilis√©e pour doubler la taille d'une image dans ses deux dimensions sans utiliser de boucle.
 \offit
 \item Usage des boucles \tt{for} et vectorisation en programmation \matlab~:
 \onit
-\item \'Editez le fichier \tt{gonfle.m} contenant le code d'une fonction éponyme qui, à l'instar de \tt{magnify}, double la taille de la matrice qui lui est passée pour argument, mais dont le code utilise cette fois deux boucles \tt{for}. Comparez avec \tt{magnify}. 
+\item \'Editez le fichier \tt{gonfle.m} contenant le code d'une fonction √©ponyme qui, √† l'instar de \tt{magnify}, double la taille de la matrice qui lui est pass√©e pour argument, mais dont le code utilise cette fois deux boucles \tt{for}. Comparez avec \tt{magnify}. 
 \item Entrez les commandes \tt{tic; gonfle(visage); toc}, puis \tt{tic; magnify(visage); toc}.
-\item Recommencer en remplaçant l'argument \tt{visage} par \tt{Z}, après avoir entré la commande \tt{Z=magnify (visage)}.
+\item Recommencer en rempla√ßant l'argument \tt{visage} par \tt{Z}, apr√®s avoir entr√© la commande \tt{Z=magnify (visage)}.
 \offit
 Conclusion?
 \offit

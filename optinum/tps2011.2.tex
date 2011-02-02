@@ -1,13 +1,14 @@
 \documentclass[10pt,a4paper,fleqn]{report}
 \usepackage{a4wide}
 \usepackage{amsmath,amssymb}
-\usepackage[francais]{babel}
+\usepackage[french]{babel}
+\usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
+\usepackage{lmodern}
 \usepackage{oldstyle}
 \usepackage{parallel}
 \usepackage{url}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\usepackage[applemac]{inputenc}    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \renewcommand{\thesection}{ \textbf{\Large \arabic{section}.}}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\`{u}\`{u}
 \setlength{\oddsidemargin}{1pt}
@@ -71,7 +72,7 @@ puis extraire les fichiers qui seront utilis\'{e}s durant la s\'{e}ance dans le 
 
 \section{\'Ecriture d'un oracle}
 
-Le fichier \texttt{lbpfun.m} contenu dans le répertoire \tt{optinum-tp2} contient le modèle d'un oracle associé au critère du problème. Le code, reproduit ci-après,  déclare quatre variables \textit{globales} \tt{Sigma}, \tt r, \tt{mu}, et \tt{rho} destin\'ees \`a contenir respectivement la matrice des variances-covariances des rendements du panier d'actifs consid\'er\'e et le vecteur des rendements moyens, ainsi que les valeurs des paramètres$\mu$ et $\rho$~:
+Le fichier \texttt{lbpfun.m} contenu dans le r√©pertoire \tt{optinum-tp2} contient le mod√®le d'un oracle associ√© au crit√®re du probl√®me. Le code, reproduit ci-apr√®s,  d√©clare quatre variables \textit{globales} \tt{Sigma}, \tt r, \tt{mu}, et \tt{rho} destin\'ees \`a contenir respectivement la matrice des variances-covariances des rendements du panier d'actifs consid\'er\'e et le vecteur des rendements moyens, ainsi que les valeurs des param√®tres$\mu$ et $\rho$~:
 
 \begin{verbatim}
    lbpfun[f,g,H]=function(x)
@@ -94,7 +95,7 @@ Le fichier \texttt{lbpfun.m} contenu dans le répertoire \tt{optinum-tp2} contien
 \section{Acquisition des donn\'ees}
 
 \onit
-\item Entrer la commande \tt{global\  Sigma\ r\ mu\  rho\  pb}, qui déclare les variables globales \tt{Sigma},  \tt r, \tt{mu}, et~\tt{rho}, ainsi q'une variable~\tt{pb} destin\'ee \`a contenir une \textit{structure} rassemblant la totalit\'e des informations utiles sur le probl\`eme \`a  r\'esoudre, dont les champs seront~:
+\item Entrer la commande \tt{global\  Sigma\ r\ mu\  rho\  pb}, qui d√©clare les variables globales \tt{Sigma},  \tt r, \tt{mu}, et~\tt{rho}, ainsi q'une variable~\tt{pb} destin\'ee \`a contenir une \textit{structure} rassemblant la totalit\'e des informations utiles sur le probl\`eme \`a  r\'esoudre, dont les champs seront~:
 
 \onit
 \item \tt{pb.crit}: une \og\textit{poign\'ee}\fg\ (handle) \tt{@lbpfun} sur la fonction \texttt{lbpfun},
@@ -106,13 +107,13 @@ soit encore, pour le probl\`eme trait\'e, simplement \tt{pb.eqc.mat=[1,1,...,1]}
 \offit
 \offit
 
-Trois jeux de donn\'ees pourront être utilis\'es. Ils sont stock\'es dans un fichier \tt{data.m} contenant une \textit{structure} \tt{stocks}. Les trois jeux de donn\'ees \tt{stocks(pos)}, \tt{pos=1,2,3}, peuvent \^etre automatiquement charg\'es en utilisant la commande \tt{initialize(pos)} avec la valeur 1, 2, ou 3 de l'argument \tt{pos}. Cette commande affecte une valeur aux variables globales \tt{Sigma}, \tt{r}, \tt{mu},  \tt{rho}, et~\tt{pb}.  Les valeurs par d\'efaut de \tt{rho} et \tt{mu} sont \tt{rho=0} \footnote{0n cherche donc  \textit{a priori} le portefeuille de variance minimale sans contrainte de rendement.},  et \tt{mu=0.1}. Elles peuvent être modifiées à tout moment par une nouvelle affectation
+Trois jeux de donn\'ees pourront √™tre utilis\'es. Ils sont stock\'es dans un fichier \tt{data.m} contenant une \textit{structure} \tt{stocks}. Les trois jeux de donn\'ees \tt{stocks(pos)}, \tt{pos=1,2,3}, peuvent \^etre automatiquement charg\'es en utilisant la commande \tt{initialize(pos)} avec la valeur 1, 2, ou 3 de l'argument \tt{pos}. Cette commande affecte une valeur aux variables globales \tt{Sigma}, \tt{r}, \tt{mu},  \tt{rho}, et~\tt{pb}.  Les valeurs par d\'efaut de \tt{rho} et \tt{mu} sont \tt{rho=0} \footnote{0n cherche donc  \textit{a priori} le portefeuille de variance minimale sans contrainte de rendement.},  et \tt{mu=0.1}. Elles peuvent √™tre modifi√©es √† tout moment par une nouvelle affectation
 
 \smallskip
  \onit 
 \addtocounter{enumi}{1}
-\item  Entrez par exemple la commande \texttt{initialize(1)} qui charge un premier jeu de données~: c'est un exemple \og jouet \fg\ de dimension trois.
-\item Entrez alors les commandes \tt Sigma, puis~: \tt r -- sans la faire suivre d'un point-virgule -- pour \og voir \fg\ les valeurs des données correspondantes.
+\item  Entrez par exemple la commande \texttt{initialize(1)} qui charge un premier jeu de donn√©es~: c'est un exemple \og jouet \fg\ de dimension trois.
+\item Entrez alors les commandes \tt Sigma, puis~: \tt r -- sans la faire suivre d'un point-virgule -- pour \og voir \fg\ les valeurs des donn√©es correspondantes.
 \offit
 
 \section{\textsc{GUMP}: une bo\^ite \`a  outils commode}
@@ -143,8 +144,8 @@ Bien, vous avez d\'ecouvert le principe de diversification du risque qui a fait 
 
 \onit
 
-\item Entrez la commande \texttt{initialize(3)} qui charge dans \texttt{pb} le probl\`eme de dimension 12 associ\'e \`a  \texttt{stocks(3)}. Les données correspondantes sont tirées de l'article :  \url{http://www.geo.ut.ee/nbc/paper/lapsina.htm} et
-concernent douze actifs financiers, dont les actions les plus attractives des plus grandes compagnies -- les \textit{``Blue Chips''} -- du marché russe en 1997\footnote{Les estimations de la moyenne et de la matrice de dispersion du vecteur des rendements moyens de ces douze actifs sont obtenues à partir du relevé des rendements hebdomadaires de ces douze actions du 14.08.1996 au 13.08.1997.}. 
+\item Entrez la commande \texttt{initialize(3)} qui charge dans \texttt{pb} le probl\`eme de dimension 12 associ\'e \`a  \texttt{stocks(3)}. Les donn√©es correspondantes sont tir√©es de l'article :  \url{http://www.geo.ut.ee/nbc/paper/lapsina.htm} et
+concernent douze actifs financiers, dont les actions les plus attractives des plus grandes compagnies -- les \textit{``Blue Chips''} -- du march√© russe en 1997\footnote{Les estimations de la moyenne et de la matrice de dispersion du vecteur des rendements moyens de ces douze actifs sont obtenues √† partir du relev√© des rendements hebdomadaires de ces douze actions du 14.08.1996 au 13.08.1997.}. 
 \item Entrez la commande \texttt{gump(pb,algo,100);}. Qu'observe-t-on? Expliquez.
 \item Entrez alors la commande \verb+ algo.stepsize=@(phi)goldensearch(phi,10 ^-6);+ qui change la tol\'erance utilis\'ee par \texttt{goldensearch}. Tapez \texttt{algo} pour visualiser le changement effectu\'e dans la d\'efinition de l'algorithme, puis \texttt{pts=gump(pb,algo,1000);}. \textbf{Attention~:} n'oubliez-pas un z\'ero dans \tt{itermax} et n'oubliez pas le point-virgule !
 \item Vous avez trouv\'e un r\'esultat raisonnable, mais pouvait-on faire mieux? Entrez maintenant la commande \texttt{algo.stepsize=@backtrack}. Puis essayez \`a  nouveau \texttt{gump(pb,algo,1000);}. Qu'en pensez-vous?
@@ -195,8 +196,8 @@ Qu'observe-t-on? \'Editez le fichier \tt{BarzilaiBorwein.m} et expliquez ce qui 
 \item Entrez alors la suite de commandes:
 \tt{ initialize(2);} \tt{algo=gradconj;} \tt{pts=gump(pb,algo,1000);},
 puis corrigez la valeur de \texttt{algo.stepsize} en augmentant progressivement la pr\'ecision de \texttt{goldensearch} et recommencez. Qu'observe-t-on ? Expliquez.
-\item Entrez la commande \tt{algo=quasinewt} -- sans la faire suivre d'un point-virgule -- pour voir comment est d\'efini l'algorithme, puis, à nouveau \tt{pts=gump(pb,algo,1000);} et comparez avec les résultats précédents.
-\item Expliquez finalement comment définir une fonction \matlab\ \tt{newtopt} permettant de charger dans la structure \tt{algo} l'algorithme de Newton par la commande \tt{algo=newtopt}. Justifiez le contenu de chacun des champs de la structure \tt{algo} résultante. Détaillez en particulier le traitement de la contrainte d'égalité. Expérimentez.
+\item Entrez la commande \tt{algo=quasinewt} -- sans la faire suivre d'un point-virgule -- pour voir comment est d\'efini l'algorithme, puis, √† nouveau \tt{pts=gump(pb,algo,1000);} et comparez avec les r√©sultats pr√©c√©dents.
+\item Expliquez finalement comment d√©finir une fonction \matlab\ \tt{newtopt} permettant de charger dans la structure \tt{algo} l'algorithme de Newton par la commande \tt{algo=newtopt}. Justifiez le contenu de chacun des champs de la structure \tt{algo} r√©sultante. D√©taillez en particulier le traitement de la contrainte d'√©galit√©. Exp√©rimentez.
 
 \offit
 
@@ -204,7 +205,7 @@ puis corrigez la valeur de \texttt{algo.stepsize} en augmentant progressivement 
 
 \bigskip
 
-Quelles sont vos conclusions? Comment choisiriez-vous de construire un algorithme  de sélection de portefeuille fondé sur la minimisation d'une barrière logarithmique? (Le résultat peut dépendre de la dimension du problème à résoudre). Justifiez vos choix.
+Quelles sont vos conclusions? Comment choisiriez-vous de construire un algorithme  de s√©lection de portefeuille fond√© sur la minimisation d'une barri√®re logarithmique? (Le r√©sultat peut d√©pendre de la dimension du probl√®me √† r√©soudre). Justifiez vos choix.
 
 
 
