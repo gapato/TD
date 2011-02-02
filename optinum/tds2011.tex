@@ -1,13 +1,14 @@
 \documentclass[12pt,a4paper,fleqn]{report}
 \usepackage{a4wide}
 \usepackage{amsmath,amssymb}
-\usepackage[francais]{babel}
+\usepackage[french]{babel}
+\usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
+\usepackage{lmodern}
 \usepackage{oldstyle}
 \usepackage{parallel}
 \usepackage{url}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\usepackage[applemac]{inputenc} %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \usepackage{GLtd}
 \renewcommand{\thesection}{ \textbf{\Large \arabic{section}.}}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\`u\`u
@@ -56,28 +57,28 @@
 
 \section{Cocktail Party Problem}
 
-Soit $S$ un vecteur aléatoire $N$-dimensionnel  \it de moyenne nulle \rm (identifié dans toute la suite à un vecteur ligne de $\R^N$ : $S=[S_1\ S_2\ \ldots\ S_N]$).
-On définit une fonction $F$ sur $\R^N$ en posant : 
+Soit $S$ un vecteur al√©atoire $N$-dimensionnel  \it de moyenne nulle \rm (identifi√© dans toute la suite √† un vecteur ligne de $\R^N$ : $S=[S_1\ S_2\ \ldots\ S_N]$).
+On d√©finit une fonction $F$ sur $\R^N$ en posant : 
 \on F(w)=E[(S\star w)^4]=E\left[\,\left( \,\sum w_j\,S_j\,\right)^4\,\right] \off
-Tous les exercices de cette première série concernent les propriétés de  la fonction $F$ ainsi que le problème de la détermination des extrema de $F(w)$ sous la contrainte : $\|w\|^2=1$. 
+Tous les exercices de cette premi√®re s√©rie concernent les propri√©t√©s de  la fonction $F$ ainsi que le probl√®me de la d√©termination des extrema de $F(w)$ sous la contrainte : $\|w\|^2=1$. 
 
-\begin{exercice}[Gradient, Hessienne et Propriétés de Convexité de $F$]
+\begin{exercice}[Gradient, Hessienne et Propri√©t√©s de Convexit√© de $F$]
 \rien
 \begin{questions}
-\item Déterminer  $ \grad F(w)$ et  la forme quadratique associée à $\hess F(w)$.
-\item Déduire que $F$ est convexe sur $\R^N$.
-\item Vérifier que: 
+\item D√©terminer  $ \grad F(w)$ et  la forme quadratique associ√©e √† $\hess F(w)$.
+\item D√©duire que $F$ est convexe sur $\R^N$.
+\item V√©rifier que: 
 \mbox{$ E[(S\star w)^2]=E\left[\,\left( \,\sum w_j\,S_j\,\right)^2\,\right] =w'\star D\star w $}, 
-où $D$ est la matrice de dispersion de $S$ . En déduire que $F$ est strictement convexe si  $D$ est DP.
-\item Réciproquemment, montrer que, si $D$ n'est pas DP, il existe un vecteur $w\neq 0$ tel que: $S\star w=0$ p.s. En déduire que $F$ n'est pas strictement convexe.  
-\item Prouver que la norme spectrale de $\hess F(w)$  est majorée par :  $12\,\sqrt{F(w)}\,\sqrt{ \mbox{E} [(\| S\|^4)]}$\end{questions}
+o√π $D$ est la matrice de dispersion de $S$ . En d√©duire que $F$ est strictement convexe si  $D$ est DP.
+\item R√©ciproquemment, montrer que, si $D$ n'est pas DP, il existe un vecteur $w\neq 0$ tel que: $S\star w=0$ p.s. En d√©duire que $F$ n'est pas strictement convexe.  
+\item Prouver que la norme spectrale de $\hess F(w)$  est major√©e par :  $12\,\sqrt{F(w)}\,\sqrt{ \mbox{E} [(\| S\|^4)]}$\end{questions}
 \end{exercice}
 
 \begin{exercice}[(Ecriture \matlab\  d'un \og oracle \fg)]
 
-On suppose que l'on a observé $n$ réalisations de $S$, stockées dans une $n\times N$ matrice $R$. Chaque ligne de $R$ correspond  à une réalisation et chaque colonne à une variable.  On fait l'hypothèse de travail simplificatrice que la loi de $S$ est la loi empirique correspondante, c'est-à-dire que $S$ égale chaque ligne de $R$ avec une probabilité :  $1/n$.
+On suppose que l'on a observ√© $n$ r√©alisations de $S$, stock√©es dans une $n\times N$ matrice $R$. Chaque ligne de $R$ correspond  √† une r√©alisation et chaque colonne √† une variable.  On fait l'hypoth√®se de travail simplificatrice que la loi de $S$ est la loi empirique correspondante, c'est-√†-dire que $S$ √©gale chaque ligne de $R$ avec une probabilit√© :  $1/n$.
 \begin{questions}
-\item Ecrire le code d'une fonction  \matlab\  prenant pour arguments $R$ et $w$, et retournant : $F(w)$ dans une variable $f$, $\grad F(w)$ dans une variable $g$, et :  $\hess F(w)$ dans une variable $H$, selon le modèle suivant :
+\item Ecrire le code d'une fonction  \matlab\  prenant pour arguments $R$ et $w$, et retournant : $F(w)$ dans une variable $f$, $\grad F(w)$ dans une variable $g$, et :  $\hess F(w)$ dans une variable $H$, selon le mod√®le suivant :
 
 \begin{verbatim}
 function[f,g,H]= CPPcrit(R,w)
@@ -91,25 +92,25 @@ function[f,g,H]= CPPcrit(R,w)
  end
  \end{verbatim}
  \vspace{-\baselineskip}
- \item Ecrire le code d'une fonction \matlab\  prenant pour argument un réel $C$ qui retourne dans une variable $K$ un majorant de la norme spectrale de $\hess F(w)$ sur l'ensemble de niveau $C$ de $F$.
+ \item Ecrire le code d'une fonction \matlab\  prenant pour argument un r√©el $C$ qui retourne dans une variable $K$ un majorant de la norme spectrale de $\hess F(w)$ sur l'ensemble de niveau $C$ de $F$.
 \end{questions}
 \end{exercice}
 
 
-\begin{exercice}[(Méthode de  pénalisation)]
-On suppose les $S_j$ non corrélés, de moyennes nulles, et de variances :  $\sigma_j^2=1$, et on se propose de maximiser le \it kurtosis \rm :  
+\begin{exercice}[(M√©thode de  p√©nalisation)]
+On suppose les $S_j$ non corr√©l√©s, de moyennes nulles, et de variances :  $\sigma_j^2=1$, et on se propose de maximiser le \it kurtosis \rm :  
 \on  k(S\star w)= E[(S\star w)^4] -3\,E[(S\star w)^2] ^2 \off
-de $S\star w$  sous la contrainte de normalisation : \mbox{$E[(S\star w)^2]=1$}, problème qui se réduit  au problème :
+de $S\star w$  sous la contrainte de normalisation : \mbox{$E[(S\star w)^2]=1$}, probl√®me qui se r√©duit  au probl√®me :
 \on ( \P)  \push{5} \underset{ s. c. \|w\|^2=1}{\push 3\mbox{Max}\push 5 F(w)}  \off
- Pour le résoudre, on décide de maximiser le critère  pénalisé :  
+ Pour le r√©soudre, on d√©cide de maximiser le crit√®re  p√©nalis√© :  
  \on F_{\mu}(w)=F(w)-\frac{\mu}{4}\,\left(\,\|w\|^2-1\,\right)^2 \off
- où $\mu$ est un paramètre positif destiné à tendre vers l'infini. 
+ o√π $\mu$ est un param√®tre positif destin√© √† tendre vers l'infini. 
   \begin{questions}
 \item Prouver que : 
 \begin{subquestions}
-\item$M_{\mu}= \sup F_{\mu}$ (éventuellement : $+\infty$) est une fonction décroissante de $\mu$, minorée par $M=\sup (\P)$
-\item $\mu\leq 4\,M \Rightarrow M_{\mu}=+\infty$ (considérer~: $\hat w\in ArgMax \{F(w)   |   \|w\|^2=1   \}$)
-\item Prouver~: $\forall w\in\R^N \quad F(w)\leq M \|w\|^4$. En déduire~: $\mu> 4\,M \Rightarrow \mathrm{ArgMax}\ F_{\mu} \neq \emptyset$ 
+\item$M_{\mu}= \sup F_{\mu}$ (√©ventuellement : $+\infty$) est une fonction d√©croissante de $\mu$, minor√©e par $M=\sup (\P)$
+\item $\mu\leq 4\,M \Rightarrow M_{\mu}=+\infty$ (consid√©rer~: $\hat w\in ArgMax \{F(w)   |   \|w\|^2=1   \}$)
+\item Prouver~: $\forall w\in\R^N \quad F(w)\leq M \|w\|^4$. En d√©duire~: $\mu> 4\,M \Rightarrow \mathrm{ArgMax}\ F_{\mu} \neq \emptyset$ 
 \end{subquestions}
 \item On suppose : $\mu> 4\,M$ et : $w_{\mu}\in\mathrm{ArgMax}\ F_{\mu}$. Etablir successivement :
 \begin{subquestions}
@@ -118,42 +119,42 @@ de $S\star w$  sous la contrainte de normalisation : \mbox{$E[(S\star w)^2]=1$},
 \item $\lim_{\mu\rightarrow +\infty} M_{\mu}=\lim_{\mu\rightarrow +\infty} F(w_{\mu})= M$
 \end{subquestions}
 \item Calculer $\hess F_{\mu}(w_{\mu})$ et montrer que sa norme spectrale  \og explose \fg\  lorsque $\mu$ tend vers l'infini.
-Que risque-t-on d'observer si on cherche a maximiser $F_{\mu}$ par une méthode de gradient à pas fixe en augmentant progressivement la valeur du paramètre $\mu$?
+Que risque-t-on d'observer si on cherche a maximiser $F_{\mu}$ par une m√©thode de gradient √† pas fixe en augmentant progressivement la valeur du param√®tre $\mu$?
 \end{questions}
 \end{exercice}
 
 \begin{exercice}[(Extrema locaux du kurtosis)]
-On suppose les $S_j$ non corrélés, de moyennes nulles et de variances :  $\sigma_j^2=E(S_j^2)>0$ .
+On suppose les $S_j$ non corr√©l√©s, de moyennes nulles et de variances :  $\sigma_j^2=E(S_j^2)>0$ .
 \begin{questions}
 \item  Prouver que: $E\left[\left(\sum w_jS_j\right)^2\right]=\sum w_j^2\, \sigma_j^2$
-\item  Prouver que, si les $S_j$ sont  \it indépendants \rm : 
-\on k(\sum w_jS_j)=\sum w_j^4\, k(S_j) \off
-où : $k(S)=E(S^4)-3\,E(S^2)^2$. Ce résultat reste-il vrai si on suppose seulement les $Sj$ non corrélés?
-\item On suppose toujours les $S_j$ \it indépendants\rm, et on cherche maintenant à déterminer les extrema locaux de :  
+\item  Prouver que, si les $S_j$ sont  \it ind√©pendants \rm : 
+\on k(\sum w_jS_j)=\sum w_j^4\, k(S_j) \off
+o√π : $k(S)=E(S^4)-3\,E(S^2)^2$. Ce r√©sultat reste-il vrai si on suppose seulement les $Sj$ non corr√©l√©s?
+\item On suppose toujours les $S_j$ \it ind√©pendants\rm, et on cherche maintenant √† d√©terminer les extrema locaux de :  
 \on k(S\star w)=k(\sum w_jS_j) \off
 sous la contrainte de normalisation : $E[(S\star w)^2]=\sum w_j^2\,\sigma_j^2=1$.
 Pour tout indice $j$, on note : $k_j:=k(S_j)$, et on suppose tous les $k_j$, \it sauf au plus un\rm, non nuls (donc au plus un des $S_j$ est Gaussien).  Prouver que si $w$ est un extremum local de $k(S\star w)$ : 
 \begin{subquestions}
-\item Il existe un réel $\lambda$ tel que, pour tout $j$:
+\item Il existe un r√©el $\lambda$ tel que, pour tout $j$:
 $ w_j=0\;$  ou:  $ k_j\,w_j^2= \lambda\,\sigma_j^2 $, et:  $k(S\star w)=\lambda$.
-\item  Si deux composantes  au moins  : $w_k$ et $w_l$ de $w$ sont  non nulles, et une troisième $w_m$ est nulle, $w$ ne vérifie pas les conditions  \it nécessaires \rm du second ordre.
-\item  Si \it une seule \rm  composante $w_j$ de $w$ est non nulle, et $k_j\neq 0$, $w$ vérifie les conditions \it suffisantes \rm du second ordre.
+\item  Si deux composantes  au moins  : $w_k$ et $w_l$ de $w$ sont  non nulles, et une troisi√®me $w_m$ est nulle, $w$ ne v√©rifie pas les conditions  \it n√©cessaires \rm du second ordre.
+\item  Si \it une seule \rm  composante $w_j$ de $w$ est non nulle, et $k_j\neq 0$, $w$ v√©rifie les conditions \it suffisantes \rm du second ordre.
 \end{subquestions}
-\item Trouver tous les extrema locaux de $k(S\star w)$ pour lesquels: $k(S\star w)\neq 0$, et déterminer  leur nature en fonction du signe de $k(S\star w)$.
-\item Déduire que $w$ est un \it maximum \rm  local de $|k|$ sous la contrainte : $\sum w_j^2\,\sigma_j^2=1$, si et seulement si il existe un indice $j$ tel que:  $k_j\neq 0$,
+\item Trouver tous les extrema locaux de $k(S\star w)$ pour lesquels: $k(S\star w)\neq 0$, et d√©terminer  leur nature en fonction du signe de $k(S\star w)$.
+\item D√©duire que $w$ est un \it maximum \rm  local de $|k|$ sous la contrainte : $\sum w_j^2\,\sigma_j^2=1$, si et seulement si il existe un indice $j$ tel que:  $k_j\neq 0$,
 $  \sigma_j w_j=\pm 1$, et : $w_i = 0\push{10}\mbox{pour :}\push 5 i\neq j $ . 
 \end{questions}
 \end{exercice}
 
 \pagebreak
 
-\begin{exercice}[(Réduction à un problème de Point Fixe)]
+\begin{exercice}[(R√©duction √† un probl√®me de Point Fixe)]
 On suppose : $F(w_0)>0$ pour au moins un vecteur $w_0\in\R^N$.
 \begin{questions}
 \item  Montrer que : \mbox{$\hat w \in \mathrm{ArgMax}\,\{ F(w)\ | \ \|w\|^2=1\ \} \Rightarrow \grad F(\hat w) = \| \grad F(\hat w) \|\,\hat w$} 
-\item Cette implication suggère de s'intéresser à la suite de premier terme $w_0$ définie par la formule de récurrence : 
+\item Cette implication sugg√®re de s'int√©resser √† la suite de premier terme $w_0$ d√©finie par la formule de r√©currence : 
 \mbox{$ w_{k+1}= \| \grad F(w_k) \| ^{-1}  \, \grad F(w_k)$}. Prouver que
- $\grad F(w_k)$ ne s'annule jamais - donc que la suite $w_k$ est bien définie - et que la suite $F(w_k)$ est croissante (remarquer que : $\grad F(w_k)'\star w_k= 4\,F(w_k)$ et utiliser l'inégalité de convexité).
+ $\grad F(w_k)$ ne s'annule jamais - donc que la suite $w_k$ est bien d√©finie - et que la suite $F(w_k)$ est croissante (remarquer que : $\grad F(w_k)'\star w_k= 4\,F(w_k)$ et utiliser l'in√©galit√© de convexit√©).
 \item Etablir alors successivement :
 \begin{subquestions}
 \item $\grad F(w_k)'\star w_k-\| \grad F(w_k)\| \rightarrow 0$
@@ -169,7 +170,7 @@ On suppose : $F(w_0)>0$ pour au moins un vecteur $w_0\in\R^N$.
 
 \section{Zooming Problem}
 
-Les exercices de cette seconde s\'erie ont pour but de reconnaître la nature du \og Zooming Problem \fg\ (ex. 8) et de permettre l'\'ecriture \matlab\ d'un \og oracle \fg\ associ\'e au crit\`ere de ce probl\`eme (ex. 6,7) qui sera impl\'ement\'e lors des s\'eances de Travaux Pratiques. On travaille dans l'espace vectoriel $\mathcal E=\mathcal M_{M,N}(\R)$ des $M\times N$ matrices r\'eelles que l'on munit de la norme 
+Les exercices de cette seconde s\'erie ont pour but de reconna√Ætre la nature du \og Zooming Problem \fg\ (ex. 8) et de permettre l'\'ecriture \matlab\ d'un \og oracle \fg\ associ\'e au crit\`ere de ce probl\`eme (ex. 6,7) qui sera impl\'ement\'e lors des s\'eances de Travaux Pratiques. On travaille dans l'espace vectoriel $\mathcal E=\mathcal M_{M,N}(\R)$ des $M\times N$ matrices r\'eelles que l'on munit de la norme 
 \on \|Z\|=\sqrt{\mathrm{tr}(Z\star Z')}=\sqrt{\mathrm{tr}(Z'\star Z)}\off 
 associ\'ee au produit scalaire $<X,Y>=\mathrm{tr}(X\star Y')=\mathrm{tr}(X'\star Y)$.
  
@@ -179,7 +180,7 @@ On d\'efinit une fonction $\varphi$ d\'efinie sur en posant :
 \begin{questions}
 \item Expliciter $\|Z\|^2$ en fonction des coefficients $Z_i^j$ de $Z$.
 \item D\'eduire que l'on peut \'ecrire $\varphi(Z)=(1/2)\, \|Z\star T\|^2$ o\`u $T$ est une matrice tridiagonale que l'on d\'eterminera.
-\item D\'eterminer la d\'eriv\'ee $\varphi'(Z)$ de $\varphi$ au point $Z$ et montrer que $\grad \varphi(Z)$ peut être identifi\'e \`a la matrice $Z\star T \star T'$. 
+\item D\'eterminer la d\'eriv\'ee $\varphi'(Z)$ de $\varphi$ au point $Z$ et montrer que $\grad \varphi(Z)$ peut √™tre identifi\'e \`a la matrice $Z\star T \star T'$. 
 \item \'Ecrire le code d'une fonction \matlab\ prenant $N$ pour argument et retournant la $N\times N$ matrice sym\'etrique $A=T\star T'$ 
 \item En d\'eduire le code d'une fonction \matlab, qui prend pour argument une matrice $Z$ et retourne la valeur du smoother 
 \on S(Z) = \frac{1}{2}\, \sum_{i=1}^M \sum_{j=1}^{N-1} \left| \, Z_i^j -Z_i^{j+1}\,\right|^2 +
@@ -197,7 +198,7 @@ On suppose $N$ et $M$ \it pairs \rm et on se donne une $M\times N$ matrice $D$ a
 \item Trouver des matrices sym\'etriques $S_1$ et $S_2$ telles que, pour tout $Z\in\mathcal E$, $p(Z)=S_1\star Z\star S_2$ (indication : trouver $S_1$ et $S_2$ si $N=M=2$).
 \item D\'eduire que le gradient de la fonction $E$ d\'efinie sur $\mathcal E$ par : 
 \on E(Z)= \frac{1}{2}\,\| p(Z)-D\|^2 \off
-peut être identifi\'e \`a la matrice $S_1\star (Z-D)\star S_2$
+peut √™tre identifi\'e \`a la matrice $S_1\star (Z-D)\star S_2$
 \end{questions}
 \end{exercice}
 
@@ -216,7 +217,7 @@ o\`u $\mu$ est un r\'eel strictement positif, est une fonction \it quadratique e
 
 \section{Portfolio Selection Problem}
 
-Cette derni\`ere s\'erie d'exercices est consacr\'ee \`a une m\'ethode de r\'esolution du probl\`eme de s\'election de portefeuille qui utilise une \og barri\`ere logarithmique \fg\ pour forçer les contraintes d'in\'egalit\'e du probl\`eme \`a rester strictement v\'erifi\'ees (ex. 9), combin\'ee avec une m\'ethode dite de \og gradient r\'eduit \fg\ permettant de se d\'ebarasser de la contrainte d'\'egalit\'e (ex. 11). Au passage (ex. 9), on donne le code d'un oracle qui sera utilis\'e dans les s\'eances de Travaux Pratiques. L'exercice 10 \'etablit que la contrainte de rendement est n\'ecessairement active d\`es que le rendement minimal esp\'er\'e est sup\'erieur au rendement du portefeuille de variance minimale, et montre sur un exemple \'el\'ementaire l'effet du principe de \it diversification \rm sur le choix d'un portefeuille efficient.
+Cette derni\`ere s\'erie d'exercices est consacr\'ee \`a une m\'ethode de r\'esolution du probl\`eme de s\'election de portefeuille qui utilise une \og barri\`ere logarithmique \fg\ pour for√ßer les contraintes d'in\'egalit\'e du probl\`eme \`a rester strictement v\'erifi\'ees (ex. 9), combin\'ee avec une m\'ethode dite de \og gradient r\'eduit \fg\ permettant de se d\'ebarasser de la contrainte d'\'egalit\'e (ex. 11). Au passage (ex. 9), on donne le code d'un oracle qui sera utilis\'e dans les s\'eances de Travaux Pratiques. L'exercice 10 \'etablit que la contrainte de rendement est n\'ecessairement active d\`es que le rendement minimal esp\'er\'e est sup\'erieur au rendement du portefeuille de variance minimale, et montre sur un exemple \'el\'ementaire l'effet du principe de \it diversification \rm sur le choix d'un portefeuille efficient.
 
 \begin{exercice}[(utilisation d'une barri\`ere logarithmique)]
 Pour r\'esoudre le probl\`eme :
@@ -332,7 +333,7 @@ v\'erifie toujours les conditions de Wolfe avec $0<\alpha<0.5$ et $\beta>1-c/K$.
 \end{exercice}
 
 \begin{exercice}[(application : radioth\'erapie de la prostate)]
-La prostate a grossi\`erement la forme d'une chataîgne. Lors de son traitement par radioth\'erapie, on essaie de focaliser le rayonnement \'emis sur le centre de la plus petite boule tridimensionnelle qui l'englobe. Localiser le centre $x$ de cette boule \'equivaut \`a minimiser : $ F(x)=\underset{i=1..N}{\max} ||\,x-a_i\,|| $, o\`u les $a_i$, $i=1,\ldots,N$, sont $N$ points donn\'es de $\R^3$ d\'elimitant le volume occup\'e par la prostate dans $\R^3$ (d\'etermin\'es manuellement par le praticien sur diff\'erentes coupes scanner).
+La prostate a grossi\`erement la forme d'une chata√Ægne. Lors de son traitement par radioth\'erapie, on essaie de focaliser le rayonnement \'emis sur le centre de la plus petite boule tridimensionnelle qui l'englobe. Localiser le centre $x$ de cette boule \'equivaut \`a minimiser : $ F(x)=\underset{i=1..N}{\max} ||\,x-a_i\,|| $, o\`u les $a_i$, $i=1,\ldots,N$, sont $N$ points donn\'es de $\R^3$ d\'elimitant le volume occup\'e par la prostate dans $\R^3$ (d\'etermin\'es manuellement par le praticien sur diff\'erentes coupes scanner).
 Le probl\`eme se r\'e\'ecrit: 
 \[
  (\P) \push{15}\underset{\rule{0pt}{15pt}\mbox{s.c.}\push{5}\parbox[t]{100pt}{$\frac{1}{2}\,||a_i||^2\leq x'\star a_i + \xi$ \\ \rule{0pt}{11pt}$i=1..N$}}{\mbox{Min \rule{60pt}{0pt}}} \push{10}\left( \frac{1}{2} \| x\|^2 +\xi \right).
@@ -349,7 +350,7 @@ Le probl\`eme se r\'e\'ecrit:
 \end{exercice}
  
  \begin{exercice}[(scoring)]
- On cherche \`a construire un classificateur automatique permettant de classer des points de $\R^M$ (des \og clients \fg\ identifi\'es par un jeu de $M$ donn\'ees num\'eriques : âge, situation familiale, d\'epartement de residence, revenu imposable, etc...) dans l'une ou l'autre de deux classes \textit{disjointes} $C_1$ et $C_2$ recouvrant tout l'espace $\R^M$ (les \og bons \fg\ et les \og mauvais \fg\ clients). 
+ On cherche \`a construire un classificateur automatique permettant de classer des points de $\R^M$ (des \og clients \fg\ identifi\'es par un jeu de $M$ donn\'ees num\'eriques : √¢ge, situation familiale, d\'epartement de residence, revenu imposable, etc...) dans l'une ou l'autre de deux classes \textit{disjointes} $C_1$ et $C_2$ recouvrant tout l'espace $\R^M$ (les \og bons \fg\ et les \og mauvais \fg\ clients). 
  
  Le mod\`ele \textit{Logit} suppose la probabilit\'e d'appartenance \`a la classe $C_1$ d'un \'el\'ement \mbox{$x\in \R^M$} donn\'ee par
 \[
