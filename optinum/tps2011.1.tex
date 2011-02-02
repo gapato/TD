@@ -98,8 +98,17 @@ la faire suivre d'un point-virgule -- mais indique simplement au noyau de \matla
 
 \section{Traitement pr\'{e}alable des donn\'{e}es}
 
-Le traitement pr\'{e}alable des donn\'{e}es a pour but de remplacer les signaux composites
-enregistr\'{e}s dans \tt R par des combinaisons lin\'{e}aires de ces m\^{e}mes signaux, de telle sorte que la matrice de dispersion des nouveaux signaux soit la matrice identit\'{e}. On remplace donc les signaux initiaux par des signaux d\'{e}corr\'{e}l\'{e}s et de variance \'{e}gale \`{a} un. Ce traitement sera r\'{e}alis\'{e} par l'appel de la fonction \tt{whiten} contenue dans le r\'{e}pertoire \tt{optinum-tp1}.
+Le traitement pr\'{e}alable des donn\'{e}es a pour but de remplacer
+les signaux composites enregistr\'{e}s dans \tt R par des combinaisons
+affines de ces m\^{e}mes signaux, de telle sorte que ces signaux
+soient centrés et de matrice de dispersion égale à la matrice
+identit\'{e}. On remplace donc les signaux initiaux par des signaux
+centrés, d\'{e}corr\'{e}l\'{e}s et de variance \'{e}gale \`{a}
+un. Cette opération a pour but de simplifier le problème de
+maximisation et notamment de remplacer $E[(\sum S_j w_j)^2]$ par
+$||w||^2$, comme vu en TD. Ce traitement sera r\'{e}alis\'{e} par
+l'appel de la fonction \tt{whiten} contenue dans le r\'{e}pertoire
+\tt{optinum-tp1}.
 
 \onit
 \item Entrer la commande : \tt{global X N}, qui cr\'{e}e deux variables \textit{globales}\footnote{Ces variables sont pour l'instant initialis\'{e}es \`{a} la matrice vide : [\  ].}, destin\'{e}es \`{a} contenir :
