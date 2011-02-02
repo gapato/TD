@@ -62,9 +62,16 @@ d\'{e}sign\'{e} dans la suite par son acronyme CPP -- en cherchant \`{a} maximis
 \[
 F(w)=E\left[(R\star w)^4\right]=\frac{1}{N}\,\sum_{i=1}^N \left( \sum_{j=1}^3 R_i^j w_j \right)^4
 \]
-sous la contrainte $E\left[(R\star w)^2\right]=\frac{1}{N}\,\sum_{i=1}^N \left( \sum_{j=1}^3 R_i^j w_j\right)^2=1$, o\`{u} \tt R est une matrice donn\'{e}e
-contenant trois enregistrements audio composites, combinaisons lin\'{e}aires de trois sources
-ind\'{e}pendantes.
+sous la contrainte $E\left[(R\star
+  w)^2\right]=\frac{1}{N}\,\sum_{i=1}^N \left( \sum_{j=1}^3 R_i^j
+  w_j\right)^2=1$. \tt R est une matrice donn\'{e}e contenant trois
+enregistrements audio composites, combinaisons lin\'{e}aires de trois
+sources ind\'{e}pendantes. Chaque colonne de $R$ correspond à un
+enregistrement : la matrice est donc de taille $N \times 3$, avec $N$
+le nombre d'échantillons audio. $N$ est égal à $f\, T$, où $f$ est la fréquence
+d'échantillonage (ici, $22050$ Hz), et $T$ la durée du signal (un peu
+plus de $7$ secondes). On a $N = 160000$, ce qui impose l'utilisation
+de code vectoriel pour obtenir un temps d'éxécution raisonable.
 
 \section{Pr\'{e}liminaires}
 \onit
