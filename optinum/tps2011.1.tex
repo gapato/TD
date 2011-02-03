@@ -181,18 +181,25 @@ pour maximiser  $F_{\mu}$, on va cr\'{e}er une \textit{structure} : \tt{algo} co
 \offit
 \item \textbf{Choix de l'initialisation}
 \onit
-\item Entrer la commande : \tt{cppfun([1 0 0]')}. Elle retourne le
-    kurtosis du premier signal de \tt X. Pourquoi ?  Entrer la commande : \tt{cppfun(eye(3))}. Elle retourne les valeurs respectives
+\item Entrer la commande : \tt{cppfun([1 0 0]')}. Quelle quantité
+  cette commande calcule-t-elle ?  Entrer la commande : \tt{cppfun(eye(3))}. Elle retourne les valeurs respectives
 du kurtosis des trois signaux contenus dans \tt X \footnote{Utiliser l'aide en ligne pour comprendre \'{e}ventuellement l'utilisation de la fonction pr\'{e}d\'{e}finie : \tt{eye}.}. Pourquoi ? Qu'est-ce que ce r\'{e}sultat vous apprend ?
 \item Entrer alors la commande\footnote{Attention \`{a} n'oublier ni le point entre \tt{algo} et \tt{init}, ni le prime de la transposition.} : \tt{algo.init=[1 0 0]'} cr\'{e}ant le premier champ de la variable \tt{algo}, d\'{e}finie comme une structure par cette affectation.
 \offit
 \item \textbf{Choix du coefficient $\mu$}\\
-L'analyse conduite lors des travaux dirig\'{e}s montre qu'il convient de choisir $\mu > 0$ sup\'{e}rieur \`{a} $4M$, o\`{u} : $M=\max\{F(w)\  |\  \|w\|=1 \}$. En pratique, il faut donc une majoration de M, m\^{e}me grossi\`{e}re, pour choisir raisonnablement  $\mu$. On utilisera ici
+  L'analyse conduite lors des travaux dirig\'{e}s montre qu'il
+  convient de choisir $\mu > 0$ sup\'{e}rieur \`{a} $4M$, o\`{u} :
+  $M=\max\{F(w)\ |\ \|w\|=1 \}$. En pratique, il faut donc une
+  majoration de M pour choisir raisonnablement $\mu$. On utilisera ici
+  la majoration issue de l'inégalité de Cauchy-Schwartz
 \[
 M\leq C=\frac{1}{N} \sum_{i=1}^N \left( \sum_{j=1}^3 (X_i^j)^2\right)^2.
 \]
 
 \onit
+\item Pourquoi cette majoration est-elle extrêmement grossière ?
+  Quelle influence le choix d'une majoration trop élevée a-t-il sur
+  l'algorithme ?
 \item Ouvrir un nouveau fichier de type M-file, y \'{e}crire le code d'une fonction \tt{Cval}
 sans argument retournant dans une variable \tt C un majorant de \tt M\footnote{Ne pas oublier de d\'{e}clarer, dans le code de cette fonction les variables : \tt X, et, si n\'{e}cessaire : \tt N comme variables globales.}, puis l'enregistrer sous le nom \tt{Cval.m}.
 \item  Entrer alors la commande : \tt{Cval}, et lire la valeur retourn\'{e}e par \matlab.
