@@ -84,24 +84,55 @@ décompression, ou la commande \textsc{unix} \tt{tar xvzf
   optinum-tp1.tgz}, de façon à extraire les fichiers qui seront utilis\'{e}s
 durant la s\'{e}ance dans le répertoire \tt{optinum-tp1}. Lancer alors
 \matlab\  et se placer dans le r\'{e}pertoire \tt{optinum-tp1}.
-\item Dans la fen\^{e}tre de commande de \matlab, entrer la commande\footnote{Une commande \matlab\ est une cha\^ine de caract\`{e}res, saisie au clavier dans la fen\^{e}tre de commande apr\`{e}s le prompt \matlab~: \tt{>\,>}, et qui se termine par un retour chariot. \matlab\ \'{e}value l'expression contenue dans cette cha\^ine de caract\`{e}res, et, le cas \'{e}ch\'{e}ant, retourne le r\'{e}sultat de l'\'{e}valuation. Lorsqu'un point-virgule termine la cha\^ine de caract\`{e}res pr\'{e}c\'{e}dent le retour chariot, l'expression est \'{e}valu\'{e}e normalement,
-mais l'affichage \'{e}ventuel du r\'{e}sultat supprim\'{e}.}~: \tt{format short}. Cette commande ne g\'{e}n\`{e}re aucune \'{e}valuation -- il n'est donc pas n\'{e}cessaire de
-la faire suivre d'un point-virgule -- mais indique simplement au noyau de \matlab\  de repr\'{e}senter les r\'{e}els en sortie avec seulement quatre d\'{e}cimales.
+
+\item Créer un fichier de script \tt{tp.m}. On peut entrer des
+  commandes dans ce fichier, et les éxécuter en tapant \tt{tp} dans la
+  fenêtre de commandes de \matlab{}. Cette méthode permet de reprendre
+  rapidement le travail entre plusieurs sessions.
+
+  On pourra au choix entrer les commandes qui vont suivre dans ce
+  fichier ou dans la fenêtre de commandes de \matlab{}.
+\item 
+  Commencer par la commande \tt{format short}. Cette commande ne g\'{e}n\`{e}re aucune \'{e}valuation -- il n'est donc pas n\'{e}cessaire de
+la faire suivre d'un point-virgule -- mais indique simplement à \matlab\  de repr\'{e}senter les r\'{e}els en sortie avec seulement
+quatre d\'{e}cimales, ce qui gagne de la place dans l'affichage.
+
+\item Entrer la commande : \tt{load recordings} qui charge en
+  m\'{e}moire une matrice \tt R contenant les trois enregistrements
+  composites. Cette commande, comme la pr\'{e}c\'{e}dente, n'a pas
+  besoin d'\^{e}tre suivie d'un point-virgule et ne provoquera aucune
+  \'{e}valuation. Il existe d\'{e}sormais, et pour toute la session en
+  cours, une variable \tt R contenant les donn\'{e}es. Le v\'{e}rifier
+  en entrant la commande \tt{size(R)} qui retourne le format de la
+  matrice \tt R, ou en cliquant sur la variable \tt{R} dans
+  l'explorateur de variables de \matlab.
+
 \offit
 
-\section{ Acquisition des Donn\'{e}es}
 
-\onit
-\item[ ] Entrer la commande : \tt{load recordings} qui charge en m\'{e}moire une matrice \tt R contenant les trois enregistrements composites. Cette commande, comme la pr\'{e}c\'{e}dente, n'a pas besoin d'\^{e}tre suivie d'un point-virgule et ne provoquera aucune \'{e}valuation. Il existe d\'{e}sormais, et pour toute la session en cours, une variable \tt R contenant les donn\'{e}es. Le v\'{e}rifier en entrant la commande : \tt{size(R)} qui retourne le format de la matrice \tt R.
-\offit
+\section{\'Ecoute d'un signal num\'{e}rique}
+
+Vous pouvez \textit{\'{e}couter} \`{a} tout moment un signal
+num\'{e}ris\'{e} en entrant une commande du type \tt{soundsc(R(:,i),
+  22050)} pour \tt{i} entre 1 et 3. Le premier argument est le signal
+que l'on veut \'{e}couter. Dans cet exemple : \tt{ R(:,i)}
+c'est-\`{a}-dire\footnote{R(i,j) est l'\'{e}l\'{e}ment de R situ\'{e}
+  dans la $i$\textsuperscript{\`{e}me} ligne et la
+  $j$\textsuperscript{\`{e}me} colonne. Les deux points remplacent
+  ``tous les indices''.} le signal dont l'enregistrement est contenu
+dans la i-ième colonne de \tt R. Le second donne la
+fr\'{e}quence d'\'{e}chantillonnage utilis\'{e}e : $22,05$ kHz, soit
+$22050$ captures du signal analogique par seconde. Au cours du TP,
+écouter les différents signaux obtenus permet d'avoir une idée
+de l'effet des différents algorithmes.
 
 
 \section{Traitement pr\'{e}alable des donn\'{e}es}
 
 Le traitement pr\'{e}alable des donn\'{e}es a pour but de remplacer
-les signaux composites enregistr\'{e}s dans \tt R par des combinaisons
-affines de ces m\^{e}mes signaux, de telle sorte que ces signaux
-soient centrés et de matrice de dispersion égale à la matrice
+les signaux enregistr\'{e}s dans \tt R par des combinaisons de ces
+m\^{e}mes signaux, de telle sorte que les nouveaux signaux soient
+centrés et de matrice de dispersion égale à la matrice
 identit\'{e}. On remplace donc les signaux initiaux par des signaux
 centrés, d\'{e}corr\'{e}l\'{e}s et de variance \'{e}gale \`{a}
 un. Cette opération a pour but de simplifier le problème de
@@ -121,13 +152,11 @@ qui seront introduites ult\'{e}rieurement sans avoir a les passer syst\'{e}matiq
 arguments.
 \item \'Editer le fichier \tt{whiten.m}, contenu dans le r\'{e}pertoire : \tt{optinum-tp1}. Il contient le code d'une fonction \'{e}ponyme qui transforme une matrice \tt X de donn\'{e}es en une matrice \tt Y, de m\^{e}me format, dont les colonnes sont combinaisons lin\'{e}aires des colonnes de X -- c'est-\`{a}-dire combinaisons lin\'{e}aires des signaux enregistr\'{e}s dans \tt X -- mais non corr\'{e}l\'{e}es, et de variances \'{e}gales \`{a} un. Il vous est demand\'{e} d'expliquer la mani\`{e}re dont cette fonction est cod\'{e}e. Ne pas h\'esiter \`a utiliser l'aide en ligne ou entrer simplement la commande : \tt{help eig} pour d\'{e}couvrir l'effet de la commande : \tt{[P,D]=eig(C)}.
 \item Entrer ensuite les commandes : \tt{X=whiten(R); N=size(X,1);} qui affectent des valeurs aux
-variables globales \tt X et \tt N pour le reste de la session.
+variables globales \tt X et \tt N pour le reste de la session. Par la
+suite, on travaille uniquement sur les signaux décorrélés \tt X, et on
+oublie les signaux originaux \tt R.
 \offit
 
-
-\section{\'Ecoute d'un signal num\'{e}rique}
-
-Vous pouvez \textit{\'{e}couter} \`{a} tout moment un signal num\'{e}ris\'{e} en entrant une commande du type \tt{soundsc(R(:,i), 22050)} pour \tt{i} entre 1 et 3. Le premier argument est le signal que l'on veut \'{e}couter. Dans cet exemple : \tt{ R(:,1)} c'est-\`{a}-dire\footnote{R(i,j) est l'\'{e}l\'{e}ment de R situ\'{e} dans la $i$\textsuperscript{\`{e}me} ligne et la $j$\textsuperscript{\`{e}me} colonne. Les deux points remplacent ``tous les indices''.} le signal dont l'enregistrement est contenu dans la premi\`{e}re colonne de \tt R. Le second donne la fr\'{e}quence d'\'{e}chantillonnage utilis\'{e}e : $22,05$ kHz, soit $22050$ captures du signal analogique par seconde. En comparant \`{a} l'\'{e}coute les signaux de \tt R et ceux de \tt X, vous pouvez observer l'effet de la d\'{e}corr\'{e}lation.
 
 \section{ Ecriture d'un oracle}
 
@@ -154,18 +183,35 @@ Vous pourrez d\'{e}sormais calculer la valeur du crit\`{e}re et de son gradient 
 \item Tester votre code en entrant les commandes : \tt{w=1/3$\mathtt{\star}$ones(3,1);[f,g]=cppfun(w)}.
 Le r\'{e}sultat qui s'affiche doit \^{e}tre
 
-\centerline{\texttt{f = 0.8554 ; \push{5} g = (5.6261; 3.7246; 0.9144)}}
+\centerline{\texttt{f = 0.8554 ; \push{5} g = (5.6261; 3.7246;
+    0.9144)}}
+
+\item Entrer les commandes \tt{e = 1e-8; (cppfun(w + e*[1 0 0]') -
+    cppfun(w))/e}. Qu'obtient-on ? Ce test valide les formules de
+  calcul de \tt f et \tt g.
+  
+\item Entrer la commande : \tt{cppfun([1 0 0]')}. Quelle quantité
+  cette commande calcule-t-elle ?  Entrer la commande :
+  \tt{cppfun(eye(3))}. Elle retourne les valeurs respectives du
+  kurtosis des trois signaux contenus dans \tt X \footnote{Utiliser
+    l'aide en ligne pour comprendre \'{e}ventuellement l'utilisation
+    de la fonction pr\'{e}d\'{e}finie : \tt{eye}.}. Pourquoi ?
+  Qu'est-ce que ce r\'{e}sultat vous apprend ? Quelle valeur
+  préliminaire de \tt w utiliseriez-vous à partir de ces résultats ?
+  Ce vecteur sera utilisé comme point de départ pour la recherche
+  numérique qui va suivre.
+
 
 %\item Comparer avec l'utilisation des commandes : \tt{f=cppfun(w)} ou \tt{cppfun(w)}
 \offit
 
 \section{Approche par p\'{e}nalisation}
-On se propose, dans cette partie, de maximiser le crit\`{e}re p\'{e}nalis\'{e} :
+Pour résoudre le problème original, on se propose dans cette partie de maximiser le crit\`{e}re p\'{e}nalis\'{e} :
 \[
-E\left[(R\star w)^4\right]- \mu\,\left(\|w\|^2-1\right)^2 =\frac{1}{N}\,\sum_{i=1}^N \left( \sum_{j=1}^3 R_i^j w_j \right)^4
+F_\mu(w) = E\left[(X\star w)^4\right]- \mu\,\left(\|w\|^2-1\right)^2 =\frac{1}{N}\,\sum_{i=1}^N \left( \sum_{j=1}^3 X_i^j w_j \right)^4
 -\frac \mu 4\,\left(\sum_{j=1}^3 w_j^2-1\right)^2
 \]
-pour   $\mu> 0$  convenablement choisi, o\`{u} \tt X est la matrice des signaux d\'{e}corr\'{e}l\'{e}s obtenue \`{a} partir de \tt R. On a en effet \'{e}tabli lors des travaux dirig\'{e}s :
+pour   $\mu> 0$  convenablement choisi. On a en effet \'{e}tabli lors des travaux dirig\'{e}s :
 \[
 (\mu \rightarrow +\infty) \Rightarrow \max F_{\mu} \rightarrow \max \{F(w) \  | \ \| w \| =1\}.
 \]
@@ -181,29 +227,29 @@ pour maximiser  $F_{\mu}$, on va cr\'{e}er une \textit{structure} : \tt{algo} co
 \offit
 \item \textbf{Choix de l'initialisation}
 \onit
-\item Entrer la commande : \tt{cppfun([1 0 0]')}. Quelle quantité
-  cette commande calcule-t-elle ?  Entrer la commande : \tt{cppfun(eye(3))}. Elle retourne les valeurs respectives
-du kurtosis des trois signaux contenus dans \tt X \footnote{Utiliser l'aide en ligne pour comprendre \'{e}ventuellement l'utilisation de la fonction pr\'{e}d\'{e}finie : \tt{eye}.}. Pourquoi ? Qu'est-ce que ce r\'{e}sultat vous apprend ?
-\item Entrer alors la commande\footnote{Attention \`{a} n'oublier ni le point entre \tt{algo} et \tt{init}, ni le prime de la transposition.} : \tt{algo.init=[1 0 0]'} cr\'{e}ant le premier champ de la variable \tt{algo}, d\'{e}finie comme une structure par cette affectation.
+\item Entrer la commande : \tt{algo.init=[1 0 0]'} cr\'{e}ant le
+  premier champ de la variable \tt{algo}, d\'{e}finie comme une
+  structure par cette affectation.
 \offit
 \item \textbf{Choix du coefficient $\mu$}\\
   L'analyse conduite lors des travaux dirig\'{e}s montre qu'il
   convient de choisir $\mu > 0$ sup\'{e}rieur \`{a} $4M$, o\`{u} :
   $M=\max\{F(w)\ |\ \|w\|=1 \}$. En pratique, il faut donc une
   majoration de M pour choisir raisonnablement $\mu$. On utilisera ici
-  la majoration issue de l'inégalité de Cauchy-Schwartz
+  la majoration
 \[
 M\leq C=\frac{1}{N} \sum_{i=1}^N \left( \sum_{j=1}^3 (X_i^j)^2\right)^2.
 \]
 
 \onit
-\item Pourquoi cette majoration est-elle extrêmement grossière ?
-  Quelle influence le choix d'une majoration trop élevée a-t-il sur
+\item Comment obtient-on cette inégalité ?
+\item Cette majoration vous paraît-elle trop élevée ? Quelle
+  influence le choix d'une majoration trop élevée a-t-il sur
   l'algorithme ?
 \item Ouvrir un nouveau fichier de type M-file, y \'{e}crire le code d'une fonction \tt{Cval}
 sans argument retournant dans une variable \tt C un majorant de \tt M\footnote{Ne pas oublier de d\'{e}clarer, dans le code de cette fonction les variables : \tt X, et, si n\'{e}cessaire : \tt N comme variables globales.}, puis l'enregistrer sous le nom \tt{Cval.m}.
 \item  Entrer alors la commande : \tt{Cval}, et lire la valeur retourn\'{e}e par \matlab.
-\item En d\'{e}duire une valeur \og raisonnable \fg\ du coefficient  $\mu$ et l'affecter \`{a} une variable \tt{algo.mu} qui sera cr\'{e}\'{e}e par cette affectation\footnote{ Attention \`{a} ne pas oublier le point entre algo et mu.}, ajoutant ainsi un champ \`{a} la structure \tt{algo}.
+\item En d\'{e}duire une valeur \og raisonnable \fg\ du coefficient  $\mu$ et l'affecter \`{a} une variable \tt{algo.mu} qui sera cr\'{e}\'{e}e par cette affectation, ajoutant ainsi un champ \`{a} la structure \tt{algo}.
 \offit
 \item \textbf{Choix du pas}\\
 Le calcul d'un pas suffisamment petit pour assurer la croissance du crit\`{e}re et
@@ -219,8 +265,9 @@ o\`{u} $w_0$ = \tt{algo.init = [1 0 0]'}. On va se contenter d'une r\`{e}gle emp
 K=12\,\sqrt{F(w)}\sqrt C
 \]
 \item D\'{e}duire : $\|w\|=1 \Rightarrow \|\hess F(w)\|\leq 12\, C$.
-\item En remarquant que $F_{\mu}\leq F$, et $F_{\mu}(w)=F(w)$ si $\|w\|=1$, d\'{e}duire un
-ordre de grandeur \og raisonnable \fg\ pour le pas.
+\item D\'{e}duire un ordre de grandeur \og raisonnable \fg\ pour le
+  pas. Bien noter que ce choix approximatif ne garantit pas la
+  convergence inconditionelle de l'algorithme.
 \item Affecter la valeur retenue \`{a} la variable \tt{algo.stepsize}, cr\'{e}ant ainsi le dernier champ de la structure \tt{algo}.
 \offit
 \offit
@@ -229,40 +276,42 @@ ordre de grandeur \og raisonnable \fg\ pour le pas.
 Le fichier \tt{pcpp.m} contenu dans le r\'{e}pertoire \tt{optinum-tp1} contient une impl\'{e}mentation de l'algorithme \tt{GradFix} utilisant une fonction auxiliaire \tt{pcppfun}, qui appelle \tt{cppfun}. Le code de la fonction \tt{pcpp} contient un test pour v\'{e}rifier, \`{a} chaque \'{e}tape, que le pas effectu\'{e} dans la direction du gradient est assez petit pour garantir la stricte croissance des valeurs du crit\`{e}re. Dans le cas contraire, il stoppe l'algorithme et retourne un message d'erreur.
 \onit
 \item \'Editer le fichier \tt{pcpp.m} et examiner le code de la fonction \'{e}ponyme.
-\item Tester l'utilisation de l'algorithme \`{a} l'aide de la commande : \tt{[w,f]=pcpp(itermax)},
-o\`{u} \tt{itermax} est un entier fixant le nombre maximal d'it\'{e}rations \`{a} effectuer. A tout instant, vous pouvez :
+\item Tester l'utilisation de l'algorithme \`{a} l'aide de la commande : \tt{[w,vals]=pcpp(itermax)},
+o\`{u} \tt{itermax} est un entier fixant le nombre maximal
+d'it\'{e}rations \`{a} effectuer.
+\item Observer les résultats obtenus. On peut
  \onit
-\item[-] augmenter ou diminuer la valeur de \tt{itermax},
-\item[-] r\'eaffecter le dernier point \tt w calcul\'{e} au contenu du champ \tt{algo.init} par
-la commande : \tt{algo.init=w} pour am\'{e}liorer le r\'{e}sultat,
-\item[-]  augmenter la valeur du coefficient  \tt mu en re-affectant le contenu du champ \tt{algo.mu},
-\item[-]  diminuer si n\'{e}cessaire (ou augmenter) la valeur du pas en r\'eaffectant le
-contenu du champ \tt{algo.stepsize},
-\item[-]  tester la norme du dernier point \tt w calcul\'{e} avec la commande : \tt{norm(w)}.
+\item[-] calculer le kurtosis \tt{cppfun(w)} du point \tt w obtenu,
+  ainsi que sa norme \tt{norm(w)},
+\item[-] observer la convergence de l'algorithme, en tracant les
+  valeurs successives de la fonction objectif via \tt{plot(vals)},
+\item[-] faire varier les paramètres \tt{itermax}, \tt{algo.mu},
+  \tt{algo.stepsize}, \tt{algo.init}.
 \offit
-\item  Quelle approximation \og raisonnable \fg\ $w$ d'un maximiseur de $F$ \^{e}tes-vous capable d'obtenir en utilisant \tt{pcpp} ? Quelle est la norme de cette approximation \footnote{Elle devrait \^{e}tre tr\`{e}s proche de un !} ? Quel est le kurtosis du signal correspondant $S=X\star w$?
-\offit
-\offit
+\item Qu'observez-vous en augmentant $\mu$ ? Pourquoi ?
+\item Quels compromis faut-il faire dans le choix des différents
+  paramètres ?
+\item Conclure sur la solution du problème obtenue avec cette
+  méthode. Quels sont les avantages et inconvénients de la méthode ?
+  \offit \offit
 
 \section{ Approche par relaxation}
 Une approche plus directe consiste \`{a} \textit{relaxer} la contrainte $\| w\|=1$, c'est-\`{a}-dire \`{a} maximiser $E[(X\star w)^4]$ sous la contrainte d'\textit{in\'{e}galit\'{e}} $\| w \|^2 \leq 1$. L'ensemble admissible devenant \textit{convexe}, il devient possible d'impl\'{e}menter l'algorithme du \textit{Gradient Projet\'{e}}.
 \onit
-\item Pourquoi est-il légitime de relaxer la contrainte ? Lors de
-  l'application de l'algorithme du gradient projeté à partir d'un
-  point de départ $w_0$ tel que $\|w_0\| \geq 1$, $w$ peut-il entrer
-  dans la boule ouverte ? Donner l'expression de la projection de $w$
-  sur la boule unité.
+\item Pourquoi est-il légitime de relaxer la contrainte ? Donner
+  l'expression de la projection de $w$ sur la boule unité.
 \item \'Editer le fichier \tt{pcpp.m} contenu dans le r\'{e}pertoire \tt{optinum-tp1}, l'enregistrer sous le nom \tt{projcpp.m}, puis modifier le code contenu dans ce nouveau fichier en supprimant
 \onit
 \item la fonction auxiliaire \tt{pcppfun} qui sera remplac\'{e}e dans le corps de la boucle par \tt{cppfun},
 \item l'initialisation de la variable \tt{mu} et toute r\'{e}f\'{e}rence \`{a} cette variable,
-\item le test v\'{e}rifiant que la suite des valeurs du crit\`{e}re est strictement croissante (pourquoi ce test devient-il inutile ?),
 \offit
 puis en ajoutant dans le corps de la boucle \tt{while} une ligne calculant, \`{a} chaque \'{e}tape, la projection de la variable \tt w sur la boule unit\'{e} de l'espace dans lequel vit \tt w. Enregistrez le fichier ainsi modifi\'{e}.
-\item Utiliser alors la commande : \tt{[w,f,g]=projcpp(itermax)} pour trouver une approximation
-d'un maximiseur de $F$. Comparer avec l'approche par p\'{e}nalisation. Conserver
-dans la variable \tt  w l'approximation obtenue.
-\offit
+\item Utiliser alors la commande : \tt{[w,f,g]=projcpp(itermax)} pour
+  trouver une approximation d'un maximiseur de $F$. Comparer le
+  résultat avec celui obtenu par p\'{e}nalisation. Quels sont les
+  avantages et inconvénients de la méthode du gradient projeté par
+  rapport à l'approche par pénalisation ? Conserver dans la variable
+  \tt w l'approximation obtenue.  \offit
 
 \section{Extraction it\'erative de signaux non gaussiens}
 Ayant extrait une approximation $S=X\star w$ de l'un des signaux sources, on se propose de trouver les autres.
