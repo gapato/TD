@@ -291,9 +291,10 @@ d'it\'{e}rations \`{a} effectuer.
 \item Qu'observez-vous en augmentant $\mu$ ? Pourquoi ?
 \item Quels compromis faut-il faire dans le choix des différents
   paramètres ?
-\item Conclure sur la solution du problème obtenue avec cette
-  méthode. Quels sont les avantages et inconvénients de la méthode ?
-  \offit \offit
+\item Obtenir une ``bonne'' solution du problème original. Ecouter le
+  signal obtenu par \tt{soundsc(X*w)}. Conclure sur la solution du
+  problème obtenue avec cette méthode. Quels sont les avantages et
+  inconvénients de la méthode ?  \offit \offit
 
 \section{ Approche par relaxation}
 Une approche plus directe consiste \`{a} \textit{relaxer} la contrainte $\| w\|=1$, c'est-\`{a}-dire \`{a} maximiser $E[(X\star w)^4]$ sous la contrainte d'\textit{in\'{e}galit\'{e}} $\| w \|^2 \leq 1$. L'ensemble admissible devenant \textit{convexe}, il devient possible d'impl\'{e}menter l'algorithme du \textit{Gradient Projet\'{e}}.
