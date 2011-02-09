@@ -1,6 +1,6 @@
-\documentclass[10pt,a4paper,fleqn]{report}
+\documentclass[10pt,a4paper,fleqn]{article}
 \usepackage{a4wide}
-\usepackage{amsmath,amssymb}
+\usepackage{amsmath,amssymb,amsbsy}
 \usepackage[french]{babel}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
@@ -10,10 +10,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \renewcommand{\thesection}{ \textbf{\Large \arabic{section}.}}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\`{u}\`{u}
-\setlength{\oddsidemargin}{1pt}
-\setlength{\evensidemargin}{1pt}
-\setlength{\textheight}{590pt}
-\setlength{\textwidth}{470pt}
 
 \makeatletter
 \def\cleardoublepage{\clearpage\if@twoside\ifodd\c@page\else\hbox{}\thispagestyle{empty}\newpage\fi\fi}
@@ -92,10 +88,11 @@ durant la s\'{e}ance dans le répertoire \tt{optinum-tp1}. Lancer alors
 
   On pourra au choix entrer les commandes qui vont suivre dans ce
   fichier ou dans la fenêtre de commandes de \matlab{}.
-\item 
-  Commencer par la commande \tt{format short}. Cette commande ne g\'{e}n\`{e}re aucune \'{e}valuation -- il n'est donc pas n\'{e}cessaire de
-la faire suivre d'un point-virgule -- mais indique simplement à \matlab\  de repr\'{e}senter les r\'{e}els en sortie avec seulement
-quatre d\'{e}cimales, ce qui gagne de la place dans l'affichage.
+\item
+  Commencer par la commande \tt{format short}. Cette commande ne g\'{e}n\`{e}re aucune
+  \'{e}valuation -- il n'est donc pas n\'{e}cessaire de la faire suivre d'un point-virgule -- mais
+  indique simplement à \matlab\  de repr\'{e}senter les r\'{e}els en sortie avec seulement quatre
+  d\'{e}cimales, ce qui gagne de la place dans l'affichage.
 
 \item Entrer la commande : \tt{load recordings} qui charge en
   m\'{e}moire une matrice \tt R contenant les trois enregistrements
@@ -113,14 +110,14 @@ quatre d\'{e}cimales, ce qui gagne de la place dans l'affichage.
 \section{\'Ecoute d'un signal num\'{e}rique}
 
 Vous pouvez \textit{\'{e}couter} \`{a} tout moment un signal
-num\'{e}ris\'{e} en entrant une commande du type \tt{soundsc(R(:,i),
-  22050)} pour \tt{i} entre 1 et 3. Le premier argument est le signal
-que l'on veut \'{e}couter. Dans cet exemple : \tt{ R(:,i)}
-c'est-\`{a}-dire\footnote{R(i,j) est l'\'{e}l\'{e}ment de R situ\'{e}
-  dans la $i$\textsuperscript{\`{e}me} ligne et la
-  $j$\textsuperscript{\`{e}me} colonne. Les deux points remplacent
-  ``tous les indices''.} le signal dont l'enregistrement est contenu
-dans la i-ième colonne de \tt R. Le second donne la
+num\'{e}ris\'{e} en entrant une commande du type \tt{soundsc(R(:,i),~22050)}
+pour \tt{i} entre 1 et 3. Ici on écoute le signal contenu dans la première colonne
+de \tt{R}
+\footnote{R(i,j) est l'\'{e}l\'{e}ment de R situ\'{e}
+dans la $i$\textsuperscript{\`{e}me} ligne et la
+$j$\textsuperscript{\`{e}me} colonne. Les deux points remplacent
+``tous les indices''.}
+Le second argument donne la
 fr\'{e}quence d'\'{e}chantillonnage utilis\'{e}e : $22,05$ kHz, soit
 $22050$ captures du signal analogique par seconde. Au cours du TP,
 écouter les différents signaux obtenus permet d'avoir une idée
@@ -156,7 +153,7 @@ variables globales \tt X et \tt N pour le reste de la session. Par la
 suite, on travaille uniquement sur les signaux décorrélés \tt X, et on
 oublie les signaux originaux \tt R. Comme les colonnes de \tt X sont
 des combinaisons linéaires non dégénérées des colonnes de \tt R,
-maximiser $E\left[(X\star w)^4\right]$ est équivalent à maximiser $E\left[(R\star w)^4\right]$
+maximiser $E\left[(X\star w)^4\right]$ est équivalent à maximiser le kurtosis de $R\star w$.
 \offit
 
 
@@ -191,7 +188,7 @@ Le r\'{e}sultat qui s'affiche doit \^{e}tre
 \item Entrer les commandes \tt{e = 1e-8; (cppfun(w + e*[1 0 0]') -
     cppfun(w))/e}. Qu'obtient-on ? Ce test valide les formules de
   calcul de \tt f et \tt g.
-  
+
 \item Entrer la commande : \tt{cppfun([1 0 0]')}. Quelle quantité
   cette commande calcule-t-elle ?  Entrer la commande :
   \tt{cppfun(eye(3))}. Elle retourne les valeurs respectives du
@@ -245,9 +242,7 @@ M\leq C=\frac{1}{N} \sum_{i=1}^N \left( \sum_{j=1}^3 (X_i^j)^2\right)^2.
 
 \onit
 \item Comment obtient-on cette inégalité ?
-\item Cette majoration vous paraît-elle trop élevée ? Quelle
-  influence le choix d'une majoration trop élevée a-t-il sur
-  l'algorithme ?
+\item Cette majoration vous paraît-elle trop élevée ?
 \item Ouvrir un nouveau fichier de type M-file, y \'{e}crire le code d'une fonction \tt{Cval}
 sans argument retournant dans une variable \tt C un majorant de \tt M\footnote{Ne pas oublier de d\'{e}clarer, dans le code de cette fonction les variables : \tt X, et, si n\'{e}cessaire : \tt N comme variables globales.}, puis l'enregistrer sous le nom \tt{Cval.m}.
 \item  Entrer alors la commande : \tt{Cval}, et lire la valeur retourn\'{e}e par \matlab.
@@ -269,7 +264,10 @@ K=12\,\sqrt{F(w)}\sqrt C
 \item D\'{e}duire : $\|w\|=1 \Rightarrow \|\hess F(w)\|\leq 12\, C$.
 \item D\'{e}duire un ordre de grandeur \og raisonnable \fg\ pour le
   pas. Bien noter que ce choix approximatif ne garantit pas la
-  convergence inconditionelle de l'algorithme.
+  convergence inconditionelle de l'algorithme. Que se passe-t-il si le majorant $C$ est trop
+  grossier ?\\
+  \textit{Par souçis de simplification, on majore ${\Vert\nabla^2F\Vert}$ au lieu de
+  ${\Vert\nabla^2F_{\boldsymbol\mu\Vert}}$.}
 \item Affecter la valeur retenue \`{a} la variable \tt{algo.stepsize}, cr\'{e}ant ainsi le dernier champ de la structure \tt{algo}.
 \offit
 \offit
