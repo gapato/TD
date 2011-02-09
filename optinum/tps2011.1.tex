@@ -207,7 +207,7 @@ Le r\'{e}sultat qui s'affiche doit \^{e}tre
 \section{Approche par p\'{e}nalisation}
 Pour résoudre le problème original, on se propose dans cette partie de maximiser le crit\`{e}re p\'{e}nalis\'{e} :
 \[
-F_\mu(w) = E\left[(X\star w)^4\right]- \mu\,\left(\|w\|^2-1\right)^2 =\frac{1}{N}\,\sum_{i=1}^N \left( \sum_{j=1}^3 X_i^j w_j \right)^4
+F_\mu(w) = E\left[(X\star w)^4\right]- \frac \mu 4\,\left(\|w\|^2-1\right)^2 =\frac{1}{N}\,\sum_{i=1}^N \left( \sum_{j=1}^3 X_i^j w_j \right)^4
 -\frac \mu 4\,\left(\sum_{j=1}^3 w_j^2-1\right)^2
 \]
 pour   $\mu> 0$  convenablement choisi. On a en effet \'{e}tabli lors des travaux dirig\'{e}s :
@@ -263,11 +263,8 @@ K=12\,\sqrt{F(w)}\sqrt C
 \]
 \item D\'{e}duire : $\|w\|=1 \Rightarrow \|\hess F(w)\|\leq 12\, C$.
 \item D\'{e}duire un ordre de grandeur \og raisonnable \fg\ pour le
-  pas. Bien noter que ce choix approximatif ne garantit pas la
-  convergence inconditionelle de l'algorithme. Que se passe-t-il si le majorant $C$ est trop
-  grossier ?\\
-  \textit{Par souçis de simplification, on majore ${\Vert\nabla^2F\Vert}$ au lieu de
-  ${\Vert\nabla^2F_{\boldsymbol\mu\Vert}}$.}
+  pas, en ignorant le terme en $\mu$ dans $\hess F_\mu(w)$. Que
+  risque-t-il de se passer si $\mu$ est trop grand ?
 \item Affecter la valeur retenue \`{a} la variable \tt{algo.stepsize}, cr\'{e}ant ainsi le dernier champ de la structure \tt{algo}.
 \offit
 \offit
