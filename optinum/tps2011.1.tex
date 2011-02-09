@@ -127,7 +127,7 @@ variables globales \tt X et \tt N pour le reste de la session.
 
 \section{\'Ecoute d'un signal num\'{e}rique}
 
-Vous pouvez \textit{\'{e}couter} \`{a} tout moment un signal num\'{e}ris\'{e} en entrant une commande du type \tt{soundsc(R(:,1), 22050)}. Le premier argument est le signal que l'on veut \'{e}couter. Dans cet exemple : \tt{ R(:,1)} c'est-\`{a}-dire\footnote{R(i,j) est l'\'{e}l\'{e}ment de R situ\'{e} dans la $i$\textsuperscript{\`{e}me} ligne et la $j$\textsuperscript{\`{e}me} colonne. Les deux points remplacent ``tous les indices''.} le signal dont l'enregistrement est contenu dans la premi\`{e}re colonne de \tt R. Le second donne la fr\'{e}quence d'\'{e}chantillonnage utilis\'{e}e : $22,05$ kHz, soit $22050$ captures du signal analogique par seconde. En comparant \`{a} l'\'{e}coute les signaux de \tt R et ceux de \tt X, vous pouvez observer l'effet de la d\'{e}corr\'{e}lation.
+Vous pouvez \textit{\'{e}couter} \`{a} tout moment un signal num\'{e}ris\'{e} en entrant une commande du type \tt{soundsc(R(:,i), 22050)} pour \tt{i} entre 1 et 3. Le premier argument est le signal que l'on veut \'{e}couter. Dans cet exemple : \tt{ R(:,1)} c'est-\`{a}-dire\footnote{R(i,j) est l'\'{e}l\'{e}ment de R situ\'{e} dans la $i$\textsuperscript{\`{e}me} ligne et la $j$\textsuperscript{\`{e}me} colonne. Les deux points remplacent ``tous les indices''.} le signal dont l'enregistrement est contenu dans la premi\`{e}re colonne de \tt R. Le second donne la fr\'{e}quence d'\'{e}chantillonnage utilis\'{e}e : $22,05$ kHz, soit $22050$ captures du signal analogique par seconde. En comparant \`{a} l'\'{e}coute les signaux de \tt R et ceux de \tt X, vous pouvez observer l'effet de la d\'{e}corr\'{e}lation.
 
 \section{ Ecriture d'un oracle}
 
@@ -275,7 +275,7 @@ $F$  calcul\'{e}e prec\'{e}demment.}
 \item Utilisez alors \`{a} nouveau : \tt{[w,f,g]=projcpp(itermax)} pour d\'{e}tecter un second signal
 source que l'on ajoutera \`{a} \tt S par la commande :\tt{ S(:,2)=X*w}, qui affecte \`{a} la variable
 \tt S une seconde colonne contenant l'approximation \tt w du nouveau maximiseur de $F$.
-\item  Finalement, le dernier signal sera obtenu par un nouvel appel \`a la fonction \tt{prune}, et ajout\'{e} dans \tt S par la commande : \tt{S(:,3)=prune(w)}. Vous disposez maintenant d'une approximation \tt S de la matrice des signaux sources, et vous pouvez :
+\item  Finalement, le dernier signal sera obtenu par un nouvel appel \`a la fonction \tt{prune}, et ajout\'{e} dans \tt S par la commande : \tt{prune(w); S(:,3)=X*w;}. Vous disposez maintenant d'une approximation \tt S de la matrice des signaux sources, et vous pouvez :
 \onit
 \item[-] calculer leur kurtosis avec la commande : \tt{X=S; cppfun(eye(3))},
 \item[-]  tester leur ind\'{e}pendance avec la commande : \tt{cov(S)},
