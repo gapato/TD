@@ -154,7 +154,9 @@ arguments.
 \item Entrer ensuite les commandes : \tt{X=whiten(R); N=size(X,1);} qui affectent des valeurs aux
 variables globales \tt X et \tt N pour le reste de la session. Par la
 suite, on travaille uniquement sur les signaux décorrélés \tt X, et on
-oublie les signaux originaux \tt R.
+oublie les signaux originaux \tt R. Comme les colonnes de \tt X sont
+des combinaisons linéaires non dégénérées des colonnes de \tt R,
+maximiser $E\left[(X\star w)^4\right]$ est équivalent à maximiser $E\left[(R\star w)^4\right]$
 \offit
 
 
@@ -325,7 +327,7 @@ $F$  calcul\'{e}e prec\'{e}demment.}
 \item Utilisez alors \`{a} nouveau : \tt{[w,f,g]=projcpp(itermax)} pour d\'{e}tecter un second signal
 source que l'on ajoutera \`{a} \tt S par la commande :\tt{ S(:,2)=X*w}, qui affecte \`{a} la variable
 \tt S une seconde colonne contenant l'approximation \tt w du nouveau maximiseur de $F$.
-\item  Finalement, le dernier signal sera obtenu par un nouvel appel \`a la fonction \tt{prune}, et ajout\'{e} dans \tt S par la commande : \tt{prune(w); S(:,3)=X*w;}. Vous disposez maintenant d'une approximation \tt S de la matrice des signaux sources, et vous pouvez :
+\item  Finalement, le dernier signal sera obtenu par un nouvel appel \`a la fonction \tt{prune}, et ajout\'{e} dans \tt S par la commande : \tt{prune(w); S(:,3)=X;}. Vous disposez maintenant d'une approximation \tt S de la matrice des signaux sources, et vous pouvez :
 \onit
 \item[-] calculer leur kurtosis avec la commande : \tt{X=S; cppfun(eye(3))},
 \item[-]  tester leur ind\'{e}pendance avec la commande : \tt{cov(S)},
