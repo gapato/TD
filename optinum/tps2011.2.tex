@@ -55,9 +55,9 @@
 
 
 \section*{Objectif}
-\'Etant donn\'e un panier de $N$ actifs dont le vecteur des rendements moyens $r$ et la matrice des variances-covariances $\Sigma$ sont connus, d\'eterminer la composition d'un portefeuille constitu\'e \`a partir de ces $N$ actifs assurant un rendement minimal anticip\'e $\rho$ en minimisant, pour $\rho$ et $c$ fix\'es, la fonction barri\`ere logarithmique~:
+\'Etant donn\'e un panier de $N$ actifs dont le vecteur des rendements moyens $r$ et la matrice des variances-covariances $Q$ sont connus, d\'eterminer la composition d'un portefeuille constitu\'e \`a partir de ces $N$ actifs assurant un rendement minimal anticip\'e $\rho$ en minimisant, pour $\rho$ et $c$ fix\'es, la fonction barri\`ere logarithmique~:
 \[
-f(x,\mu,\rho)=\frac{1}{2}\,x^T\Sigma\,x-\mu\,\sum_{i=1}^N\ln(x_i)-\mu\,\ln\left(r^Tx-\rho\right),
+f(x,\mu,\rho)=\frac{1}{2}\,x^TQ\,x-\mu\,\sum_{i=1}^N\ln(x_i)-\mu\,\ln\left(r^Tx-\rho\right),
 \]
 sous la contrainte $\sum_{i=1}^N x_i=1$, avec $\mu$ un param\`etre r\'eel strictement positif destin\'e \`a tendre vers z\'ero.
 
@@ -74,17 +74,17 @@ puis extraire les fichiers qui seront utilis\'{e}s durant la s\'{e}ance dans le 
 Le fichier \texttt{lbpfun.m} contenu dans le répertoire
 \tt{optinum-tp2} contient le modèle d'un oracle associé au critère du
 problème. Le code, reproduit ci-après,  déclare quatre variables
-\textit{globales} \tt{Sigma}, \tt r, \tt{mu}, et \tt{rho} destin\'ees
+\textit{globales} \tt{Q}, \tt r, \tt{mu}, et \tt{rho} destin\'ees
 \`a contenir respectivement la matrice des variances-covariances des
 rendements du panier d'actifs consid\'er\'e et le vecteur des
 rendements moyens, ainsi que les valeurs des paramètres $\mu$ et $\rho$~:
 
 \begin{verbatim}
    lbpfun[f,g,H]=function(x)
-   global Sigma r mu rho
+   global Q r mu rho
    excess=r'*x-rho ;
    if all(x>0)&&(excess>0) % lbpfun defined at x
-      f=0.5*x'*Sigma*x-mu*[sum(log(x))+log(excess)] ;
+      f=0.5*x'*Q*x-mu*[sum(log(x))+log(excess)] ;
       if nargout>1
          g=
          if nargout>2
@@ -92,7 +92,7 @@ rendements moyens, ainsi que les valeurs des paramètres $\mu$ et $\rho$~:
          end
       end
    else % lbpfun not defined at x
-      f=inf ; g=r ; g(:)=NaN ; H=Sigma ; H(:,:)=NaN ;
+      f=inf ; g=r ; g(:)=NaN ; H=Q ; H(:,:)=NaN ;
    end
 \end{verbatim}
 \'Editer le fichier \tt{lbpfun.m}, compl\'eter le code manquant dans l'\'ecriture de la fonction (c'est-\`a-dire les d\'efinitions de \tt{g} et de \tt{H}), et sauvegarder.
@@ -100,7 +100,7 @@ rendements moyens, ainsi que les valeurs des paramètres $\mu$ et $\rho$~:
 \section{Acquisition des donn\'ees}
 
 \onit
-\item Entrer la commande \tt{global\  Sigma\ r\ mu\  rho\  pb}, qui déclare les variables globales \tt{Sigma},  \tt r, \tt{mu}, et~\tt{rho}, ainsi q'une variable~\tt{pb} destin\'ee \`a contenir une \textit{structure} rassemblant la totalit\'e des informations utiles sur le probl\`eme \`a  r\'esoudre, dont les champs seront~:
+\item Entrer la commande \tt{global\  Q\ r\ mu\  rho\  pb}, qui déclare les variables globales \tt{Q},  \tt r, \tt{mu}, et~\tt{rho}, ainsi q'une variable~\tt{pb} destin\'ee \`a contenir une \textit{structure} rassemblant la totalit\'e des informations utiles sur le probl\`eme \`a  r\'esoudre, dont les champs seront~:
 
 \onit
 \item \tt{pb.crit}: une \og\textit{poign\'ee}\fg\ (handle) \tt{@lbpfun} sur la fonction \texttt{lbpfun},
@@ -112,13 +112,13 @@ soit encore, pour le probl\`eme trait\'e, simplement \tt{pb.eqc.mat=[1,1,...,1]}
 \offit
 \offit
 
-Trois jeux de donn\'ees pourront être utilis\'es. Ils sont stock\'es dans un fichier \tt{data.m} contenant une \textit{structure} \tt{stocks}. Les trois jeux de donn\'ees \tt{stocks(pos)}, \tt{pos=1,2,3}, peuvent \^etre automatiquement charg\'es en utilisant la commande \tt{initialize(pos)} avec la valeur 1, 2, ou 3 de l'argument \tt{pos}. Cette commande affecte une valeur aux variables globales \tt{Sigma}, \tt{r}, \tt{mu},  \tt{rho}, et~\tt{pb}.  Les valeurs par d\'efaut de \tt{rho} et \tt{mu} sont \tt{rho=0} \footnote{0n cherche donc  \textit{a priori} le portefeuille de variance minimale sans contrainte de rendement.},  et \tt{mu=0.1}. Elles peuvent être modifiées à tout moment par une nouvelle affectation
+Trois jeux de donn\'ees pourront être utilis\'es. Ils sont stock\'es dans un fichier \tt{data.m} contenant une \textit{structure} \tt{stocks}. Les trois jeux de donn\'ees \tt{stocks(pos)}, \tt{pos=1,2,3}, peuvent \^etre automatiquement charg\'es en utilisant la commande \tt{initialize(pos)} avec la valeur 1, 2, ou 3 de l'argument \tt{pos}. Cette commande affecte une valeur aux variables globales \tt{Q}, \tt{r}, \tt{mu},  \tt{rho}, et~\tt{pb}.  Les valeurs par d\'efaut de \tt{rho} et \tt{mu} sont \tt{rho=0} \footnote{0n cherche donc  \textit{a priori} le portefeuille de variance minimale sans contrainte de rendement.},  et \tt{mu=0.1}. Elles peuvent être modifiées à tout moment par une nouvelle affectation
 
 \smallskip
  \onit
 \addtocounter{enumi}{1}
 \item  Entrez par exemple la commande \texttt{initialize(1)} qui charge un premier jeu de données~: c'est un exemple \og jouet \fg\ de dimension trois.
-\item Entrez alors les commandes \tt Sigma, puis~: \tt r -- sans la faire suivre d'un point-virgule -- pour \og voir \fg\ les valeurs des données correspondantes.
+\item Entrez alors les commandes \tt Q, puis~: \tt r -- sans la faire suivre d'un point-virgule -- pour \og voir \fg\ les valeurs des données correspondantes.
 \offit
 
 \section{\textsc{GUMP}: une bo\^ite \`a  outils commode}
@@ -136,7 +136,19 @@ Pour pouvoir comparer simplement l'application de diff\'erentes proc\'edures de 
 \onit
 \item Pour comprendre l'utilisation de \tt{gump}, entrez d'abord la commande \tt{help gump}, et lire attentivement l'aide en ligne retourn\'ee par \matlab.
 \item Entrez alors -- sans la faire suivre d'un point virgule -- la commande \tt{algo=gradopt},  qui charge dans la structure \tt{algo} l'algorithme de Gradient \`a pas optimal, puis la commande -- suivie cette fois d'un point-virgule -- \texttt{pts=gump(pb,algo,100)}.
-\item  R\'ecup\'erez le dernier point calcul\'e par l'algorithme en tapant la commande \texttt{x=pts(:,end)}, qui extrait la derni\`ere colonne de la matrice \texttt{pts}\footnote{Rappelez-vous la signification des deux points.}, et v\'erifiez \`a  l'aide des variables globales \texttt{r} et \texttt{Sigma} que le r\'esultat obtenu fournit un portefeuille de rendement anticip\'e sup\'erieur \`a $5$, et de risque (\'ecart-type ?) associ\'e inf\'erieur \`a $2$.
+
+\item Suivre le comportement de l'algorithme avec la commande
+  \tt{plots(pts)}, qui trace différentes quantités permettant de juger
+  de la convergence. Vous pourrez tracer ces quantités par la suite
+  pour observer les différences de convergence des algorithmes.
+  
+\item  R\'ecup\'erez le dernier point calcul\'e par l'algorithme en
+  tapant la commande \texttt{x=pts(:,end)}, qui extrait la derni\`ere
+  colonne de la matrice \texttt{pts}\footnote{Rappelez-vous la
+    signification des deux points.}, et v\'erifiez \`a  l'aide des
+  variables globales \texttt{r} et \texttt{Q} que le r\'esultat obtenu
+  fournit un portefeuille de rendement anticip\'e sup\'erieur \`a $5$,
+  et de risque (\'ecart-type ?) associ\'e inf\'erieur \`a $2$.
 \offit
 
 Bien, vous avez d\'ecouvert le principe de diversification du risque qui a fait la fortune de H. Markowitz, laur\'eat du prix Nobel d'\'economie en 1990\footnote{En d\'emontrant  dans sa th\`ese, en 1952,  qu'il \'etait possible de r\'eduire le risque par diversification, il a fait entrer le loup des math\'ematiques dans la bergerie de la Finance. }. Passons maintenant aux choses s\'erieuses...
