@@ -186,8 +186,12 @@ Maintenant, c'est \`a vous de jouer.
 \tt{ phi(t)< phi(0)+ alpha*t*phi'(0)}.
 \onit
 \item D\'eterminez l'\'equation de la parabole passant par les points \tt{(0,phi(0))} et \texttt{(t,phi(t))}, tangente en \tt{t=0} au graphe de \tt{phi}, puis l'abscisse du sommet de cette parabole en fonction de \tt{phi(t)}, \tt{phi(0)} et \tt{phi'(0)}.
-\item \'Editez ensuite le fichier \tt{backtrack.m} et expliquez pourquoi la proc\'edure finit n\'ecessairement par trouver un pas \tt t v\'erifiant la condition d'Armijo (\textbf{indication}~: v\'erifier que l'abscisse du sommet de la parabole interpolante reste toujours strictement inf\'erieure \`a \tt{t/(2(1-alpha))}).
-\offit
+\item \'Editez ensuite le fichier \tt{backtrack.m} et expliquez
+  pourquoi la proc\'edure finit n\'ecessairement par trouver un pas
+  \tt t v\'erifiant la condition d'Armijo (\textbf{indication}~:
+  montrer que si la condition d'Armijo n'est pas vérifiée, alors
+  l'abscisse du sommet de la parabole interpolante est inf\'erieure
+  \`a \tt{t/(2(1-alpha))}).  \offit
 
 \item Entrez la commande \tt{algo.stepsize=@Wolfe}, puis essayez \`a nouveau  \tt{pts=gump(pb,algo,2000);}. \'Editez le fichier \texttt{Wolfe.m} et expliquez pourquoi la proc\'edure finit toujours par trouver un pas \tt t v\'erifiant la r\`egle de Wolfe.
 
