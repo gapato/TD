@@ -218,8 +218,7 @@ Qu'observe-t-on? \'Editez le fichier \tt{BarzilaiBorwein.m} et expliquez ce qui 
 \onit
 \item \'Editez le fichier \tt{Cauchy.m} et expliquez le r\^ole de la matrice \texttt{trial.M} apparaissant dans le code de ce fichier (\textbf{indication}~: souvenez-vous que l'on minimise en fait $G(u)=F(x+N\,u)$).
 \item Comment calculer alors la direction de recherche du gradient conjugu\'e ? (\textbf{indication}~: la formule g\'en\'erale d'actualisation est $\mathtt d_{k+1}=-g_{k+1}+\|g_{k+1}\|^2/\|g_k\|^2\,d_k$. Le probl\`eme est de prendre en compte l'existence \'eventuelle de contraintes d'\'egalit\'e lin\'eaires. Par cons\'equant, la matrice \tt{trial.M} doit intervenir quelquepart...).
- \item Donnez le code d'une fonction \texttt{FR} prenant pour argument la structure \texttt{trial} et retournant la direction de  descente de Fletcher-Reeves (\textbf{attention}~: la premi\`ere direction de recherche doit \^etre la direction de Cauchy et \tt{trial.old.g}  vaut z\'ero \`a  l'initialisation.).
-\item \'Ecrire alors une fonction \tt{gradconj} sur le mod\`ele de \tt{gradopt}. N'oubliez pas de mettre \tt{algo.memory} \`a  un.
+\item Créez un nouveau fichier \texttt{FR.m} et écrivez-y le code d'une fonction \texttt{FR} prenant pour argument la structure \texttt{trial} et retournant la direction de  descente de Fletcher-Reeves (\textbf{attention}~: la premi\`ere direction de recherche doit \^etre la direction de Cauchy et \tt{trial.old.g}  vaut z\'ero \`a  l'initialisation.).
 \item Entrez alors la suite de commandes:
 \tt{ initialize(2);} \tt{algo=gradconj;} \tt{pts=gump(pb,algo,1000);},
 puis corrigez la valeur de \texttt{algo.stepsize} en augmentant progressivement la pr\'ecision de \texttt{goldensearch} et recommencez. Qu'observe-t-on ? Expliquez.
