@@ -119,12 +119,16 @@
 \frame{
   \frametitle{Principe d'incertitude}
   \begin{itemize}
-  \item Sous-problème, en négligeant la répulsion électronique :
+  \item Sous-problème :
     \begin{equation*}
       F(\psi) = \frac{a^2 \int (\nabla \psi)^2 \dd x + b^2
         \int \psi^{4} \dd x}{
         \alpha z \int \frac{\psi^3(x)}{|x|} \dd x}
     \end{equation*}
+  \item Équivalent au problème de départ en négligeant l'interaction électronique
+  \item Raisonable parce que faible physiquement, et pas indispensable
+    mathématiquement
+  \item Beaucoup plus simple à résoudre par réduction au cas radial
   \item Lemme : $F(\psi) \ge F_0 = \frac{4 a b}{3 \alpha z}$
   \item ``Principe d'incertitude'': si les électrons sont localisés
     autour de 0 (dénominateur grand), alors grande énergie cinétique (numérateur grand)
@@ -133,9 +137,9 @@
 \frame{
   \frametitle{Preuve du lemme : réduction au cas radial}
   \begin{itemize}
-  \item $\psi \rightarrow \psi^*$, où $\psi^*$ est la symétrisée de
+  \item Regarder $F$ sous $\psi \rightarrow \psi^*$, où $\psi^*$ est la symétrisée de
     Schwartz (ref: Lieb \& Loss, Analysis)
-  \item $\psi^*(x) = \psi^*(|x|)$, décroissant
+  \item $\psi^*(x)$ est radial, décroissant
   \item Propriétés
     \begin{enumerate}
     \item $\int (\nabla \psi^*)^2 \le \int (\nabla \psi)^2$ (lissage
@@ -152,16 +156,20 @@
 
 \frame{
   \frametitle{Preuve du lemme : cas radial}
-  \begin{equation*}
-    F(\psi) = \frac{a^2 (\psi')^2 r^2 \dd r + b^2
+  \begin{align*}
+    F(\psi) &= \frac{a^2 \int (\psi')^2 r^2 \dd r + b^2
       \int \psi^{4} r^2 \dd r}{
-      \alpha z \int {\psi^3} r \dd r}
-  \end{equation*}
+      \alpha z \int {\psi^3} r \dd r}\\
+     &\overset{\text{IPP}}{=} \frac {4 a b }{3 \alpha z}\;\frac{ \int \overbrace{(a\psi')^2}^{x^2} r^2 \dd r + 
+      \int \overbrace{(b \psi^{2})^2}^{y^2} r^2 \dd r}{
+      \int - 2  \underbrace{a \psi'}_x\underbrace{b \psi^2}_{y} r^2
+      \dd r}
+  \end{align*}
   \begin{itemize}
-  \item IPP sur le dénominateur, puis $x y \le x^2/2 + y^2/2$
+  \item $- 2 x y \le x^2 + y^2$
   \item Conclusion: $F(\psi) \ge F_0 = \frac{4 a b}{3 \alpha z}$
-  \item Bonus : on remonte le cas d'égalité, on en déduit une équation
-    différentielle qu'on résoud:
+  \item Bonus : on remonte le cas d'égalité $x = - y$, on en déduit une équation
+    différentielle $a \psi' = - b \psi^2$ qu'on résoud:
     \begin{equation*}
       \psi(r) = \psi_{R}(r) = \frac a b \frac {1}{r+R}
     \end{equation*}
