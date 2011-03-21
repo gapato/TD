@@ -76,7 +76,7 @@
     \rho(\lambda x)$: zoom d'un facteur $\lambda$ sur le noyau, en préservant la charge
     totale $\int \sigma = \int \rho$
   \item $ \mathcal E(\sigma) = \lambda \mathcal
-    E(\rho)$ 
+    E(\rho)$
   \item Seulement deux possibilités
     \begin{enumerate}
     \item $\exists \rho, \mathcal E(\rho) < 0$ : $\inf \mathcal E = -
@@ -163,7 +163,7 @@
     F(\psi) &= \frac{a^2 \int (\psi')^2 r^2 \dd r + b^2
       \int \psi^{4} r^2 \dd r}{
       \alpha z \int {\psi^3} r \dd r}\\
-     &\overset{\text{IPP}}{=} \frac {4 a b }{3 \alpha z}\;\frac{ \int \overbrace{(a\psi')^2}^{x^2} r^2 \dd r + 
+     &\overset{\text{IPP}}{=} \frac {4 a b }{3 \alpha z}\;\frac{ \int \overbrace{(a\psi')^2}^{x^2} r^2 \dd r +
       \int \overbrace{(b \psi^{2})^2}^{y^2} r^2 \dd r}{
       \int - 2  \underbrace{a \psi'}_x\underbrace{b \psi^2}_{y} r^2
       \dd r}
@@ -179,7 +179,7 @@
 
   \end{itemize}
 }
-\subsection{Étude de $\mathcal E$}
+\subsection{Étude de $\mathcal{E}$}
 \frame{
   \frametitle{Fonctionelle complète}
     \begin{align*}
@@ -238,4 +238,69 @@
   \end{itemize}
 }
 \section{Cas moléculaire}
+\begin{frame}{Résultat}
+    \begin{itemize}
+        \item Pour traiter la géométrie du problème on minimise
+            \[\mathcal{E}(\rho) + \alpha\sum_{1\leq i < j \leq K} \frac{z_i z_j}{|R_i-R_j|}\]
+        \item Stabilité si
+            \[0 \leq z_i \leq \frac{4ab}{3\alpha}\sqrt{1-x} = z_{cs} \sqrt{1-x}\]
+            où $x$ est solution d'un polynôme du 3ième degré.
+    \end{itemize}
+\end{frame}
+\subsection{Prise en compte de la géométrie}
+\begin{frame}{Charges identiques}
+    \begin{itemize}
+        \item Pour traiter la géométrie du problème on minimise
+            \[\mathcal{E}(\rho) + \alpha\sum_{1\leq i < j \leq K} \frac{z_i z_j}{|R_i-R_j|}.\]
+        \item L'énergie est concave en $z_i \in [0, z]$\\
+            $\Rightarrow$ minimum atteint en $0$ ou $z$.
+        \item Si minimum atteint en $0$ alors on a un noyau de moins.
+        \item On considère donc toutes les charges égales.
+    \end{itemize}
+\end{frame}
+\begin{frame}{Diagramme de Voronoï}
+    Pour contrôler l'énergie autour de chaque noyeau, on introduit :
+    \begin{itemize}
+        \item les cellules de Voronoï
+            \[\Gamma_j = \left\{x \; \big| \; |x-R_j| < |x-R_k|\; \forall\, k\neq j\right\},\]
+        \item leur diamètre
+            \[D_j = dist(R_j, \mathit{\partial}\Gamma_k),\]
+        \item et le potentiel associé à une cellule
+            \[\Phi(x) =  z \sum_{i\neq j} \frac{1}{|x-R_i|},\]
+            c-à-d le potentiel généré par tous les noyaux sauf celui contenu dans cette cellule.
+    \end{itemize}
+\end{frame}
+\subsection{Inégalité électrostatique}
+\begin{frame}{Inégalité électrostatique de Lieb et Yau}
+    {``Many-Body Stability Implied a Bound on the Fine-Structure Constant''\\
+    ``The Stability and Instability of Relativistic Matter''}
+    Résultat :
+
+    Pour toute mesure de Borel sur $\mathbb{R}^3$ :
+    \[\frac{\alpha}{2}\int_{\mathbb{R}^3} \int_{\mathbb{R}^3}
+    \frac{\dd\nu(x)\dd\nu(y)}{|x-y|}-\alpha\int_{\mathbb{R}^3}\Phi(x)\dd\nu(x) + U \geq
+    \alpha \frac{z^2}{8}\sum_j \frac{1}{D_j}.\]
+    Donne une minoration des termes d'énergie potentielle et d'intéraction.
+
+    ** Détails ** ?
+\end{frame}
+\subsection{Principe d'incertitude modifié}
+\definecolor{gris}{rgb}{.2 .2 .2}
+\begin{frame}{Principe d'incertitude modifié}
+    Il faut aussi contrôler l'énergie cinétique et le terme de correction relativiste :
+
+    Pour toute $f$ régulière et positive, pour tout $R$ positif
+    \[a^2\int_{B_R}|\nabla f(x)|^2 \dd x + b^2 \int_{B_R} f(x)^4\dd x \geq ab \int_{B_R}
+    \left[\frac{4}{3|x|}-\frac{2}{R}\right]f(x)^3\dd x,\]
+    où $B_R$ est la boule fermée de rayon $R$
+
+    \vfill
+    \footnotesize\textcolor{gris}{
+    Preuve « simple » :\\
+    Considérer pour tout $u$ régulière telle que $u(R)=0$
+    \[\int_{B_R}(3u(|x|)+u'(|x|)|x|)f(x)^3\dd x,\]
+    IPP + Cauchy-Schwarz, utiliser $u=\frac{1}{2}\left( \frac{1}{r}-\frac{1}{R} \right)$ et
+    l'inégalité $2ab < a^2 + b^2$.
+    }
+\end{frame}
 \end{document}
