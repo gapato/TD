@@ -242,7 +242,7 @@
     \begin{itemize}
         \item Pour traiter la géométrie du problème on minimise
             \[\mathcal{E} + U\]
-        \item Stabilité si
+        \item Stabilité, i.e. $\mathcal{E}(\rho)+ U\geq0$
             \[ z_i \leq \frac{4ab}{3\alpha}\sqrt{1-x} = z_{cs} \sqrt{1-x}\]
             où $x$ est solution d'un polynôme du 3ième degré.
     \end{itemize}
@@ -275,6 +275,11 @@
     \includegraphics[width=0.7\textwidth]{voronoi.pdf}
     \end{center}
 \end{frame}
+\begin{frame}{Séparation du potentiel}{Action longue distance}
+    On définit le potentiel « longue distance », qui, à l'intérieur d'une cellule, ne « voit pas
+    » le noyau associé :
+    \[\forall j\; \forall x\in\Gamma_j\;\Phi(x) = z \sum_{i\neq j} \frac{1}{|x-R_i|}\]
+\end{frame}
 \subsection{Inégalité électrostatique}
 \begin{frame}{Inégalité électrostatique de Lieb et Yau}
     {``Many-Body Stability Implies a Bound on the Fine-Structure Constant''\\
@@ -284,8 +289,6 @@
     \frac{\rho(x)\rho(y)}{|x-y|}-\alpha\int\Phi(x)\rho(x) + U \geq
     \alpha \frac{z^2}{8}\sum_j \frac{1}{D_j}.\]
     Donne une minoration des termes d'énergie potentielle et d'intéraction.
-
-    ** Détails ** ?
 \end{frame}
 \subsection{Principe d'incertitude modifié}
 \definecolor{gris}{rgb}{.2 .2 .2}
