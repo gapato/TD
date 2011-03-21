@@ -241,44 +241,47 @@
 \begin{frame}{Résultat}
     \begin{itemize}
         \item Pour traiter la géométrie du problème on minimise
-            \[\mathcal{E}(\rho) + \alpha\sum_{1\leq i < j \leq K} \frac{z_i z_j}{|R_i-R_j|}\]
+            \[\mathcal{E} + U\]
         \item Stabilité si
-            \[0 \leq z_i \leq \frac{4ab}{3\alpha}\sqrt{1-x} = z_{cs} \sqrt{1-x}\]
+            \[ z_i \leq \frac{4ab}{3\alpha}\sqrt{1-x} = z_{cs} \sqrt{1-x}\]
             où $x$ est solution d'un polynôme du 3ième degré.
     \end{itemize}
 \end{frame}
 \subsection{Prise en compte de la géométrie}
 \begin{frame}{Charges identiques}
+            \[\mathcal{E} + \alpha\sum_{i < j} \frac{z_i z_j}{|R_i-R_j|}.\]
     \begin{itemize}
-        \item Pour traiter la géométrie du problème on minimise
-            \[\mathcal{E}(\rho) + \alpha\sum_{1\leq i < j \leq K} \frac{z_i z_j}{|R_i-R_j|}.\]
         \item L'énergie est concave en $z_i \in [0, z]$\\
-            $\Rightarrow$ minimum atteint en $0$ ou $z$.
+            $\Rightarrow$ minimum sur les $z_i$ atteint en $0$ ou $z$.
         \item Si minimum atteint en $0$ alors on a un noyau de moins.
         \item On considère donc toutes les charges égales.
     \end{itemize}
 \end{frame}
 \begin{frame}{Diagramme de Voronoï}
-    Pour contrôler l'énergie autour de chaque noyeau, on introduit :
-    \begin{itemize}
-        \item les cellules de Voronoï
-            \[\Gamma_j = \left\{x \; \big| \; |x-R_j| < |x-R_k|\; \forall\, k\neq j\right\},\]
-        \item leur diamètre
-            \[D_j = dist(R_j, \mathit{\partial}\Gamma_k),\]
-        \item et le potentiel associé à une cellule
-            \[\Phi(x) =  z \sum_{i\neq j} \frac{1}{|x-R_i|},\]
-            c-à-d le potentiel généré par tous les noyaux sauf celui contenu dans cette cellule.
-    \end{itemize}
+              \[\Gamma_j = \left\{x \; \big| \; |x-R_j| < |x-R_k|\; \forall\, k\neq j\right\},\]
+              \[D_j = \text{dist}(R_j, \mathit{\partial}\Gamma_k),\]
+
+    % Pour contrôler l'énergie autour de chaque noyeau, on introduit :
+    % \begin{itemize}
+    %     \item les cellules de Voronoï
+    %     \item leur rayon
+    %         \[D_j = \text{dist}(R_j, \mathit{\partial}\Gamma_k),\]
+    %     % \item et le potentiel associé à une cellule
+    %     %     \[\Phi(x) =  z \sum_{i\neq j} \frac{1}{|x-R_i|},\]
+    %     %     c-à-d le potentiel généré par tous les noyaux sauf celui contenu dans cette cellule.
+    % \end{itemize}
+              \vspace{-5mm}
+    \begin{center}
+    \includegraphics[width=0.8\textwidth]{voronoi.pdf}
+    \end{center}
 \end{frame}
 \subsection{Inégalité électrostatique}
 \begin{frame}{Inégalité électrostatique de Lieb et Yau}
-    {``Many-Body Stability Implied a Bound on the Fine-Structure Constant''\\
+    {``Many-Body Stability Implies a Bound on the Fine-Structure Constant''\\
     ``The Stability and Instability of Relativistic Matter''}
-    Résultat :
-
-    Pour toute mesure de Borel sur $\mathbb{R}^3$ :
-    \[\frac{\alpha}{2}\int_{\mathbb{R}^3} \int_{\mathbb{R}^3}
-    \frac{\dd\nu(x)\dd\nu(y)}{|x-y|}-\alpha\int_{\mathbb{R}^3}\Phi(x)\dd\nu(x) + U \geq
+    Pour toute densité $\rho$,
+    \[\frac{\alpha}{2}\iint
+    \frac{\rho(x)\rho(y)}{|x-y|}-\alpha\int\Phi(x)\rho(x) + U \geq
     \alpha \frac{z^2}{8}\sum_j \frac{1}{D_j}.\]
     Donne une minoration des termes d'énergie potentielle et d'intéraction.
 
