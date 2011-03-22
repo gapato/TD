@@ -269,7 +269,7 @@
     On définit
               \[\Gamma_j = \left\{x \; \big| \; |x-R_j| < |x-R_k|\; \forall\, k\neq j\right\},\]
               \[D_j = \text{dist}(R_j, \mathit{\partial}\Gamma_k),\]
-              \[B_j = \overline{B(R_j, D_j)}\text{, la plus grande boule centrée en $R_j$ contenue
+              \[B_j = {B(R_j, D_j)}\text{, la plus grande boule centrée en $R_j$ contenue
               dans }\Gamma_j.\]
     \begin{center}
     \includegraphics[width=0.7\textwidth]{voronoi.pdf}
@@ -278,7 +278,7 @@
 \begin{frame}{Séparation du potentiel}{Action longue distance}
     On définit le potentiel « longue distance », qui, à l'intérieur d'une cellule, ne « voit pas
     » le noyau associé :
-    \[\forall j\; \forall x\in\Gamma_j\;\Phi(x) = \alpha z \sum_{i\neq j} \frac{1}{|x-R_i|}.\]
+    \[\text{pour } x \in \Gamma_i, \Phi(x) = \alpha z \sum_{j\neq i} \frac{1}{|x-R_j|}.\]
 \end{frame}
 \subsection{Inégalité électrostatique}
 \begin{frame}{Inégalité électrostatique de Lieb et Yau}
@@ -288,7 +288,8 @@
     \[\frac{\alpha}{2}\iint
     \frac{\rho(x)\rho(y)}{|x-y|}-\int\Phi(x)\rho(x) + U \geq
     \alpha \frac{z^2}{8}\sum_j \frac{1}{D_j}.\]
-    $\Rightarrow$ Contrôle de l'énergie potentielle longue distance avec le terme d'intéraction.
+    $\Rightarrow$ Contrôle de l'énergie potentielle longue distance
+    par l'interaction électronique et l'interaction nucléaire.
 \end{frame}
 \subsection{Principe d'incertitude modifié}
 \definecolor{gris}{rgb}{.2 .2 .2}
