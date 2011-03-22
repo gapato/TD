@@ -352,12 +352,12 @@ size(5cm);
 real i=0.5;
 real f(real x) {return 1/abs(x);}
 real g(real x) {return 1/i+1;}
-draw(graph(f,i,5),blue+3*linewidth(currentpen));
-draw(graph(g,-i,i),blue+3*linewidth(currentpen));
-draw(graph(f,-5,-i),blue+3*linewidth(currentpen));
-xaxis('$$');
-yaxis('$$');
-label('$\widehat{V}$', (2, 2));
+draw(graph(f,i,4),blue+3*linewidth(currentpen));
+draw(graph(g,0,i),blue+3*linewidth(currentpen));
+xaxis('$|x-R_j|$');
+yaxis('$\widehat{V}$');
+labelx('$D_j$',i);
+draw((i,g(i))--(i,0),dashed);
 \end{asy}
         \end{center}
         \label{fig:vvv}
