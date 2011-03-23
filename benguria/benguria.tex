@@ -254,9 +254,7 @@
 \section{Cas moléculaire}
 \begin{frame}{Résultat}
     \begin{itemize}
-        \item Pour traiter la géométrie du problème on minimise
-            \[\mathcal{E} + U.\]
-        \item Stabilité, i.e. $\mathcal{E}(\rho)+ U\geq0,$ si
+        \item Stabilité, i.e. $\mathcal{E}(\rho)\geq0,$ si
           \[ z_i \leq \frac{4ab}{3\alpha}\sqrt{1-x} = z_{cs}
           \sqrt{1-x},\] où $x$ est solution d'un polynôme du 3ième
           degré. $x \approx 0.04$, même borne que le cas atomique avec
@@ -298,7 +296,7 @@
     avec
     \[\vv(x) = \frac z {|x - R_i|} \text{ dans $\Gamma_i$}\]
     \begin{align*}
-    \mathcal{E} + U =&
+    \mathcal{E} =&
     \overbrace{a^2\int (\nabla \rho^\frac{1}{3})^2 + b^2 \int \rho^{4/3}
     - \int \vv \rho}^{\mathcal{E}_1}\\
     &\overbrace{-\int \Phi \rho +  \frac{\alpha}{2}\int\frac{\rho(x) \rho(y)}{|x-y|}+U,}^{\mathcal{E}_2}
@@ -453,10 +451,10 @@ $\vvv$ n'est plus singulier, on peut le contrôler par Hölder.
 \subsection{Conclusion}
 \begin{frame}{Conclusion}
   Finalement, si $b_2(z) < b$,
-  \[\mathcal{E} + U \ge M(z) \sum_j \frac{1}{D_j}\]
+  \[\mathcal{E} \ge M(z) \sum_j \frac{1}{D_j}\]
 
   On en déduit une condition sur $z$ et le résultat
-        \[\mathcal{E} + U\ge 0\quad\text { si }\quad \max z_i \le \frac{4ab}{3\alpha}\sqrt{1-x},\]
+        \[\mathcal{E}\ge 0\quad\text { si }\quad \max z_i \le \frac{4ab}{3\alpha}\sqrt{1-x},\]
         \medskip
         où $x$ est solution de
         \[\frac{1-x}{x^3}=\frac{b^4}{a^2}\left( \frac{4}{3}
