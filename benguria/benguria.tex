@@ -255,7 +255,7 @@
           correction $\approx$ 2\%.
     \end{itemize}
 \end{frame}
-\subsection{Prise en compte de la géométrie}
+\subsection{Géométrie}
 \begin{frame}{Charges identiques}
             \[\mathcal{E} + \alpha\sum_{i < j} \frac{z_i z_j}{|R_i-R_j|}.\]
     \begin{itemize}
@@ -267,10 +267,11 @@
 \end{frame}
 \begin{frame}{Diagramme de Voronoï}
     On définit
-              \[\Gamma_j = \left\{x \; \big| \; |x-R_j| < |x-R_k|\; \forall\, k\neq j\right\},\]
-              \[D_j = \text{dist}(R_j, \mathit{\partial}\Gamma_k),\]
-              \[B_j = {B(R_j, D_j)}\text{, la plus grande boule centrée en $R_j$ contenue
-              dans }\Gamma_j.\]
+    \begin{align*}
+      \Gamma_j &= \left\{x \; \big| \; \forall\, k\neq j, |x-R_j| < |x-R_k|\right\},\\
+      D_j &= \mathrm{dist}(R_j, \mathit{\partial}\Gamma_k),\\
+      B_j &= {B(R_j, D_j)}.      
+    \end{align*}
     \begin{center}
     \includegraphics[width=0.6\textwidth]{voronoi.pdf}
     \end{center}
@@ -280,41 +281,10 @@
     » le noyau associé. Dans $\Gamma_i$,
     \[\Phi(x) = \alpha z \sum_{j\neq i} \frac{1}{|x-R_j|}.\]
 \end{frame}
-\subsection{Inégalité électrostatique}
-\begin{frame}{Inégalité électrostatique de Lieb et Yau}
-    {``Many-Body Stability Implies a Bound on the Fine-Structure Constant''\\
-      ``The Stability and Instability of Relativistic Matter''}
-    Contrôle de l'énergie potentielle longue distance
-    par l'interaction électronique et l'interaction nucléaire.
-    
-    \vspace{1cm}
-    
-    Pour toute densité $\rho$,
-    \[\int\Phi(x)\rho(x) \leq \frac{\alpha}{2}\iint
-    \frac{\rho(x)\rho(y)}{|x-y|} + U - 
-    \alpha \frac{z^2}{8}\sum_j \frac{1}{D_j}.\]
-\end{frame}
-\subsection{Principe d'incertitude modifié}
-\definecolor{gris}{rgb}{.2 .2 .2}
-\begin{frame}{Principe d'incertitude modifié}
-  Contrôle de la singularité coulombienne dans toute boule (et non pas
-  sur tout l'espace comme avant)
-
-    \vspace{1cm}
-
-    Pour toute densité $\rho$ :
-    \begin{align*}
-      \frac {4ab}{3} \int_{B_j}
-       \frac 1 {|x|}\rho(x)\dd x &\leq
-      a^2\int_{B_j}\left|\nabla \rho(x)^{\tiny{\frac{1}{3}}}\right|^2 \dd x + b^2 \int_{B_j} \rho(x)^{4/3}\dd x \\&+ \frac{2ab}{R} \int_{B_j}
-    \rho(x)\dd x.
-    \end{align*}
-
-\end{frame}
-\subsection{Preuve du résultat}
+\subsection{Séparation des cellules}
 \newcommand{\vv}{\widetilde{V}}
 \newcommand{\vvv}{\widehat{V}}
-\begin{frame}{Preuve du résultat général dans le cas moléculaire}
+\begin{frame}{Séparation des cellules}
     On sépare l'énergie potentielle :
     \[V = \vv + \Phi,\]
     avec
@@ -327,30 +297,51 @@
     \end{align*}
 \end{frame}
 
-\begin{frame}{}
-  On contrôle $\int \Phi \rho$ par l'inégalité électrostatique
+\begin{frame}{Inégalité électrostatique de Lieb et Yau}
+  
+    Contrôle de l'énergie potentielle longue distance
+    par l'interaction électronique et l'interaction nucléaire.
+    
+    \vspace{1cm}
+    
+    Pour toute densité $\rho$,
+    \[\int\Phi(x)\rho(x) \leq \frac{\alpha}{2}\iint
+    \frac{\rho(x)\rho(y)}{|x-y|} + U - 
+    \alpha \frac{z^2}{8}\sum_j \frac{1}{D_j}.\]
+\end{frame}
+
+\begin{frame}{Interaction inter-cellulaire}
+  \begin{align*}
+    {\mathcal{E}_2} = {-\int \Phi \rho +  \frac{\alpha}{2}\int\frac{\rho(x) \rho(y)}{|x-y|}+U,}
+  \end{align*}
+  On contrôle $\int \Phi \rho$ avec l'inégalité électrostatique
   \begin{align*}
         \mathcal{E}_2 \ge& \frac{\alpha z^2}{8}\sum_j \frac{1}{D_j}.
   \end{align*}
 
-  Reste
+\end{frame}
+\begin{frame}{Interaction intra-cellulaire}
   \begin{align*}
     \mathcal E_1 = {a^2\int (\nabla \rho^\frac{1}{3})^2 + b^2 \int \rho^{4/3}
     - \int \vv \rho}
 \end{align*}
 
-  Contrôle de $\int \vv \rho$ ? On aimerait utiliser H\"older
+Contrôle de $\int \vv \rho$ ?
+
+Si $\vv$ n'était pas singulier, on pourrait utiliser H\"older
   \begin{align*}
     \int \vv \rho \leq \Vert\vv\Vert_{4} \Vert\rho\Vert_{4/3}
   \end{align*}
   pour faire apparaître $(\int \rho^{4/3})^{3/4}$ et conclure.
 
-  Problème: $\vv$ singulier, $\vv \not \in L^{4}$: on contrôle la
-  singularité de $\vv$ par le principe d'incertitude
+  Problème: $\vv \not \in L^{4}$.
+
+  On sépare la partie singulière
 
 \end{frame}
 
-\begin{frame}{Minoration de $\mathcal{E}_2$}
+\subsection{Isolation de la singularité}
+\begin{frame}{Isolation de la singularité}
   \begin{align*}
     \mathcal E_1 = {a^2\int (\nabla \rho^\frac{1}{3})^2 + b^2 \int \rho^{4/3}
     - \int \vv \rho}
@@ -359,9 +350,30 @@
 
   \begin{align*}
     \int \vv \rho &= \sum_j \underbrace{\int_{B_j} \vv
-      \rho}_{\text{P.I.M.}} + \sum_j \underbrace{\int_{\Gamma_j -
+      \rho}_{\text{?}} + \sum_j \underbrace{\int_{\Gamma_j -
       B_j} \vv \rho}_{\text{Hölder}}
 \end{align*}
+\end{frame}
+
+\definecolor{gris}{rgb}{.2 .2 .2}
+\begin{frame}{Principe d'incertitude modifié}
+  Contrôle de la singularité coulombienne dans toute boule (et non pas
+  sur tout l'espace comme dans le cas atomique)
+
+    \vspace{1cm}
+
+    Pour toute densité $\rho$ :
+    \begin{align*}
+      \frac {4ab}{3} \int_{B_j}
+       \frac 1 {|x|}\rho(x)\dd x &\leq
+      a^2\int_{B_j}\left|\nabla \rho(x)^{\tiny{\frac{1}{3}}}\right|^2 \dd x + b^2 \int_{B_j} \rho(x)^{4/3}\dd x \\&+ \frac{2ab}{R} \int_{B_j}
+    \rho(x)\dd x.
+    \end{align*}
+
+\end{frame}
+
+
+\begin{frame}{Contrôle de la singularité}
 On contrôle $\int_{B_j} \vv \rho$ par le P.I.M. si
 \begin{align*}
   \alpha z \leq \frac{4ab}{3}
@@ -374,26 +386,7 @@ Mais on veut garder du $\int \rho^{4/3}$ pour $\int_{\Gamma_j - B_j}
   \alpha z &= \frac{4ab_2}{3}
 \end{align*}
 \end{frame}
-\begin{frame}
-    \begin{align*}
-        \mathcal{E}_1 &=
-    \,a^2\int (\nabla \rho^\frac{1}{3})^2 + b^2 \int \rho^{4/3} - \int \vv \rho\quad\quad (b^2 = b_1^2
-    + b_2^2)\\
-    &=\,b_1^2 \int \rho^{4/3}+\underbrace{a^2\int (\nabla \rho^\frac{1}{3})^2 + b_2^2 \int \rho^{4/3}}
-    - \int \vv \rho\\
-    &\stackrel{\text{\tiny P.I.M.}}{\ge}
-    b_1^2 \int \rho^{4/3} +  ab_2\sum_j \int_{B_j} \left[
-    \frac{4}{3\left|x-R_j\right|}-\frac{2}{D_j} \right] \rho
-    - \int \vv \rho,
-    \intertext{en choisissant $b_2 = \frac{3\alpha z}{4a}$, on tue les
-    2 singularités$^\dagger$ :}
-    \mathcal{E}_1&=
-    b_1^2 \int \rho^{4/3} - \sum_j \int_{B_j}\frac{3\alpha z}{2 D_j} \rho
-    - \sum_j\int_{\scriptscriptstyle\Gamma_j\setminus B_j} \vv \rho.
-    \end{align*}
-    $^\dagger$Les conditions sur $b_2$ nous donnerons les conditions sur $z$.  
-\end{frame}
-\begin{frame}[fragile]
+\begin{frame}[fragile]{Contrôle de la partie non singulière}
   \begin{align*}
     \mathcal{E}_1&\geq
     b_1^2 \int \rho^{4/3} - \sum_j \int_{B_j}\frac{3\alpha z}{2 D_j} \rho
@@ -432,20 +425,26 @@ draw((i,g(i))--(i,0),dashed);
 $\vvv$ n'est plus singulier, on peut le contrôler par Hölder.
 \end{frame}
 
-\begin{frame}
+\begin{frame}{Contrôle de la partie non singulière (2)}
             \begin{align*}
                 \int \vvv \rho \le& \Vert\vvv\Vert_4 \Vert\rho\Vert_{4/3},\\
-                \intertext{on a maintenant}
+                \intertext{donc}
                 \mathcal{E}_1 \ge&\,b_1^2 \int \rho^{4/3} -
                 \Vert\vvv\Vert_4 \left(\int \rho^{4/3}\right)^{3/4}\\
                 \ge& b_1^2 X - \Vert\vvv\Vert_4 X^{3/4}
                 \intertext{En optimisant sur $X$ on a :}
                 \mathcal{E}_1 \ge& -\frac{1}{4}\left( \frac{3}{4b_1^2}
                 \right)^3\Vert \vvv \Vert_4^4.
-            \end{align*}
+              \end{align*}
+              On calcule
+              \begin{align*}
+                \int \vvv^4 \leq \sum_j \frac 1 {D_j} (\alpha z)^4 (\underbrace{\frac 4 3 \pi}_{B_j}
+                  +  \underbrace{{3 \pi}}_{\mathbb R^3 \setminus B_j})
+              \end{align*}
 \end{frame}
-\begin{frame}
-    En calculant $\int \vvv^4$ sur chaque cellule de Voronoï, on a finalement:
+\subsection{Conclusion}
+\begin{frame}{Conclusion}
+  Finalement:
     \[\mathcal{E} + U \ge M \sum_j \frac{1}{D_j}\]
     où
     \[M=-\frac{1}{4}\alpha^4\left( \frac{3}{4b_1^2} \right)^3\left( 3\pi z^4 + \frac{64\pi a^4
@@ -462,7 +461,7 @@ $\vvv$ n'est plus singulier, on peut le contrôler par Hölder.
         \item $\Rightarrow$ polynôme du 3ième degré dont la solution donne une borne sur $z$.
     \end{itemize}
 \end{frame}
-\begin{frame}{Rappel du résultat}
+\begin{frame}{Résultat}
     \begin{align*}
         \mathcal{E} + U &\ge 0
         \intertext{si}
@@ -471,4 +470,5 @@ $\vvv$ n'est plus singulier, on peut le contrôler par Hölder.
         \frac{1-x}{x^3}&=\frac{b^4}{a^2}\left( \frac{4}{3} \right)^2\frac{1}{2\pi\alpha(4+9\alpha^4)}
     \end{align*}
 \end{frame}
+\section{Conclusion}
 \end{document}
