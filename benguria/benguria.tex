@@ -55,21 +55,25 @@
       \int \rho^{4/3} \dd x}_{\text{énergie cinétique}} \\
     &-
     \underbrace{\int V(x) \rho(x) \dd x}_\text{attraction des noyaux}\\
-    &+ \underbrace{D(\rho,\rho)}_\text{répulsion électronique}
+    &+ \underbrace{D(\rho,\rho)}_\text{répulsion électronique}\\
+    &+ \underbrace{U}_\text{répulsion nucléaire}
   \end{align*}
   \begin{itemize}
   \item $V(x) = \alpha \sum_i \frac{z_i}{|x - R_i|}$
-  \item $D(\rho,\rho) = \frac \alpha 2 \int \frac{\rho(x) \rho(y)}{|x-y|} \dd x \dd y
+  \item $D(\rho,\rho) = \frac \alpha 2 \iint \frac{\rho(x) \rho(y)}{|x-y|} \dd x \dd y
     \ge 0$
+  \item $U = \alpha \sum_{i,j} \frac{z_i z_j}{|R_i - R_j|}$
   \end{itemize}
 }
 \frame{
   \frametitle{Justification}
   \begin{itemize}
-  \item Modélise le gaz d'électrons de densité $\rho$ autour d'un
-    atome ou d'une molécule
-  \item Modèle quantique avec corrections relativistes
-  \item Limite d'un modèle de QED (Engel-Dreizler)
+  \item Modélise le gaz d'électrons de densité $\rho$ et fonction
+    d'onde $\psi = \rho^{1/3}$ autour d'un atome ou d'une molécule
+  \item Limite d'un modèle de la QED (cf. papier Engel-Dreizler)
+  \item Modèle quantique relativiste très simplifié
+  \item Proche du modèle de TFW, mais $\rho = \psi^3$ au lieu de $\rho
+    = \psi^2$
   \item Pas très physique, modèle jouet
   \end{itemize}
 }
@@ -78,7 +82,8 @@
   \begin{itemize}
   \item Stabilité ?
   \item Si $\inf \mathcal E(\rho) = - \infty$, alors système instable
-  \item Cas atomique $R_1 = 0$. Changement d'échelle : $\sigma(x) = \lambda^{3}
+  \item Pour simplifier, cas atomique $R_1 = 0$
+  \item Changement d'échelle $\sigma(x) = \lambda^{3}
     \rho(\lambda x)$: zoom d'un facteur $\lambda$ sur le noyau, en préservant la charge
     totale $\int \sigma = \int \rho$
   \item $ \mathcal E(\sigma) = \lambda \mathcal
@@ -90,11 +95,11 @@
     \item $\forall \rho, \mathcal E(\rho) \ge 0$ : $\inf \mathcal E =
       0$ (stable)
     \end{enumerate}
-  \item Instabilité: $\int \frac{\rho(x)}{|x|} \dd x$ domine, $\lambda
-    \rightarrow +\infty$, concentration
-    $\rho \rightarrow \delta_{R_i}$
   \item Stabilité: pas d'échelle naturelle (au contraire de
     Schr\"odinger pour H)
+  \item Instabilité: l'attraction $\int \frac{\rho(x)}{|x|} \dd x$ domine, $\lambda
+    \rightarrow +\infty$, concentration
+    $\rho \rightarrow \delta_{R_i}$
   \end{itemize}
 }
 \subsection{Présentation des papiers}
@@ -102,14 +107,14 @@
   \frametitle{Premier papier}
   \begin{itemize}
   \item Benguria - Pérez - Oyarzun: The ultrarelativistic TFW model (2002)
-  \item Cas atomique. Résultat : $z < z_s \implies$ stabilité, $z >
-    z_i \implies$ instabilité.
+  \item Cas atomique. Résultat : stabilité si $z$ petit, instabilité
+    si $z$ grand.
   \item Technique de preuve : perturbation sur l'interaction
     inter-électronique, réduction au cas radial par réarrangement
     symétrique, et contrôle de l'attraction des noyaux
-  \item Extension au cas moléculaire par réarrangement symétrique :
-    tous les noyaux au même endroit, pire cas, borne grossière sur
-    $\sum_i z_i$
+  \item Extension de la preuve de stabilité au cas moléculaire par
+    réarrangement symétrique : tous les noyaux au même endroit, pire
+    cas, borne grossière sur $\sum_i z_i$
   \end{itemize}
 }
 \frame{
@@ -119,8 +124,8 @@
     in an ultrarelativistic TFW model (2008)
   \item Cas moléculaire avec prise en compte de la répulsion des noyaux
   \item Résultat : borne sur $\max_i z_i$
-  \item Technique de preuve : contrôle sur $x$ proche de $R_i$, et $x$
-    loin de $R_i$, via diagramme de Voronoï
+  \item Technique de preuve : on se ramène à un cas quasi-atomique via
+    le diagramme de Voronoï
   \end{itemize}
 }
 \section{Cas atomique}
@@ -128,17 +133,19 @@
 \frame{
   \frametitle{Principe d'incertitude}
   \begin{itemize}
-  \item Sous-problème :
+  \item Sous-problème : minimiser
     \begin{equation*}
       F(\psi) = \frac{a^2 \int (\nabla \psi)^2 \dd x + b^2
         \int \psi^{4} \dd x}{
         \alpha z \int \frac{\psi^3(x)}{|x|} \dd x}
     \end{equation*}
-  \item Équivalent au problème de départ en négligeant l'interaction électronique
+  \item Équivalent à $\mathcal E$ en négligeant l'interaction
+    électronique $D(\rho,\rho)$
   \item Raisonable parce que faible physiquement, et pas indispensable
     mathématiquement
-  \item Beaucoup plus simple à résoudre par réduction au cas radial
-  \item Lemme : $F(\psi) \ge F_0 = \frac{4 a b}{3 \alpha z}$
+  \item Invariant par scaling
+  \item $\inf F$ résoluble explicitement par réduction au cas radial.
+  \item $\inf F = \frac{4 a b}{3 \alpha z}$
   \item ``Principe d'incertitude'': si les électrons sont localisés
     autour de 0 (dénominateur grand), alors grande énergie cinétique (numérateur grand)
   \end{itemize}
@@ -146,8 +153,8 @@
 \frame{
   \frametitle{Preuve du lemme : réduction au cas radial}
   \begin{itemize}
-  \item Regarder $F$ sous $\psi \rightarrow \psi^*$, où $\psi^*$ est la symétrisée de
-    Schwartz (ref: Lieb \& Loss, Analysis)
+  \item Regarder $F$ sous $\psi \rightarrow \psi^*$, où $\psi^*$ est
+    le réarrangement symétrique (ref: Lieb \& Loss, Analysis)
   \item $\psi^*(x)$ est radial, décroissant
   \item Propriétés
     \begin{enumerate}
@@ -155,11 +162,12 @@
       des oscillations)
     \item $\int (\psi^*)^4 = \int \psi^4$ (préserve les normes $L^p$)
     \item $\int \psi^3 \frac 1 {|x|} \le \int (\psi^*)^3 (\frac 1
-      {|x|})^* = \int (\psi^*)^3 \frac 1 {|x|}$ ($\int |f g| \le \int
-      |f^* g^*|$ : penser à supp $f $ disjoint de supp $g$)
+      {|x|})^* = \int (\psi^*)^3 \frac 1 {|x|}$ (plus généralement
+      $\int |f g| \le \int |f^* g^*|$ : penser à supp $f $ disjoint de
+      supp $g$)
     \end{enumerate}
   \item $F(\psi^*) \le F(\psi)$
-  \item Regarder $F$ sur des fonctions radiales
+  \item Sans perte de généralité, $\psi$ radiale décroissante
   \end{itemize}
 }
 
@@ -176,13 +184,14 @@
   \end{align*}
   \begin{itemize}
   \item $- 2 x y \le x^2 + y^2$
-  \item Conclusion: $F(\psi) \ge F_0 = \frac{4 a b}{3 \alpha z}$
-  \item Bonus : on remonte le cas d'égalité $x = - y$, on en déduit une équation
+  \item $F(\psi) \ge \frac{4 a b}{3 \alpha z}$
+  \item On remonte le cas d'égalité $x = - y$, on en déduit l'équation
     différentielle $a \psi' = - b \psi^2$ qu'on résoud:
     \begin{equation*}
-      \psi(r) = \psi_{R}(r) = \frac a b \frac {1}{r+R}
+      \psi(r) = \phi_{R}(r) = \frac a b \frac {1}{r+R}
     \end{equation*}
-
+  \item $\inf F(\psi) = F(\phi_R) = \frac{4 a b}{3 \alpha z}$,
+    $\phi_R$ unique minimiseur à scaling près
   \end{itemize}
 }
 \subsection{Étude de $\mathcal{E}$}
@@ -199,8 +208,9 @@
   \end{align*}
   \begin{itemize}
   \item Si $F_0 > 1$, alors $\mathcal E(\rho) \geq 0$ : stabilité
-  \item Si $F_0 < 1$, alors l'argument ne permet pas de conclure
-  \item Il est naturel de tester $\mathcal E$ sur $\psi_R$, qui
+  \item Si $F_0 < 1$, alors l'argument ne permet pas de conclure à
+    l'instabilité
+  \item Mais il est naturel de tester $\mathcal E$ sur $\phi_R$, qui
     minimise déjà $F$. Si $\mathcal E(\psi_R) < 0$, alors instabilité
   \end{itemize}
 }
@@ -222,7 +232,7 @@
       $\frac{7 \pi
         a^3}{6 b^3} \approx 0.2$
     \item L'encadrement est bon. L'interaction entre les électrons est
-      faible, et l'approximation du lemme était physiquement raisonable
+      faible, et l'approximation $D(\rho,\rho) = 0$ était physiquement raisonable
   \end{itemize}
 }
 \subsection{Extension au cas moléculaire}
@@ -232,15 +242,13 @@
   \item On peut prouver la stabilité pour $\sum_i z_i < \frac{4 a b}{3
       \alpha}$ de même que précédemment, parce que $(\sum_i
     \frac{z_i}{|x-R_i|})^* = (\sum_i z_i) \frac 1 {|x|}$
-  \item Physiquement, correspond à mettre tous les noyaux au même
-    endroit : pire cas
   \item Pas de preuve d'instabilité
   \item Pas physique : existence de longues molécules (chimie
-    organique)
-  \item Stabilité fournie par l'énergie de répulsion des noyaux $U =
-    \sum_{i < j} \frac{z_i z_j}{|R_i - R_j|}$ qui empêche le pire cas
-  \item Nécessité de méthodes spécifiques pour prouver la stabilité de
-    $\mathcal E + U$ en prenant en compte la géométrie de la molécule
+    organique \dots)
+  \item Physiquement, correspond à mettre tous les noyaux au même
+    endroit : $U$ explose, donc la borne sur $\sum_i z_i$ est très mauvaise
+  \item Nécessité de méthodes spécifiques prenant en compte la
+    géométrie de la molécule
   \end{itemize}
 }
 \section{Cas moléculaire}
@@ -276,12 +284,12 @@
     \includegraphics[width=0.6\textwidth]{voronoi.pdf}
     \end{center}
 \end{frame}
-\begin{frame}{Séparation du potentiel}{Action longue distance}
+\subsection{Séparation des cellules}
+\begin{frame}{Séparation des cellules}
     On définit le potentiel « longue distance », qui, à l'intérieur d'une cellule, ne « voit pas
     » le noyau associé. Dans $\Gamma_i$,
     \[\Phi(x) = \alpha z \sum_{j\neq i} \frac{1}{|x-R_j|}.\]
 \end{frame}
-\subsection{Séparation des cellules}
 \newcommand{\vv}{\widetilde{V}}
 \newcommand{\vvv}{\widehat{V}}
 \begin{frame}{Séparation des cellules}
