@@ -270,7 +270,7 @@
     \begin{align*}
       \Gamma_j &= \left\{x \; \big| \; \forall\, k\neq j, |x-R_j| < |x-R_k|\right\},\\
       D_j &= \mathrm{dist}(R_j, \mathit{\partial}\Gamma_k),\\
-      B_j &= {B(R_j, D_j)}.      
+      B_j &= {B(R_j, D_j)}.
     \end{align*}
     \begin{center}
     \includegraphics[width=0.6\textwidth]{voronoi.pdf}
@@ -298,15 +298,15 @@
 \end{frame}
 
 \begin{frame}{Inégalité électrostatique de Lieb et Yau}
-  
+
     Contrôle de l'énergie potentielle longue distance
     par l'interaction électronique et l'interaction nucléaire.
-    
+
     \vspace{1cm}
-    
+
     Pour toute densité $\rho$,
     \[\int\Phi(x)\rho(x) \leq \frac{\alpha}{2}\iint
-    \frac{\rho(x)\rho(y)}{|x-y|} + U - 
+    \frac{\rho(x)\rho(y)}{|x-y|} + U -
     \alpha \frac{z^2}{8}\sum_j \frac{1}{D_j}.\]
 \end{frame}
 
@@ -395,14 +395,14 @@ Mais on veut garder du $\int \rho^{4/3}$ pour $\int_{\Gamma_j - B_j}
     b_1^2 \int \rho^{4/3} - \int_{\mathbb{R}^3} \vvv\rho,
   \end{align*}
   où
-  
+
   \begin{minipage}{0.2\linewidth}
     \centering
     \small
     \begin{align*}
       \vvv(x) &= \left\{\begin{aligned}
           \frac{3\alpha z}{2D_j} && x \in B_j\\
-          \frac{\alpha z}{|x-R_j|} && x \in \Gamma_j \setminus B_j\end{aligned}\right.    
+          \frac{\alpha z}{|x-R_j|} && x \in \Gamma_j \setminus B_j\end{aligned}\right.
     \end{align*}
   \end{minipage}
   \begin{minipage}{0.5\linewidth}
@@ -461,14 +461,14 @@ $\vvv$ n'est plus singulier, on peut le contrôler par Hölder.
         \item $\Rightarrow$ polynôme du 3ième degré dont la solution donne une borne sur $z$.
     \end{itemize}
 \end{frame}
-\begin{frame}{Résultat}
-    \begin{align*}
-        \mathcal{E} + U &\ge 0
-        \intertext{si}
-        z &\le \frac{4ab}{3\alpha}\sqrt{1-x}
-        \intertext{où $x$ est solution de}
-        \frac{1-x}{x^3}&=\frac{b^4}{a^2}\left( \frac{4}{3} \right)^2\frac{1}{2\pi\alpha(4+9\alpha^4)}
-    \end{align*}
+\begin{frame}{Résultat (stabilité)}
+        \[\mathcal{E} + U\ge 0\quad\text { si }\quad z \le \frac{4ab}{3\alpha}\sqrt{1-x},\]
+        \medskip
+        où $x$ est solution de
+        \[\frac{1-x}{x^3}=\frac{b^4}{a^2}\left( \frac{4}{3} \right)^2\frac{1}{2\pi\alpha(4+9\alpha^4)}.\]
 \end{frame}
 \section{Conclusion}
+\begin{frame}{Conclusion générale}
+
+\end{frame}
 \end{document}
