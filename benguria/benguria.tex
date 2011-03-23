@@ -262,7 +262,7 @@
         \item L'énergie est concave en $z_i \in [0, z]$\\
             $\Rightarrow$ minimum sur les $z_i$ atteint en $0$ ou $z$.
         \item Si minimum atteint en $0$ alors on a un noyau de moins.
-        \item On considère donc toutes les charges égales.
+        \item On considère donc toutes les charges égales à $z$.
     \end{itemize}
 \end{frame}
 \begin{frame}{Diagramme de Voronoï}
@@ -272,21 +272,21 @@
               \[B_j = {B(R_j, D_j)}\text{, la plus grande boule centrée en $R_j$ contenue
               dans }\Gamma_j.\]
     \begin{center}
-    \includegraphics[width=0.7\textwidth]{voronoi.pdf}
+    \includegraphics[width=0.6\textwidth]{voronoi.pdf}
     \end{center}
 \end{frame}
 \begin{frame}{Séparation du potentiel}{Action longue distance}
     On définit le potentiel « longue distance », qui, à l'intérieur d'une cellule, ne « voit pas
-    » le noyau associé :
-    \[\text{pour } x \in \Gamma_i, \Phi(x) = \alpha z \sum_{j\neq i} \frac{1}{|x-R_j|}.\]
+    » le noyau associé. Dans $\Gamma_i$,
+    \[\Phi(x) = \alpha z \sum_{j\neq i} \frac{1}{|x-R_j|}.\]
 \end{frame}
 \subsection{Inégalité électrostatique}
 \begin{frame}{Inégalité électrostatique de Lieb et Yau}
     {``Many-Body Stability Implies a Bound on the Fine-Structure Constant''\\
     ``The Stability and Instability of Relativistic Matter''}
     Pour toute densité $\rho$,
-    \[\frac{\alpha}{2}\iint
-    \frac{\rho(x)\rho(y)}{|x-y|}-\int\Phi(x)\rho(x) + U \geq
+    \[\int\Phi(x)\rho(x) \leq \frac{\alpha}{2}\iint
+    \frac{\rho(x)\rho(y)}{|x-y|} + U - 
     \alpha \frac{z^2}{8}\sum_j \frac{1}{D_j}.\]
     $\Rightarrow$ Contrôle de l'énergie potentielle longue distance
     par l'interaction électronique et l'interaction nucléaire.
@@ -294,13 +294,18 @@
 \subsection{Principe d'incertitude modifié}
 \definecolor{gris}{rgb}{.2 .2 .2}
 \begin{frame}{Principe d'incertitude modifié}
-    On veut aussi une minoration de l'énergie cinétique :
+  Contrôle de la singularité coulombienne dans toute boule (et non pas
+  sur tout l'espace comme avant)
 
     \vspace{1cm}
 
-    Pour toute densité $\rho$ régulière :
-    \[a^2\int_{B_j}\left|\nabla \rho(x)^{\tiny{\frac{1}{3}}}\right|^2 \dd x + b^2 \int_{B_j} \rho(x)^{4/3}\dd x \geq ab \int_{B_j}
-    \left[\frac{4}{3|x|}-\frac{2}{R}\right]\rho(x)\dd x.\]
+    Pour toute densité $\rho$ :
+    \begin{align*}
+      \frac {4ab}{3} \int_{B_j}
+       \frac 1 {|x|}\rho(x)\dd x &\leq
+      a^2\int_{B_j}\left|\nabla \rho(x)^{\tiny{\frac{1}{3}}}\right|^2 \dd x + b^2 \int_{B_j} \rho(x)^{4/3}\dd x \\&+ \frac{2ab}{R} \int_{B_j}
+    \rho(x)\dd x.
+    \end{align*}
 
 \end{frame}
 \subsection{Preuve du résultat}
@@ -308,29 +313,53 @@
 \newcommand{\vvv}{\widehat{V}}
 \begin{frame}{Preuve du résultat général dans le cas moléculaire}
     On sépare l'énergie potentielle :
-    \[V = (V-\Phi) + \Phi = \vv + \Phi\]
+    \[V = \vv + \Phi,\]
+    avec
+    \[\vv(x) = \frac z {|x - R_i|} \text{ dans $\Gamma_i$}\]
     \begin{align*}
     \mathcal{E} + U =&
     \overbrace{a^2\int (\nabla \rho^\frac{1}{3})^2 + b^2 \int \rho^{4/3}
     - \int \vv \rho}^{\mathcal{E}_1}\\
     &\overbrace{-\int \Phi \rho +  \frac{\alpha}{2}\int\frac{\rho(x) \rho(y)}{|x-y|}+U,}^{\mathcal{E}_2}
-    \intertext{l'inégalité électrostatique nous donne :}
-    \mathcal{E}_2 \ge& \frac{\alpha z^2}{8}\sum_j \frac{1}{D_j}.
     \end{align*}
 \end{frame}
+
+\begin{frame}{}
+  On contrôle $\int \Phi \rho$ par l'inégalité électrostatique
+  \begin{align*}
+        \mathcal{E}_2 \ge& \frac{\alpha z^2}{8}\sum_j \frac{1}{D_j}.
+  \end{align*}
+
+  Reste
+  \begin{align*}
+    \mathcal E_1 = {a^2\int (\nabla \rho^\frac{1}{3})^2 + b^2 \int \rho^{4/3}
+    - \int \vv \rho}
+\end{align*}
+
+  Contrôle de $\int \vv \rho$ ? On aimerait utiliser H\"older
+  \begin{align*}
+    \int \vv \rho \leq ||\vv||_{4} ||\rho||_{4/3}
+  \end{align*}
+  pour faire apparaître $(\int \rho^{4/3})^{3/4}$ et conclure.
+
+  Problème: $\vv$ singulier, $\vv \not \in L^{4}$: on contrôle la
+  singularité de $\vv$ par le principe d'incertitude
+
+\end{frame}
+
 \begin{frame}{Minoration de $\mathcal{E}_2$}
-    On va maintenant tuer le terme singulier $\int_{B_j} (V-\Psi) \rho$ dans $\mathcal{E}_1$ pour
-    pouvoir contrôler l'énergie potentielle :
+  On va maintenant contrôler le terme singulier $\int \vv \rho$
+  dans $\mathcal{E}_1$
     \begin{align*}
         \mathcal{E}_1 &=
     \,a^2\int (\nabla \rho^\frac{1}{3})^2 + b^2 \int \rho^{4/3} - \int \vv \rho\quad\quad (b^2 = b_1^2
     + b_2^2)\\
     &=\,b_1^2 \int \rho^{4/3}+\underbrace{a^2\int (\nabla \rho^\frac{1}{3})^2 + b_2^2 \int \rho^{4/3}}
-    - \sum_j\int_{\scriptscriptstyle\Gamma_j\setminus B_j \cup B_j} \vv \rho\\
+    - \int \vv \rho\\
     &\stackrel{\text{\tiny P.I.M.}}{\ge}
     b_1^2 \int \rho^{4/3} +  ab_2\sum_j \int_{B_j} \left[
     \frac{4}{3\left|x-R_j\right|}-\frac{2}{D_j} \right] \rho
-    - \sum_j\int_{\scriptscriptstyle\Gamma_j\setminus B_j \cup B_j} \vv \rho,
+    - \int \vv \rho,
     \intertext{en choisissant $b_2 = \frac{3\alpha z}{4a}$, on tue les
     2 singularités$^\dagger$ :}
     \mathcal{E}_1&=
