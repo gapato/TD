@@ -283,13 +283,16 @@
 \subsection{Inégalité électrostatique}
 \begin{frame}{Inégalité électrostatique de Lieb et Yau}
     {``Many-Body Stability Implies a Bound on the Fine-Structure Constant''\\
-    ``The Stability and Instability of Relativistic Matter''}
+      ``The Stability and Instability of Relativistic Matter''}
+    Contrôle de l'énergie potentielle longue distance
+    par l'interaction électronique et l'interaction nucléaire.
+    
+    \vspace{1cm}
+    
     Pour toute densité $\rho$,
     \[\int\Phi(x)\rho(x) \leq \frac{\alpha}{2}\iint
     \frac{\rho(x)\rho(y)}{|x-y|} + U - 
     \alpha \frac{z^2}{8}\sum_j \frac{1}{D_j}.\]
-    $\Rightarrow$ Contrôle de l'énergie potentielle longue distance
-    par l'interaction électronique et l'interaction nucléaire.
 \end{frame}
 \subsection{Principe d'incertitude modifié}
 \definecolor{gris}{rgb}{.2 .2 .2}
@@ -338,7 +341,7 @@
 
   Contrôle de $\int \vv \rho$ ? On aimerait utiliser H\"older
   \begin{align*}
-    \int \vv \rho \leq ||\vv||_{4} ||\rho||_{4/3}
+    \int \vv \rho \leq \Vert\vv\Vert_{4} \Vert\rho\Vert_{4/3}
   \end{align*}
   pour faire apparaître $(\int \rho^{4/3})^{3/4}$ et conclure.
 
@@ -348,8 +351,30 @@
 \end{frame}
 
 \begin{frame}{Minoration de $\mathcal{E}_2$}
-  On va maintenant contrôler le terme singulier $\int \vv \rho$
-  dans $\mathcal{E}_1$
+  \begin{align*}
+    \mathcal E_1 = {a^2\int (\nabla \rho^\frac{1}{3})^2 + b^2 \int \rho^{4/3}
+    - \int \vv \rho}
+\end{align*}
+  Contrôle de $\int \vv \rho$
+
+  \begin{align*}
+    \int \vv \rho &= \sum_j \underbrace{\int_{B_j} \vv
+      \rho}_{\text{P.I.M.}} + \sum_j \underbrace{\int_{\Gamma_j -
+      B_j} \vv \rho}_{\text{Hölder}}
+\end{align*}
+On contrôle $\int_{B_j} \vv \rho$ par le P.I.M. si
+\begin{align*}
+  \alpha z \leq \frac{4ab}{3}
+\end{align*}
+
+Mais on veut garder du $\int \rho^{4/3}$ pour $\int_{\Gamma_j - B_j}
+\vv \rho$:
+\begin{align*}
+  b^2 &= b_1^2 + b_2^2,\\
+  \alpha z &= \frac{4ab_2}{3}
+\end{align*}
+\end{frame}
+\begin{frame}
     \begin{align*}
         \mathcal{E}_1 &=
     \,a^2\int (\nabla \rho^\frac{1}{3})^2 + b^2 \int \rho^{4/3} - \int \vv \rho\quad\quad (b^2 = b_1^2
@@ -366,21 +391,30 @@
     b_1^2 \int \rho^{4/3} - \sum_j \int_{B_j}\frac{3\alpha z}{2 D_j} \rho
     - \sum_j\int_{\scriptscriptstyle\Gamma_j\setminus B_j} \vv \rho.
     \end{align*}
-    $^\dagger$Les conditions sur $b_2$ nous donnerons les conditions sur $z$.
+    $^\dagger$Les conditions sur $b_2$ nous donnerons les conditions sur $z$.  
 \end{frame}
 \begin{frame}[fragile]
-    On peut réécrire
+  \begin{align*}
+    \mathcal{E}_1&\geq
+    b_1^2 \int \rho^{4/3} - \sum_j \int_{B_j}\frac{3\alpha z}{2 D_j} \rho
+    - \sum_j\int_{\scriptscriptstyle\Gamma_j\setminus B_j} \vv \rho\\
+    &\ge
+    b_1^2 \int \rho^{4/3} - \int_{\mathbb{R}^3} \vvv\rho,
+  \end{align*}
+  où
+  
+  \begin{minipage}{0.2\linewidth}
+    \centering
+    \small
     \begin{align*}
-        \mathcal{E}_1 &\ge
-        b_1^2 \int \rho^{4/3} - \sum_j \int_{\mathbb{R}^3} \vvv\rho,
-    \intertext{où}
-    \vvv(x) &= \left\{\begin{aligned}
-        \frac{3\alpha z}{2D_j}\quad && x \in B_j\\
-        \frac{\alpha z}{|x-R_j|}\quad && x \in \Gamma_j \setminus B_j\end{aligned}\right.
+      \vvv(x) &= \left\{\begin{aligned}
+          \frac{3\alpha z}{2D_j} && x \in B_j\\
+          \frac{\alpha z}{|x-R_j|} && x \in \Gamma_j \setminus B_j\end{aligned}\right.    
     \end{align*}
-    \begin{figure}[h]
-        \begin{center}
-\begin{asy}
+  \end{minipage}
+  \begin{minipage}{0.5\linewidth}
+    \centering
+    \begin{asy}
 import graph;
 size(5cm);
 real i=0.5;
@@ -393,24 +427,22 @@ yaxis('$\widehat{V}$');
 labelx('$D_j$',i);
 draw((i,g(i))--(i,0),dashed);
 \end{asy}
-        \end{center}
-        \label{fig:vvv}
-    \end{figure}
+\end{minipage}
+
+$\vvv$ n'est plus singulier, on peut le contrôler par Hölder.
 \end{frame}
 
 \begin{frame}
-    \begin{itemize}
-        \item Hölder sur le deuxième terme de $\mathcal{E}_1$ :
             \begin{align*}
-                \int \vvv \rho \le& \left( \int \vvv^4 \right)^{1/4} \left( \int \rho^{3/4}
-                \right)^{4/3},\\
+                \int \vvv \rho \le& \Vert\vvv\Vert_4 \Vert\rho\Vert_{4/3},\\
                 \intertext{on a maintenant}
-                \mathcal{E}_1 \ge&\,b_1^2 \int \rho^{4/3} - \left( \rho^{4/3} \right)^{3/4}\left(
-                \vvv^4 \right)^{1/4}.\\
-                \intertext{En optimisant sur $\left\Vert \rho^{4/3} \right\Vert^{3/4}$ on a :}
-                \mathcal{E}_1 \ge& -\frac{1}{4}\left( \frac{3}{4b_1^2} \right)^3\int \vvv^4.
+                \mathcal{E}_1 \ge&\,b_1^2 \int \rho^{4/3} -
+                \Vert\vvv\Vert_4 \left(\int \rho^{4/3}\right)^{3/4}\\
+                \ge& b_1^2 X - \Vert\vvv\Vert_4 X^{3/4}
+                \intertext{En optimisant sur $X$ on a :}
+                \mathcal{E}_1 \ge& -\frac{1}{4}\left( \frac{3}{4b_1^2}
+                \right)^3\Vert \vvv \Vert_4^4.
             \end{align*}
-    \end{itemize}
 \end{frame}
 \begin{frame}
     En calculant $\int \vvv^4$ sur chaque cellule de Voronoï, on a finalement:
