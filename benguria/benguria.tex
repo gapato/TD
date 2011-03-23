@@ -120,7 +120,7 @@
   \item Cas moléculaire avec prise en compte de la répulsion des noyaux
   \item Résultat : borne sur $\max_i z_i$
   \item Technique de preuve : contrôle sur $x$ proche de $R_i$, et $x$
-    loin de $R_i$, via diagrammes de Voronoï
+    loin de $R_i$, via diagramme de Voronoï
   \end{itemize}
 }
 \section{Cas atomique}
@@ -315,25 +315,29 @@
     - \int \vv \rho}^{\mathcal{E}_1}\\
     &\overbrace{-\int \Phi \rho +  \frac{\alpha}{2}\int\frac{\rho(x) \rho(y)}{|x-y|}+U,}^{\mathcal{E}_2}
     \intertext{l'inégalité électrostatique nous donne :}
-    \mathcal{E}_2 \ge& \frac{\alpha z}{2}\sum_j \frac{1}{D_j}.
+    \mathcal{E}_2 \ge& \frac{\alpha z^2}{8}\sum_j \frac{1}{D_j}.
     \end{align*}
 \end{frame}
 \begin{frame}{Minoration de $\mathcal{E}_2$}
-    On va maintenant tuer le terme singulier $\int_{B_j} (V-\Psi) \rho$ dans $\mathcal{E}_1$ :
+    On va maintenant tuer le terme singulier $\int_{B_j} (V-\Psi) \rho$ dans $\mathcal{E}_1$ pour
+    pouvoir contrôler l'énergie potentielle :
     \begin{align*}
         \mathcal{E}_1 &=
-    \,a^2\int (\nabla \rho^\frac{1}{3})^2 + b^2 \int \rho^{4/3} - \int \vv \rho\\
-    &=\,a^2\int (\nabla \rho^\frac{1}{3})^2 + b_1^2 \int \rho^{4/3} + b_2^2 \int \rho^{4/3}
+    \,a^2\int (\nabla \rho^\frac{1}{3})^2 + b^2 \int \rho^{4/3} - \int \vv \rho\quad\quad (b^2 = b_1^2
+    + b_2^2)\\
+    &=\,b_1^2 \int \rho^{4/3}+\underbrace{a^2\int (\nabla \rho^\frac{1}{3})^2 + b_2^2 \int \rho^{4/3}}
     - \sum_j\int_{\scriptscriptstyle\Gamma_j\setminus B_j \cup B_j} \vv \rho\\
     &\stackrel{\text{\tiny P.I.M.}}{\ge}
     b_1^2 \int \rho^{4/3} +  ab_2\sum_j \int_{B_j} \left[
     \frac{4}{3\left|x-R_j\right|}-\frac{2}{D_j} \right] \rho
     - \sum_j\int_{\scriptscriptstyle\Gamma_j\setminus B_j \cup B_j} \vv \rho,
-    \intertext{en choisissant $b_2 = \frac{3\alpha z}{4a}$, on tue les 2 singularités :}
+    \intertext{en choisissant $b_2 = \frac{3\alpha z}{4a}$, on tue les
+    2 singularités$^\dagger$ :}
     \mathcal{E}_1&=
     b_1^2 \int \rho^{4/3} - \sum_j \int_{B_j}\frac{3\alpha z}{2 D_j} \rho
     - \sum_j\int_{\scriptscriptstyle\Gamma_j\setminus B_j} \vv \rho.
     \end{align*}
+    $^\dagger$Les conditions sur $b_2$ nous donnerons les conditions sur $z$.
 \end{frame}
 \begin{frame}[fragile]
     On peut réécrire
@@ -368,7 +372,42 @@ draw((i,g(i))--(i,0),dashed);
 \begin{frame}
     \begin{itemize}
         \item Hölder sur le deuxième terme de $\mathcal{E}_1$ :
-            \[\int \vvv \rho \le \left( \int \vvv^4 \right)^{1/4} \left( \int \rho^{3/4} \right)^{4/3}\]
+            \begin{align*}
+                \int \vvv \rho \le& \left( \int \vvv^4 \right)^{1/4} \left( \int \rho^{3/4}
+                \right)^{4/3},\\
+                \intertext{on a maintenant}
+                \mathcal{E}_1 \ge&\,b_1^2 \int \rho^{4/3} - \left( \rho^{4/3} \right)^{3/4}\left(
+                \vvv^4 \right)^{1/4}.\\
+                \intertext{En optimisant sur $\left\Vert \rho^{4/3} \right\Vert^{3/4}$ on a :}
+                \mathcal{E}_1 \ge& -\frac{1}{4}\left( \frac{3}{4b_1^2} \right)^3\int \vvv^4.
+            \end{align*}
     \end{itemize}
+\end{frame}
+\begin{frame}
+    En calculant $\int \vvv^4$ sur chaque cellule de Voronoï, on a finalement:
+    \[\mathcal{E} + U \ge M \sum_j \frac{1}{D_j}\]
+    où
+    \[M=-\frac{1}{4}\alpha^4\left( \frac{3}{4b_1^2} \right)^3\left( 3\pi z^4 + \frac{64\pi a^4
+    b_2^4}{3} \right)+ \frac{\alpha z^2}{8}.\]
+    Si $M\ge0$ la molécule est stable, ce qui équivaut à
+    \[
+    \frac{1}{a^2}\left( \frac{4}{3} \right)^2\frac{1}{2\pi\alpha\left( 4 + 9\alpha^4 \right)}
+    \ge
+    \frac{b^2-b_1^2}{b_1^6} = \frac{b_2^2}{b_1^6}.
+    \]
+    \begin{itemize}
+        \item On veut pouvoir avoir $z$ maximum, donc $b_2^2$ maximum.
+        \item $\Rightarrow$ second membre maximum $\Rightarrow$ cas d'égalité.
+        \item $\Rightarrow$ polynôme du 3ième degré dont la solution donne une borne sur $z$.
+    \end{itemize}
+\end{frame}
+\begin{frame}{Rappel du résultat}
+    \begin{align*}
+        \mathcal{E} + U &\ge 0
+        \intertext{si}
+        z &\le \frac{4ab}{3\alpha}\sqrt{1-x}
+        \intertext{où $x$ est solution de}
+        \frac{1-x}{x^3}&=\frac{b^4}{a^2}\left( \frac{4}{3} \right)^2\frac{1}{2\pi\alpha(4+9\alpha^4)}
+    \end{align*}
 \end{frame}
 \end{document}
