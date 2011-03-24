@@ -131,29 +131,78 @@
 \section{Cas atomique}
 \subsection{Principe d'incertitude}
 \frame{
-  \frametitle{Principe d'incertitude}
-  \begin{itemize}
-  \item Sous-problème : minimiser
-    \begin{equation*}
-      F(\psi) = \frac{a^2 \int (\nabla \psi)^2 \dd x + b^2
-        \int \psi^{4} \dd x}{
-        \alpha z \int \frac{\psi^3(x)}{|x|} \dd x}
+  \frametitle{Cas radial}
+ Cas atomique : $R_1 = 0, z_1 = z, U = 0$
+        \begin{equation*}
+          \mathcal E(\psi) = {a^2 \int (\nabla \psi)^2 \dd x + b^2
+        \int \psi^{4} \dd x} - {
+        \alpha z \int \frac{\psi^3(x)}{|x|} \dd x} + D(\psi^3,\psi^3)
     \end{equation*}
-  \item Équivalent à $\mathcal E$ en négligeant l'interaction
-    électronique $D(\rho,\rho)$
-  \item Raisonable parce que faible physiquement, et pas indispensable
-    mathématiquement
-  \item Invariant par scaling
-  \item $\inf F$ résoluble explicitement par réduction au cas radial.
-  \item $\inf F = \frac{4 a b}{3 \alpha z}$
-  \item ``Principe d'incertitude'': si les électrons sont localisés
-    autour de 0 (dénominateur grand), alors grande énergie cinétique (numérateur grand)
-  \end{itemize}
+  \begin{itemize}
+  \item On cherche à prouver $\mathcal E(\psi) \geq 0$
+  \item Contrôle de $\int \frac{\psi^3}{|x|}$ par l'énergie cinétique
+    et/ou l'interaction électronique
+  \item Problème radial, raisonable de commencer par les fonctions
+    radiales : $\psi(x) = \psi(|x|) = \psi(r)$
+  \item Énergie cinétique :
+    \begin{align*}
+      \int \left[a^2 (\psi')^2 + b^2
+      \psi^4\right] r^2 \dd r      
+    \end{align*}
+  \item Énergie potentielle :
+    \begin{align*}
+      \alpha z \int \psi^3 r \dd r      
+    \end{align*}
+  \item Interaction électronique : $D(\psi^3,\psi^3)$, ne se simplifie
+    pas
+    \end{itemize}
 }
 \frame{
-  \frametitle{Preuve du lemme : réduction au cas radial}
+  \frametitle{Cas radial (2)}
   \begin{itemize}
-  \item Regarder $F$ sous $\psi \rightarrow \psi^*$, où $\psi^*$ est
+  \item On cherche à contrôler $\alpha z \int \psi^3 {\color{red}r} \dd r$ par $      \int \left[a^2 (\psi')^2 + b^2
+      \psi^4\right] {\color{red}r^2} \dd r      $ et/ou
+    $D(\psi^3,\psi^3)$
+  \item $D(\psi^3,\psi^3)$ compliqué, on l'ignore (physiquement raisonable)
+  \item On intègre par parties pour ramener tout en $\color{red} r^2$
+    \begin{align*}
+      \alpha z \int \psi^3 {r} \dd r &= -\frac 3 2 \alpha z \int \psi'
+      \psi^2 r^2 \dd r\\
+      &= \frac{3 \alpha z}{4 a b} \int -2 \underbrace{a \psi'}_x\underbrace{b \psi^2}_{y} r^2
+      \dd r\\
+      &\leq \frac{3 \alpha z}{4 a b} \int\Big(\underbrace{a^2 (\psi')^2}_{x^2} + \underbrace{b^2
+      \psi^4}_{y^2}\Big) {r^2} \dd r
+    \end{align*}
+  \item Égalité quand $x(r) = -y(r)$, donc $a \psi' = - b \psi^2$ qu'on résoud:
+    \begin{equation*}
+      \psi(r) = \phi_{R}(r) = \frac a b \frac {1}{r+R}
+    \end{equation*}
+  \item Le scaling $\psi \to \psi_\lambda(x) = \lambda \psi(\lambda x)$
+    transforme $\phi_{R}$ en $\phi_{R'}$
+  % \item Regarder $F$ sous $\psi \rightarrow \psi^*$, où $\psi^*$ est
+  %   le réarrangement symétrique (ref: Lieb \& Loss, Analysis)
+  % \item $\psi^*(x)$ est radial, décroissant
+  % \item Propriétés
+  %   \begin{enumerate}
+  %   \item $\int (\nabla \psi^*)^2 \le \int (\nabla \psi)^2$ (lissage
+  %     des oscillations)
+  %   \item $\int (\psi^*)^4 = \int \psi^4$ (préserve les normes $L^p$)
+  %   \item $\int \psi^3 \frac 1 {|x|} \le \int (\psi^*)^3 (\frac 1
+  %     {|x|})^* = \int (\psi^*)^3 \frac 1 {|x|}$ (plus généralement
+  %     $\int |f g| \le \int |f^* g^*|$ : penser à supp $f $ disjoint de
+  %     supp $g$)
+  %   \end{enumerate}
+  % \item $F(\psi^*) \le F(\psi)$
+  % \item Sans perte de généralité, $\psi$ radiale décroissante
+  \end{itemize}
+}
+
+\frame{
+  \frametitle{Cas non radial}
+  \begin{itemize}
+  \item Pour étendre l'inégalité aux fonctions non radiales, on
+    ``radialise'' une fonction $\psi$
+    \item Regarder les termes sous $\psi \rightarrow \psi^*$, où $\psi^*$ est
     le réarrangement symétrique (ref: Lieb \& Loss, Analysis)
   \item $\psi^*(x)$ est radial, décroissant
   \item Propriétés
@@ -166,52 +215,52 @@
       $\int |f g| \le \int |f^* g^*|$ : penser à supp $f $ disjoint de
       supp $g$)
     \end{enumerate}
-  \item $F(\psi^*) \le F(\psi)$
-  \item Sans perte de généralité, $\psi$ radiale décroissante
+  \item $E_p(\psi) \leq E_p(\psi^*) \leq \frac{3 \alpha z}{4 a b}
+    E_c(\psi^*) \leq \frac{3 \alpha z}{4 a b} E_c(\psi)$, avec même
+    cas d'égalité $\psi = \phi_R$
+  \item Principe d'incertitude : si $E_p$ grand (localisation autour
+    de $0$), $E_c$ grand.
   \end{itemize}
-}
-
-\frame{
-  \frametitle{Preuve du lemme : cas radial}
-  \begin{align*}
-    F(\psi) &= \frac{a^2 \int (\psi')^2 r^2 \dd r + b^2
-      \int \psi^{4} r^2 \dd r}{
-      \alpha z \int {\psi^3} r \dd r}\\
-     &\overset{\text{IPP}}{=} \frac {4 a b }{3 \alpha z}\;\frac{ \int \overbrace{(a\psi')^2}^{x^2} r^2 \dd r +
-      \int \overbrace{(b \psi^{2})^2}^{y^2} r^2 \dd r}{
-      \int - 2  \underbrace{a \psi'}_x\underbrace{b \psi^2}_{y} r^2
-      \dd r}
-  \end{align*}
-  \begin{itemize}
-  \item $- 2 x y \le x^2 + y^2$
-  \item $F(\psi) \ge \frac{4 a b}{3 \alpha z}$
-  \item On remonte le cas d'égalité $x = - y$, on en déduit l'équation
-    différentielle $a \psi' = - b \psi^2$ qu'on résoud:
-    \begin{equation*}
-      \psi(r) = \phi_{R}(r) = \frac a b \frac {1}{r+R}
-    \end{equation*}
-  \item $\inf F(\psi) = F(\phi_R) = \frac{4 a b}{3 \alpha z}$,
-    $\phi_R$ unique minimiseur à scaling près
-  \end{itemize}
+  % \begin{align*}
+  %   F(\psi) &= \frac{a^2 \int (\psi')^2 r^2 \dd r + b^2
+  %     \int \psi^{4} r^2 \dd r}{
+  %     \alpha z \int {\psi^3} r \dd r}\\
+  %    &\overset{\text{IPP}}{=} \frac {4 a b }{3 \alpha z}\;\frac{ \int \overbrace{(a\psi')^2}^{x^2} r^2 \dd r +
+  %     \int \overbrace{(b \psi^{2})^2}^{y^2} r^2 \dd r}{
+  %     \int - 2  \underbrace{a \psi'}_x\underbrace{b \psi^2}_{y} r^2
+  %     \dd r}
+  % \end{align*}
+  % \begin{itemize}
+  % \item $- 2 x y \le x^2 + y^2$
+  % \item $F(\psi) \ge \frac{4 a b}{3 \alpha z}$
+  % \item On remonte le cas d'égalité $x = - y$, on en déduit l'équation
+  %   différentielle $a \psi' = - b \psi^2$ qu'on résoud:
+  %   \begin{equation*}
+  %     \psi(r) = \phi_{R}(r) = \frac a b \frac {1}{r+R}
+  %   \end{equation*}
+  % \item $\inf F(\psi) = F(\phi_R) = \frac{4 a b}{3 \alpha z}$,
+  %   $\phi_R$ unique minimiseur à scaling près
+  % \end{itemize}
 }
 \subsection{Étude de $\mathcal{E}$}
 \frame{
-  \frametitle{Fonctionelle complète}
+  \frametitle{Conclusion}
     \begin{align*}
     \mathcal E(\rho) &= {a^2 \int (\nabla \rho^{1/3})^2 \dd x + b^2
       \int \rho^{4/3} \dd x}
     -
     \alpha z {\int \frac{ \rho(x)}{|x|} \dd x}
     +{D(\rho,\rho)}\\
-    &= \left[\alpha z \int \frac \rho {|x|} \dd x\right] \left[F(\rho)
-      - 1 + \frac{D(\rho, \rho)}{\alpha z \int \frac \rho {|x|} \dd x} \right]
+    &\geq \left(a^2 \int (\nabla \rho^{1/3})^2 \dd x + b^2
+      \int \rho^{4/3} \dd x\right)\left(1 - \frac {3 \alpha z}{4 a
+        b}\right) + D(\rho,\rho)
   \end{align*}
   \begin{itemize}
-  \item Si $F_0 > 1$, alors $\mathcal E(\rho) \geq 0$ : stabilité
-  \item Si $F_0 < 1$, alors l'argument ne permet pas de conclure à
-    l'instabilité
-  \item Mais il est naturel de tester $\mathcal E$ sur $\phi_R$, qui
-    minimise déjà $F$. Si $\mathcal E(\psi_R) < 0$, alors instabilité
+  \item Si $z \leq \frac{4 ab}{3\alpha}$, alors $\mathcal E(\rho) \geq 0$ : stabilité
+  \item Si $z > \frac{4 ab}{3\alpha}$, alors l'argument ne permet pas de conclure à
+    l'instabilité, à cause de $D(\rho,\rho)$
+  \item Mais il est naturel de tester $\mathcal E$ sur $\phi_R$, où le
+    contrôle est le moins bon. Si $\mathcal E(\psi_R) < 0$, alors instabilité
   \end{itemize}
 }
 \frame{
@@ -232,7 +281,7 @@
       $\frac{7 \pi
         a^3}{6 b^3} \approx 0.2$
     \item L'encadrement est bon. L'interaction entre les électrons est
-      faible, et l'approximation $D(\rho,\rho) = 0$ était physiquement raisonable
+      faible, et l'approximation $D(\rho,\rho) = 0$ est physiquement raisonable
   \end{itemize}
 }
 \subsection{Extension au cas moléculaire}
