@@ -80,7 +80,7 @@
 \frame{
   \frametitle{Questions mathématiques}
   \begin{itemize}
-  \item Stabilité ?
+  \item Stabilité ? Par quel mécanisme ?
   \item Si $\inf \mathcal E(\rho) = - \infty$, alors système instable
   \item Pour simplifier, cas atomique $R_1 = 0$
   \item Changement d'échelle $\sigma(x) = \lambda^{3}
@@ -203,18 +203,22 @@
   \item Pour étendre l'inégalité aux fonctions non radiales, on
     ``radialise'' une fonction $\psi$
     \item Regarder les termes sous $\psi \rightarrow \psi^*$, où $\psi^*$ est
-    le réarrangement symétrique (ref: Lieb \& Loss, Analysis)
-  \item $\psi^*(x)$ est radial, décroissant
+    le réarrangement symétrique de $\psi$ (ref: Lieb \& Loss, Analysis)
+  \item $\psi^*(x)$ est radiale, décroissante
   \item Propriétés
     \begin{enumerate}
     \item $\int (\nabla \psi^*)^2 \le \int (\nabla \psi)^2$ (lissage
       des oscillations)
-    \item $\int (\psi^*)^4 = \int \psi^4$ (préserve les normes $L^p$)
-    \item $\int \psi^3 \frac 1 {|x|} \le \int (\psi^*)^3 (\frac 1
-      {|x|})^* = \int (\psi^*)^3 \frac 1 {|x|}$ (plus généralement
-      $\int |f g| \le \int |f^* g^*|$ : penser à supp $f $ disjoint de
-      supp $g$)
+    \item $\int (\psi^*)^p = \int \psi^p$ (préserve les normes $L^p$)
+    \item $\int |f g| \leq \int |f^* g^*|$ (penser à supp $f$ disjoint
+      de supp $g$)
+    % \item $\int \psi^3 \frac 1 {|x|} \le \int (\psi^*)^3 (\frac 1
+    %   {|x|})^* = \int (\psi^*)^3 \frac 1 {|x|}$ (plus généralement
+    %   $\int |f g| \le \int |f^* g^*|$ : penser à supp $f $ disjoint de
+    %   supp $g$)
     \end{enumerate}
+  \item La radialisation augmente l'énergie potentielle et diminue
+    l'énergie cinétique
   \item $E_p(\psi) \leq E_p(\psi^*) \leq \frac{3 \alpha z}{4 a b}
     E_c(\psi^*) \leq \frac{3 \alpha z}{4 a b} E_c(\psi)$, avec même
     cas d'égalité $\psi = \phi_R$
@@ -281,7 +285,11 @@
       $\frac{7 \pi
         a^3}{6 b^3} \approx 0.2$
     \item L'encadrement est bon. L'interaction entre les électrons est
-      faible, et l'approximation $D(\rho,\rho) = 0$ est physiquement raisonable
+      faible, et l'approximation $D(\rho,\rho) = 0$ est physiquement
+      raisonable
+    \item Ce qui tient le nuage n'est pas l'interaction
+      inter-électronique mais le principe d'incertitude (comme dans
+      les autres modèles)
   \end{itemize}
 }
 \subsection{Extension au cas moléculaire}
