@@ -36,16 +36,6 @@
 
 \frame{\titlepage}
 \frame{\tableofcontents}
-% \frame{
-%   \begin{columns}
-%     \begin{column}{0.5\textwidth}
-%       \tableofcontents[sections={1-2}]
-%     \end{column}
-%     \begin{column}{0.5\textwidth}
-%       \tableofcontents[sections={3-4}]
-%     \end{column}
-%   \end{columns}
-% }
 \section{Le modèle}
 \subsection{Présentation du modèle}
 \frame{
@@ -180,21 +170,6 @@
     \end{equation*}
   \item Le zoom $\psi \to \psi_\lambda(x) = \lambda \psi(\lambda x)$
     transforme $\phi_{R}$ en $\phi_{R/\lambda}$
-  % \item Regarder $F$ sous $\psi \rightarrow \psi^*$, où $\psi^*$ est
-  %   le réarrangement symétrique (ref: Lieb \& Loss, Analysis)
-  % \item $\psi^*(x)$ est radial, décroissant
-  % \item Propriétés
-  %   \begin{enumerate}
-  %   \item $\int (\nabla \psi^*)^2 \le \int (\nabla \psi)^2$ (lissage
-  %     des oscillations)
-  %   \item $\int (\psi^*)^4 = \int \psi^4$ (préserve les normes $L^p$)
-  %   \item $\int \psi^3 \frac 1 {|x|} \le \int (\psi^*)^3 (\frac 1
-  %     {|x|})^* = \int (\psi^*)^3 \frac 1 {|x|}$ (plus généralement
-  %     $\int |f g| \le \int |f^* g^*|$ : penser à supp $f $ disjoint de
-  %     supp $g$)
-  %   \end{enumerate}
-  % \item $F(\psi^*) \le F(\psi)$
-  % \item Sans perte de généralité, $\psi$ radiale décroissante
   \end{itemize}
 }
 
@@ -226,26 +201,6 @@
   \item Principe d'incertitude : si $E_p$ grand (localisation autour
     de $0$), $E_c$ grand.
   \end{itemize}
-  % \begin{align*}
-  %   F(\psi) &= \frac{a^2 \int (\psi')^2 r^2 \dd r + b^2
-  %     \int \psi^{4} r^2 \dd r}{
-  %     \alpha z \int {\psi^3} r \dd r}\\
-  %    &\overset{\text{IPP}}{=} \frac {4 a b }{3 \alpha z}\;\frac{ \int \overbrace{(a\psi')^2}^{x^2} r^2 \dd r +
-  %     \int \overbrace{(b \psi^{2})^2}^{y^2} r^2 \dd r}{
-  %     \int - 2  \underbrace{a \psi'}_x\underbrace{b \psi^2}_{y} r^2
-  %     \dd r}
-  % \end{align*}
-  % \begin{itemize}
-  % \item $- 2 x y \le x^2 + y^2$
-  % \item $F(\psi) \ge \frac{4 a b}{3 \alpha z}$
-  % \item On remonte le cas d'égalité $x = - y$, on en déduit l'équation
-  %   différentielle $a \psi' = - b \psi^2$ qu'on résoud:
-  %   \begin{equation*}
-  %     \psi(r) = \phi_{R}(r) = \frac a b \frac {1}{r+R}
-  %   \end{equation*}
-  % \item $\inf F(\psi) = F(\phi_R) = \frac{4 a b}{3 \alpha z}$,
-  %   $\phi_R$ unique minimiseur à scaling près
-  % \end{itemize}
 }
 \subsection{Étude de $\mathcal{E}$}
 \frame{
