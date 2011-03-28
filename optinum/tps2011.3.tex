@@ -100,7 +100,7 @@ En utilisant les résultats de ce tp, vous pourrez également extraire des morce
 \section{Extraction d'une partie de l'image}
 \onit
 \item Entrez par exemple la commande \tt{draw(singe)} et observez la manière dont \matlab\ indexe les pixels de l'image.
-\item \'Ecrire dans un fichier le code d'une fonction \tt{cutout} prenant pour paramètre une matrice de pixels \tt{img} de format quelconque et deux couples d'entiers \tt{upperleft} et \tt{lowerright} extrayant la partie de \tt{img} dont les indices des coins supérieur gauche et inférieur droit sont respectivement contenus dans \tt{upperleft} et \tt{lowerright}. Inclure un test retournant un message d'erreur si \tt{any(size(img)<q)} ou \tt{any(q<p)}\footnote{\matlab\ se charge d'envoyer un message d'erreur si les composantes de \tt p et \tt q ne sont pas toutes des entiers strictement positifs, mais se contente de retourner une matrice vide lorsque la s\'election est invalide.}. Enregistrez ce fichier dans le répertoire \tt{optinum-tp3}.
+\item \'Ecrire dans un fichier le code d'une fonction \tt{cutout} prenant pour paramètre une matrice de pixels \tt{img} de format quelconque et deux couples d'entiers \tt{upperleft} et \tt{lowerright} extrayant la partie de \tt{img} dont les indices des coins supérieur gauche et inférieur droit sont respectivement contenus dans \tt{upperleft} et \tt{lowerright}. Enregistrez ce fichier dans le répertoire \tt{optinum-tp3}.
 \item Testez votre procédure en extrayant diverses parties des images \tt{visage} ou \tt{singe} que vous visualiserez en utilisant \tt{draw}.
 \offit
 
@@ -181,7 +181,7 @@ augmentant encore la taille de l'image si besoin (\tt{Z = magnify(Z);})
 \item \tt{D = double(A);} au lieu de \tt{D = A;} dans l'initialisation
   de \tt{gonfle}
 \item La même chose avec \tt{uint16,uint32,uint64} si votre système supporte
-\item Recoder \tt{gonfle} en \tt{gonfle2} en utilisant une double
+\item Recoder \tt{gonfle} dans une fonction \tt{gonfle2} en utilisant une double
   boucle \tt{for} imbriquée naïve
   \offit
 
