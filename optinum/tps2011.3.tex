@@ -176,16 +176,13 @@ Expliquer les modifications suivantes et examinez leur impact sur la
 performance du code par la même méthode que précédemment, en
 augmentant encore la taille de l'image si besoin (\tt{Z = magnify(Z);})
 \onit
-\item \tt{D = uint8(zeros(2*M,2*N)); D(1:M,1:N) = A;} au lieu de \tt{D = A;} dans l'initialisation
+\item \tt{D = zeros(2*M,2*N,'uint8'); D(1:M,1:N) = A;} au lieu de \tt{D = A;} dans l'initialisation
   de \tt{gonfle}
-\item \tt{D = double(A);} au lieu de \tt{D = A;} dans l'initialisation
-  de \tt{gonfle}
-\item La même chose avec \tt{uint16,uint32,uint64} si votre système supporte
+\item La même chose avec \tt{single,double,uint16,uint32} au lieu de \tt{uint8}
 \item Recoder \tt{gonfle} dans une fonction \tt{gonfle2} en utilisant une double
   boucle \tt{for} imbriquée naïve
   \offit
-
-  Conclusion ?
+  Qu'en conclure ?
 \offit
 
 
