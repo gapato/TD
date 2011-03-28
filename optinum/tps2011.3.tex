@@ -125,7 +125,7 @@ La commande \tt{[Z,sqn]=zoom(img, itermax)} retourne~:
 \item[ –] \tt{sqn}~: (acronyme de \tt{SQuareNorm}) le carré de la norme du gradient du critère $F$ au point \tt{Z}.
 \offit
 
-\noindent La fonction \tt{zoom} déclare \tt{mu}comme une variable \textit{globale}, lui permettant d'utiliser la valeur de \tt{mu} prédéfinie dans l'environnement de travail \tt{zoom.mat}\footnote{En cas d'utilisation de l'algorithme en dehors de cet environnement, il sera nécessaire de déclarer au préalable \tt{mu} comme une variable globale et de lui affecter une valeur. Il est également préférable de charger la \og carte de couleurs \fg\ \tt{grayscale} contenue dans \tt{zoom.mat} et d'utiliser \tt{draw} pour visualiser correctement les images utilisées. \`A défaut, on utilisera la fonction \tt{imshow} contenue dans la \og boîte à outils\fg\ \tt{Image Processing Toolbox} de \matlab.}. Cette valeur peut être actualisée à tout moment par simple affectation.
+\noindent La fonction \tt{zoom} déclare \tt{mu} comme une variable \textit{globale}, lui permettant d'utiliser la valeur de \tt{mu} prédéfinie dans l'environnement de travail \tt{zoom.mat}\footnote{En cas d'utilisation de l'algorithme en dehors de cet environnement, il sera nécessaire de déclarer au préalable \tt{mu} comme une variable globale et de lui affecter une valeur. Il est également préférable de charger la \og carte de couleurs \fg\ \tt{grayscale} contenue dans \tt{zoom.mat} et d'utiliser \tt{draw} pour visualiser correctement les images utilisées. \`A défaut, on utilisera la fonction \tt{imshow} contenue dans la \og boîte à outils\fg\ \tt{Image Processing Toolbox} de \matlab.}. Cette valeur peut être actualisée à tout moment par simple affectation.
 
 
 \onit
@@ -163,13 +163,29 @@ où $A$, $B$, $S$ et $T$ sont des matrices symétriques \textit{creuses}. L'algo
 \item \'Editez de même le fichier \tt{makeS.m} et observez la manière dont est codée la procédure.
 \item \'Editez alors le fichier \tt{magnify.m} et essayez d'expliquer la manière utilisée pour doubler la taille d'une image dans ses deux dimensions sans utiliser de boucle.
 \offit
-\item Usage des boucles \tt{for} et vectorisation en programmation \matlab~:
+\item On se propose d'examiner l'impact de différentes implémentations
+  de \tt{magnify} sur la performance du code \matlab
 \onit
 \item \'Editez le fichier \tt{gonfle.m} contenant le code d'une fonction éponyme qui, à l'instar de \tt{magnify}, double la taille de la matrice qui lui est passée pour argument, mais dont le code utilise cette fois deux boucles \tt{for}. Comparez avec \tt{magnify}.
 \item Entrez les commandes \tt{tic; gonfle(visage); toc}, puis \tt{tic; magnify(visage); toc}.
 \item Recommencer en remplaçant l'argument \tt{visage} par \tt{Z}, après avoir entré la commande \tt{Z=magnify (visage)}.
 \offit
-Conclusion?
+Conclusion ?
+
+Expliquer les modifications suivantes et examinez leur impact sur la
+performance du code par la même méthode que précédemment, en
+augmentant encore la taille de l'image si besoin (\tt{Z = magnify(Z);})
+\onit
+\item \tt{D = uint8(zeros(2*M,2*N)); D(1:M,1:N) = A;} au lieu de \tt{D = A;} dans l'initialisation
+  de \tt{gonfle}
+\item \tt{D = double(A);} au lieu de \tt{D = A;} dans l'initialisation
+  de \tt{gonfle}
+\item La même chose avec \tt{uint16,uint32,uint64} si votre système supporte
+\item Recoder \tt{gonfle} en \tt{gonfle2} en utilisant une double
+  boucle \tt{for} imbriquée naïve
+  \offit
+
+  Conclusion ?
 \offit
 
 
