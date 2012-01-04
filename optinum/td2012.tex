@@ -55,7 +55,7 @@ Licence maths applis      \hfill      Ann\'ee \textos{2011}/\textos{2012}
 
 \begin{center}
 
-\textbf{\huge TD1}
+\textbf{\huge TD/TP 1}
 
 \smallskip
 
@@ -64,7 +64,7 @@ Licence maths applis      \hfill      Ann\'ee \textos{2011}/\textos{2012}
 \end{center}
 
 
-
+\section{Rappels de calcul différentiel}
 \begin{exercice}
   On considère une fonction $F : \R^{N} \to \R$ de classe $C^{2}$.
   \begin{questions}
@@ -87,6 +87,8 @@ Licence maths applis      \hfill      Ann\'ee \textos{2011}/\textos{2012}
   pour être assuré de faire descendre la valeur de $F$ avec un pas $t$
   suffisamment petit ?
 \end{exercice}
+
+\section{Calcul de gradients et de Hessiennes}
 
 \begin{exercice}
   Soit $F(x) = \frac 1 2 x^{T} A x - b^{T} x$, où $b \in \R^{N}$ et $A
@@ -119,6 +121,8 @@ Licence maths applis      \hfill      Ann\'ee \textos{2011}/\textos{2012}
   \end{questions}
 \end{exercice}
 
+\section{Problèmes d'optimisation}
+
 \begin{exercice}
   À périmètre fixe, quel est le rectangle ayant l'aire maximale ?
   L'aire minimale ? (utiliser deux méthodes différentes)
@@ -128,6 +132,58 @@ Licence maths applis      \hfill      Ann\'ee \textos{2011}/\textos{2012}
   Un maître-nageur de plage court à 20 km/h, et nage à 10 km/h. En
   partant de la plage, quelle trajectoire doit-il choisir pour sauver
   un baigneur en train de se noyer?
+\end{exercice}
+
+\section{Implémentation Matlab}
+\begin{exercice}
+  Un oracle est une fonction qui à $x$ renvoie $F(x)$, et
+  éventuellement $\nabla F(x)$ et $\nabla^{2} F(x)$. Par exemple,
+  l'oracle de $F(x) = ||x||^{2}$ peut s'écrire
+\begin{verbatim}
+function [F,grad,hess] = oracle(x)
+    F = x'*x;
+    grad = 2*x;
+    hess = eye(numel(x));
+end
+\end{verbatim}
+
+Cette fonction est à mettre dans le fichier \verb+oracle.m+ et à
+appeler par une commande du type
+\begin{verbatim}
+    [F,grad,hess] = oracle([1;2]);
+\end{verbatim}
+
+Ecrire un oracle pour les fonctions des exercices 3, 4 et 5. On
+supposera que les données $A$ et $b$ sont des variables globales,
+qu'on déclarera comme telles. Tester l'oracle de l'exercice 3 avec les
+données $A = \begin{pmatrix}2&1&0\\1&3&1\\0&1&2\end{pmatrix}, b
+= \begin{pmatrix}1\\2\\3\end{pmatrix}$.
+\end{exercice}
+
+\begin{exercice}
+  Ecrire une fonction \verb+grad_findiff+ qui calcule une
+  approximation du gradient d'une fonction $F$ à un point $x$ par
+  différences finies. Comment choisir le pas en pratique ? Que se
+  passe-t-il si ce pas est trop petit ? Trop grand ? Vérifier le
+  résultat de cette fonction sur l'oracle de l'exercice 3.
+\end{exercice}
+
+\begin{exercice}
+  On se propose de minimiser la fonction $F$ de l'exercice 3 par un
+  algorithme de gradient à pas fixe.
+  \begin{questions}
+  \item Comment vérifier que la matrice proposée dans l'exercice 8 est
+    bien définie positive ?
+  \item Comment choisir le pas ? Que se passe-t-il si ce pas est trop
+    petit ? Trop grand ?
+  \item Proposer plusieurs critères d'arrêt pour l'algorithme. Lequel
+    choisissez-vous ?
+  \item Ecrire une procédure générique \verb+gradfix+ qui prend en
+    paramètre un oracle, un point de départ et un pas, et renvoie la
+    solution du problème de minimisation. La tester sur l'oracle de
+    l'exercice 3, et comparer avec la solution exacte.
+  \end{questions}
+
 \end{exercice}
 
 \end{document}
