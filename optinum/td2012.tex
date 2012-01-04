@@ -1,0 +1,121 @@
+\documentclass[12pt,a4paper,fleqn]{report}
+\usepackage{a4wide}
+\usepackage{amsmath,amssymb}
+\usepackage[french]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{oldstyle}
+\usepackage{url}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{GLtd}
+\renewcommand{\thesection}{ \textbf{\Large \arabic{section}.}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\`u\`u
+\setlength{\oddsidemargin}{1pt}
+\setlength{\evensidemargin}{1pt}
+\setlength{\textheight}{590pt}
+\setlength{\textwidth}{470pt}
+
+\makeatletter
+\def\cleardoublepage{\clearpage\if@twoside\ifodd\c@page\else\hbox{}\thispagestyle{empty}\newpage\fi\fi}
+\makeatother
+
+\newcommand{\matlab}{\textsc{Matlab}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\R}{\mathbb R}
+\newcommand{\onit}{\begin{enumerate}}
+\newcommand{\offit}{\end{enumerate}}
+\newcommand{\grad}{\nabla}
+\newcommand{\hess}{\nabla^2}
+\newcommand{\on}{\begin{displaymath}}
+\newcommand{\off}{\end{displaymath}}
+\renewcommand{\P}{\mathcal P}
+\newcommand{\push}[1]{\rule{0pt}{0pt}\hspace{#1pt}}
+\renewcommand{\footnote}{\stepcounter{footnote}\raisebox{5 pt}{\scriptsize(\thefootnote)}\footnotetext}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+\cleardoublepage
+
+\noindent
+Universit\'e Paris-Dauphine     \hfill      Optimisation num\'erique\\
+Licence maths applis      \hfill      Ann\'ee \textos{2011}/\textos{2012}
+
+\medskip
+
+\hrule
+
+\medskip
+
+
+
+\begin{center}
+
+\textbf{\huge TD1}
+
+\smallskip
+
+\rule{10cm}{0.4pt}
+
+\end{center}
+
+
+
+\begin{exercice}
+  On considère une fonction $F : \R^{N} \to \R$ de classe $C^{2}$.
+  \begin{questions}
+  \item Rappeler la formule de Taylor à l'ordre deux autour d'un point $x$.
+  \item Montrer que si $x$ est un minimum local de $F$, alors $\nabla
+    F(x) = 0$.
+  \item Montrer que si $x$ est un minimum local de $F$, alors
+    $\nabla^{2} F(x)$ est symétrique semi-définie positive.
+  \item Montrer que si $x$ vérifie $\nabla F(x) = 0$, $\nabla^{2}
+    F(x)$ définie positive, alors $x$ est un minimum local de $F$.
+  \item Donner un exemple où $\nabla^{2} F(x)$ est semi-définie
+    positive, mais $x$ n'est pas un minimum local.
+  \end{questions}
+\end{exercice}
+
+\begin{exercice}
+  Soit $\phi(t) = F(x+th)$, où $x$ et $h \in \R^{N}$ sont
+  fixes. Calculer $\phi'$ et $\phi''$. Si on cherche à minimiser $F$
+  à partir du point $x$, dans quelles directions peut-on se déplacer
+  pour être assuré de faire descendre la valeur de $F$ avec un pas $t$
+  suffisamment petit ?
+\end{exercice}
+
+\begin{exercice}
+  Soit $F(x) = \frac 1 2 x^{T} A x - b^{T} x$, où $b \in \R^{N}$ et $A
+  \in M_{N}(\R)$ est inversible.
+  \begin{questions}
+  \item Calculer le gradient et la Hessienne de $F$.
+  \item Quels sont les points critiques de $F$ ? À quelle condition
+    sont-ils des minima locaux ? Globaux ?
+  \end{questions}
+\end{exercice}
+
+\begin{exercice}
+  Soit $F : M_{N}(\R) \to \R$ définie par $F(M) = \text{tr}(M^{3} - A
+  M)$, où $A \in M_{N}(R)$ est une matrice fixée.
+  \begin{questions}
+  \item Rappeler le produit scalaire canonique de $M_{N}(\R)$
+  \item Calculer le gradient et la Hessienne de $F$.
+  \end{questions}
+\end{exercice}
+
+\begin{exercice}
+  À périmètre fixe, quel est le rectangle ayant l'aire maximale ?
+  L'aire minimale ? (utiliser deux méthodes différentes)
+\end{exercice}
+
+\begin{exercice}
+  Un maître-nageur de plage court à 20 km/h, et nage à 10 km/h. En
+  partant de la plage, quelle trajectoire doit-il choisir pour sauver
+  un baigneur en train de se noyer?
+\end{exercice}
+
+\end{document}
