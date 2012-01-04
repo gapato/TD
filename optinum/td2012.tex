@@ -103,8 +103,8 @@ Licence maths applis      \hfill      Ann\'ee \textos{2011}/\textos{2012}
 \end{exercice}
 
 \begin{exercice}
-  Soit $F : M_{N}(\R) \to \R$ définie par $F(x) = ||{A x - b}||^{2}$, où
-  $b \in \R^{M}$ et $A \in M_{M \times N}(\R)$
+  Soit $F : \R^{N} \to \R$ définie par $F(x) = ||{A x - b}||^{2}$, où
+  $b \in \R^{M}$ et $A \in M_{M \times N}(\R)$, avec $M > N$.
   \begin{questions}
   \item Calculer le gradient et la hessienne de $F$.
   \item À quelle condition le problème d'optimisation de $F$ est-il
@@ -129,12 +129,42 @@ Licence maths applis      \hfill      Ann\'ee \textos{2011}/\textos{2012}
 \end{exercice}
 
 \begin{exercice}
-  Un maître-nageur de plage court à 20 km/h, et nage à 10 km/h. En
-  partant de la plage, quelle trajectoire doit-il choisir pour sauver
-  un baigneur en train de se noyer?
+  Un maître-nageur de plage court à 20 km/h, et nage à 10
+  km/h. Formuler un problème d'optimisation pour trouver la
+  trajectoire optimale qu'il doit choisir pour sauver un baigneur en
+  train de se noyer.
 \end{exercice}
 
 \section{Implémentation Matlab}
+Guide de survie Matlab
+\begin{itemize}
+\item Chaque fonction doit être placée dans un fichier portant le même
+  nom
+\item \verb+help eye+ affiche l'aide pour la fonction
+  \verb+eye+. \verb+doc eye+ l'affiche dans le navigateur d'aide.
+\item Préférer le style vectoriel au style scalaire : on écrira
+\begin{verbatim}
+A = B + C;
+\end{verbatim} plutôt que
+\begin{verbatim}
+for i = 1:N
+    for j = 1:N
+        A(i,j) = B(i,j) + C(i,j);
+    end
+end
+\end{verbatim}
+
+  Afin d'éviter les boucles, on peut utiliser les commandes d'accès
+  par plages de valeurs : par exemple,
+\begin{verbatim}
+A(:,1) = A(:,1) + A(2,:)'
+\end{verbatim}
+ sur une matrice carrée ajoute la deuxième ligne à la
+  première colonne
+\item Utiliser \verb+;+ à la fin d'une ligne pour ne pas afficher le
+  résultat de la commande.
+\end{itemize}
+
 \begin{exercice}
   Un oracle est une fonction qui à $x$ renvoie $F(x)$, et
   éventuellement $\nabla F(x)$ et $\nabla^{2} F(x)$. Par exemple,
@@ -163,9 +193,9 @@ données $A = \begin{pmatrix}2&1&0\\1&3&1\\0&1&2\end{pmatrix}, b
 \begin{exercice}
   Ecrire une fonction \verb+grad_findiff+ qui calcule une
   approximation du gradient d'une fonction $F$ à un point $x$ par
-  différences finies. Comment choisir le pas en pratique ? Que se
-  passe-t-il si ce pas est trop petit ? Trop grand ? Vérifier le
-  résultat de cette fonction sur l'oracle de l'exercice 3.
+  différences finies. Comment choisir le pas de différence finie en
+  pratique ? Que se passe-t-il si ce pas est trop petit ? Trop grand ?
+  Vérifier le résultat de cette fonction sur l'oracle de l'exercice 3.
 \end{exercice}
 
 \begin{exercice}
@@ -185,5 +215,14 @@ données $A = \begin{pmatrix}2&1&0\\1&3&1\\0&1&2\end{pmatrix}, b
   \end{questions}
 
 \end{exercice}
+
+\begin{exercice}
+  Se donner des positions de départ pour le maître nageur, la mer et
+  le baigneur, et trouver la trajectoire optimale grâce à la procédure
+  \verb+gradfix+.
+
+  Optionnel : visualiser le résultat en Matlab.
+\end{exercice}
+
 
 \end{document}
