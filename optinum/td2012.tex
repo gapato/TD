@@ -108,7 +108,7 @@ Licence maths applis      \hfill      Ann\'ee \textos{2011}/\textos{2012}
   \begin{questions}
   \item Calculer le gradient et la hessienne de $F$.
   \item À quelle condition le problème d'optimisation de $F$ est-il
-    bien posé ? Comment calculer le minimiseur en pratique ?
+    bien posé (la solution existe et elle est unique) ? Comment calculer le minimiseur en pratique ?
   \end{questions}
 \end{exercice}
 
@@ -146,6 +146,7 @@ Guide de survie Matlab
 \begin{verbatim}
 A = B + C;
 \end{verbatim} plutôt que
+\pagebreak
 \begin{verbatim}
 for i = 1:N
     for j = 1:N
@@ -157,7 +158,7 @@ end
   Afin d'éviter les boucles, on peut utiliser les commandes d'accès
   par plages de valeurs : par exemple,
 \begin{verbatim}
-A(:,1) = A(:,1) + A(2,:)
+A(:,1) = A(:,1) + A(2,:)'
 \end{verbatim}
  sur une matrice carrée ajoute la deuxième ligne à la
   première colonne
@@ -166,7 +167,7 @@ A(:,1) = A(:,1) + A(2,:)
 \end{itemize}
 
 \begin{exercice}
-  Un oracle est une fonction qui à $x$ renvoie $F(x)$, et
+  Un oracle est une fonction qui à $x$ associe $F(x)$, et
   éventuellement $\nabla F(x)$ et $\nabla^{2} F(x)$. Par exemple,
   l'oracle de $F(x) = ||x||^{2}$ peut s'écrire
 \begin{verbatim}
