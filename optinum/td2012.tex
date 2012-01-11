@@ -157,7 +157,7 @@ end
   Afin d'éviter les boucles, on peut utiliser les commandes d'accès
   par plages de valeurs : par exemple,
 \begin{verbatim}
-A(:,1) = A(:,1) + A(2,:)'
+A(:,1) = A(:,1) + A(2,:)
 \end{verbatim}
  sur une matrice carrée ajoute la deuxième ligne à la
   première colonne
@@ -217,11 +217,16 @@ données $A = \begin{pmatrix}2&1&0\\1&3&1\\0&1&2\end{pmatrix}, b
 \end{exercice}
 
 \begin{exercice}
-  Se donner des positions de départ pour le maître nageur, la mer et
-  le baigneur, et trouver la trajectoire optimale grâce à la procédure
-  \verb+gradfix+.
+  Résoudre numériquement le problème de l'exercice 7 : se donner des
+  positions de départ pour le maître nageur, la mer et le baigneur, et
+  trouver la trajectoire optimale grâce à la procédure
+  \verb+gradfix+. Comment obtenir ce résultat sans recourir à des
+  méthodes d'optimisation ?
 
-  Optionnel : visualiser le résultat en Matlab.
+  Optionnel : Vérifier que le résultat satisfait à la loi de Descartes
+  pour la diffraction $v_{2} \sin \theta_{1} = v_{1} \sin \theta_{2}$,
+  où $\theta_{1}$ et $\theta_{2}$ représentent les angles d'entrée et
+  de sortie dans l'eau. Visualiser le résultat en Matlab.
 \end{exercice}
 
 
