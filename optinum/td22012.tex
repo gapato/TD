@@ -128,53 +128,69 @@ où $x, r \in \R^{n}$, $A \in M_{n}(\R)$, et $e = (1,1,\dots,1)$
 \end{questions}
 \end{exercice}
 
-\begin{exercice}[(projection)]
-  On se place maintenant dans le cas où la contrainte $r^{T} x \geq
-  \rho$ est active.  Pour $x$ donn\'e on veut calculer sa projection
-  orthogonale $p_{F}(x)$ sur l'espace affine des contraintes
-  \[F = \{x \; | \; r^{T} x = \rho, e^{T} x = 1\}.\]
-  
-  Ecrire $p_F(x)$ comme solution d'un problème d'optimisation, et le
-  r\'esoudre.  Dans quel cas peut-on projeter sur les deux contraintes
-  successivement, au lieu de simultanément ?
-\end{exercice}
-
-\section{Implémentation Matlab}
-\begin{exercice}
-  On se propose de résoudre le problème
+\begin{exercice}[(barrière logarithmique)]
+  Pour résoudre le problème 
 \begin{align*}
   \text{min} \;\;\;\;&x^{T} A x\\
   \text{s.c.}\;\;\;\;&\begin{cases}
     &e^{T} x = 1\\
-  &r^{T} x = \rho\\
+  &r^{T} x \geq \rho\\
   &x \geq 0
   \end{cases}
 \end{align*}
+on adopte une stratégie de barrière logarithmique : on minimise
+\begin{align*}
+  F_{\mu}(x) = x^{T} A x - \mu \sum_{i=1}^{N} \log x_{i} - \mu \log (r^{T}x
+  - \rho)
+\end{align*}
+sous contrainte $e^{T} x = 1$, où $\mu$ est un petit paramètre.
 
-par la méthode du gradient projeté. On rappelle que cette itération
-s'écrit $x_{n+1} = p_{C}(x_{n} - t \nabla F(x_{n}))$, où $p_{C}$ est
-la projection orthogonale sur l'espace des contraintes $C$.
+
+  \begin{questions}
+  \item Calculer le gradient et la hessienne de $F_{\mu}$.
+  \item En quoi cette barrière force-t-elle un algorithme de gradient
+    à rester à l'intérieur de l'ensemble des contraintes ?
+  \end{questions}
+\end{exercice}
+
+\begin{exercice}[(projection)]
+  Pour $x$ donn\'e on veut calculer sa projection
+  orthogonale $p_{F}(x)$ sur l'espace affine des contraintes
+  \[F = \{x \; | \; e^{T} x = 1\}.\]
+  
+  Ecrire $p_F(x)$ comme solution d'un problème d'optimisation, et le
+  r\'esoudre.
+\end{exercice}
+
+\section{Implémentation Matlab}
+\begin{exercice}
+  On se propose de résoudre le problème de minimiser
+\begin{align*}
+  F_{\mu}(x) = x^{T} A x - \mu \sum_{i=1}^{N} \log x_{i} - \mu \log (r^{T}x
+  - \rho)
+\end{align*}
+sous contrainte $e^{T} x = 1$ par la méthode du gradient projeté. On
+rappelle que l'itération s'écrit $x_{n+1} = p_{C}(x_{n} - t \nabla
+F(x_{n}))$, où $p_{C}$ est la projection orthogonale sur l'espace des
+contraintes $C$.
 
 Pour toutes les fonctions à coder,
-on déclarera les variables nécessaires ($A, r, \rho, e$) comme
+on déclarera les variables nécessaires ($A, r, \rho, e,\mu$) comme
 globales.
 \begin{questions}
 \item Écrire un oracle \verb+oracle_tp2+ qui renvoie la valeur et le
   gradient de la fonction objectif.
 \item Écrire une fonction \verb+proj_tp2+ qui projette $x$ sur l'ensemble
-  des contraintes. Plutôt que d'effectuer la projection complète,
-  difficile à calculer, on pourra se contenter de projeter sur les
-  deux contraintes d'égalité, puis de projeter sur les contraintes
-  d'inégalité.
+  des contraintes.
 \end{questions}
 
 \end{exercice}
 
 \section{Compléments}
 \begin{exercice}[(m\'ethode du gradient r\'eduit)]
-On souhaite minimiser la fonction
-\on F(x)=x^T A x \off
-sous les contraintes $e^{T} x=1, r^{T}x = \rho$.
+  On étudie dans cet exercice une approche alternative qui ne sera pas
+  exploitée en TP. On souhaite minimiser la fonction \on F(x)=x^T A x
+  \off sous les contraintes $e^{T} x=1, r^{T}x = \rho$.
 \begin{questions}
 \item Comment construire une matrice $P$ dont les colonnes forment une
   base du noyau de l'application lin\'eaire $\R^{n} \to \R^{2}$ qui
@@ -183,74 +199,7 @@ sous les contraintes $e^{T} x=1, r^{T}x = \rho$.
   $F(x)$ sous les contraintes \'equivaut \`a minimiser $G(u)=F(x_0+P
   u)$ \it sans \rm contrainte.
 \item Calculer $\grad G(u)$ et $\hess G(u)$ en fonction de $\grad
-  F(x)$ et $\hess F(x)$, o\`u $x=x_0 + P \star u$.
+  F(x)$ et $\hess F(x)$, o\`u $x=x_0 + P u$.
 \end{questions}
 \end{exercice}
-
-\newpage
-
-\begin{center}
-
-\textbf{\huge TP 2}
-
-\smallskip
-
-\rule{10cm}{0.4pt}
-
-\end{center}
-
-On résoud le problème
-\begin{align*}
-  \text{min} \;\;\;\;&x^{T} A x\\
-  \text{s.c.}\;\;\;\;&\begin{cases}
-    &e^{T} x = 1\\
-  &r^{T} x = \rho\\
-  &x \geq 0
-  \end{cases}
-\end{align*}
-
-par la méthode du gradient projeté à pas fixe. Les fichiers à
-télécharger sont disponibles sur
-
-\verb+http://www.ceremade.dauphine.fr/~levitt/optinum/+
-
-\begin{enumerate}
-\item Coder les fonctions de l'exercice 4, et les tester.
-\item Télécharger le fichier \verb+gradfix.m+, et l'utiliser comme
-  modèle pour une fonction \verb+gradproj+ qui accepte en paramètre
-  une fonction \verb+proj+ chargée de réaliser la projection. Que se
-  passerait-il si on avait utilisé la norme du gradient comme critère
-  d'arrêt ?
-\item Comment choisir le pas de la méthode de gradient ? Le point
-  initial ?
-\item Télécharger le fichier \verb+data.m+, et tester votre algorithme
-  avec les jeux de données fournis.
-\item Tracer la fonction de recherche linéaire $\phi(t) = F(x-t\nabla
-  F(x))$ pour différentes valeurs de $x$, et pour différents jeux de
-  données. Que constatez-vous ? Expliquez.
-\item Modifier la procédure \verb+gradproj+ pour qu'elle retourne la
-  liste des itérés $x_{n}$. Tracer la courbe de convergence $||x_{n+1}
-  - x_{n}||$ en fonction de $n$.
-\item L'analyse théorique de l'algorithme de gradient mène à un
-  résultat de convergence linéaire du type
-  \begin{align*}
-    ||x_{n} - x^{*}|| \leq K \nu^{n}
-  \end{align*}
-  où $K > 0$, et $\nu < 1$ est la constante de convergence.
-
-  Combien d'itérations faut-il pour obtenir une précision de
-  $10^{-16}$ sur $x$ ?
-  
-  Prouver que
-  \begin{align*}
-    ||x_{n+1} - x_{n}|| \leq K' \nu^{n}
-  \end{align*}
-
-  Montrer qu'un tracé en échelle semi-logarithmique permet de vérifier
-  visuellement cette inégalité. Se documenter sur les possibilités de
-  régression linéaire en Matlab pour obtenir numériquement la
-  constante $\nu$.
-\item Comment la constante de convergence $\nu$ varie-t-elle en
-  fonction du pas $t$ ?
-\end{enumerate}
 \end{document}
