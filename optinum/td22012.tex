@@ -1,4 +1,4 @@
-\documentclass[12pt,a4paper,fleqn]{report}
+\documentclass[10pt,a4paper,fleqn]{report}
 \usepackage{a4wide}
 \usepackage{amsmath,amssymb}
 \usepackage[french]{babel}
@@ -91,6 +91,8 @@ où $x, r \in \R^{n}$, $A \in M_{n}(\R)$, et $e = (1,1,\dots,1)$
 \begin{questions}
 \item Quelles propriétés mathématiques la matrice $A$ vérifie-t-elle ?
 \item Que se passe-t-il si $\rho$ est très grand ? Très petit ?
+\item Quand l'ensemble admissible est non vide et que $A$ est
+      d\'efinie positive, prouver l'existence et l'unicit\'e d'un minimiseur.
 \item Résoudre le problème dans le cas $r \geq 0, \rho = 0, A =
   \begin{pmatrix}
     \sigma_{1}^{2}&0\\0&\sigma_{2}^{2}
@@ -113,11 +115,13 @@ où $x, r \in \R^{n}$, $A \in M_{n}(\R)$, et $e = (1,1,\dots,1)$
 \end{exercice}
 
 \begin{exercice}[(projection)]
-  On se place maintenant dans le cas où la contrainte $r^{T} x \geq b$
-  est active. Formuler un problème d'optimisation pour trouver la
-  projection d'un vecteur $x$ quelconque sur l'espace vectoriel des
-  contraintes $F = \{x / r^{T} x = \rho, e^{T} x = 1\}$, et le
-  résoudre. Dans quel cas aurait-on pu projeter sur les deux
+  On se place maintenant dans le cas où la contrainte $r^{T} x \geq \rho$
+  est active.
+  Pour $x$ donn\'e on veut calculer sa projection sur l'espace affine
+  des contraintes
+  \[F = \{x \; | \; r^{T} x = \rho, e^{T} x = 1\}.\]
+  Ecrire $p_F(x)$ comme solution d'un problème d'optimisation, et le r\'esoudre.
+  Dans quel cas peut-on projeter sur les deux
   contraintes successivement, au lieu de simultanément ?
 \end{exercice}
 
