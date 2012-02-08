@@ -1,0 +1,168 @@
+\documentclass[12pt,a4paper,fleqn]{report}
+\usepackage{a4wide}
+\usepackage{amsmath,amssymb}
+\usepackage[french]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{oldstyle}
+\usepackage{url}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{GLtd}
+\renewcommand{\thesection}{ \textbf{\Large \arabic{section}.}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\`u\`u
+\setlength{\oddsidemargin}{1pt}
+\setlength{\evensidemargin}{1pt}
+\setlength{\textheight}{590pt}
+\setlength{\textwidth}{470pt}
+
+\makeatletter
+\def\cleardoublepage{\clearpage\if@twoside\ifodd\c@page\else\hbox{}\thispagestyle{empty}\newpage\fi\fi}
+\makeatother
+
+\newcommand{\matlab}{\textsc{Matlab}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\R}{\mathbb R}
+\newcommand{\onit}{\begin{enumerate}}
+\newcommand{\offit}{\end{enumerate}}
+\newcommand{\grad}{\nabla}
+\newcommand{\hess}{\nabla^2}
+\newcommand{\on}{\begin{displaymath}}
+\newcommand{\off}{\end{displaymath}}
+\renewcommand{\P}{\mathcal P}
+\newcommand{\push}[1]{\rule{0pt}{0pt}\hspace{#1pt}}
+\renewcommand{\footnote}{\stepcounter{footnote}\raisebox{5 pt}{\scriptsize(\thefootnote)}\footnotetext}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+\cleardoublepage
+
+\noindent
+Universit\'e Paris-Dauphine     \hfill      Optimisation num\'erique\\
+Licence maths applis      \hfill      Ann\'ee \textos{2011}/\textos{2012}
+
+\medskip
+
+\hrule
+
+\medskip
+
+
+
+\begin{center}
+
+\textbf{\huge TD/TP 2}
+
+\smallskip
+
+\rule{10cm}{0.4pt}
+
+\end{center}
+
+\section{Introduction}
+On se propose dans cette séquence de résoudre le problème
+suivant. Soit une somme fixe d'argent à répartir entre plusieurs
+investissements. Le rendement annuel de chaque investissement $i$ suit
+une loi aléatoire $X_{i}$. Comment investir son argent de façon à
+s'assurer un rendement annuel moyen $\rho$ tout en minimisant le
+risque encouru ?
+
+Modéliser ce problème sous la forme d'un problème d'optimisation, en
+explicitant les variables, la fonction objectif et les contraintes. De
+quelles caractéristiques des variables $X_{i}$ a-t-on besoin ?
+
+\section{Étude théorique}
+La modélisation a conduit à un problème de forme
+\begin{align*}
+  \text{min} \;\;\;\;&x^{T} A x\\
+  \text{s.c.}\;\;\;\;&\begin{cases}
+    &e^{T} x = 1\\
+  &r^{T} x \geq \rho\\
+  &x \geq 0
+  \end{cases}
+\end{align*}
+où $x, r \in \R^{n}$, $A \in M_{n}(\R)$, et $e = (1,1,\dots,1)$
+
+\begin{exercice}
+\begin{questions}
+\item Quelles propriétés mathématiques la matrice $A$ vérifie-t-elle ?
+\item Que se passe-t-il si $\rho$ est très grand ? Très petit ?
+\item Résoudre le problème dans le cas $r \geq 0, \rho = 0, A =
+  \begin{pmatrix}
+    \sigma_{1}^{2}&0\\0&\sigma_{2}^{2}
+  \end{pmatrix}$. Noter le \textit{principe de diversification des
+    actifs} : $x_{i}$ n'est pas nul, même s'il est associé à un risque
+  très élevé.
+\end{questions}
+\end{exercice}
+
+\begin{exercice}[(portefeuille de variance minimale)]
+  On veut savoir quand la contrainte $r^{T} x \geq \rho$ est
+  active. Soit $$\hat x= \mathrm{ArgMin} \{\ x^{T} A x\ |\ e^{T} x=1, \
+  x\geq 0\ \}$$ le portefeuille de variance minimale.
+\begin{questions}
+\item Prouver que, si $A^{-1}\,e\geq 0$, $\hat x=(e^{T} A^{-1} e)^{-1}\,A^{-1}e$.
+\item Montrer que cette condition est, en particulier, v\'erifi\'ee si $A$ est diagonale.
+% \item On dispose de trois actifs de rendements non corr\'el\'es, de moyennes $r_1=0.05$, $r_2=0.10$, $r_3=0.15$, et de variances $\sigma_1^2=0.0004$, $\sigma_2^2=0.0064$, et $\sigma_3^2=0.01$. Quel est le portefeuille de variance minimale? Quel est le rendement esp\'er\'e de ce portefeuille ?
+\item Prouver que, si $\rho$ est strictement sup\'erieur au rendement du portefeuille de variance minimale, la contrainte $r^{T} x \geq \rho$ est n\'ecessairement active \`a la solution du probl\`eme.
+\end{questions}
+\end{exercice}
+
+\begin{exercice}[(projection)]
+  On se place maintenant dans le cas où la contrainte $r^{T} x \geq b$
+  est active. Formuler un problème d'optimisation pour trouver la
+  projection d'un vecteur $x$ quelconque sur l'espace vectoriel des
+  contraintes $F = \{x / r^{T} x = \rho, e^{T} x = 1\}$, et le
+  résoudre. Dans quel cas aurait-on pu projeter sur les deux
+  contraintes successivement, au lieu de simultanément ?
+\end{exercice}
+
+\section{Implémentation Matlab}
+\begin{exercice}
+  On se propose de résoudre le problème
+\begin{align*}
+  \text{min} \;\;\;\;&x^{T} A x\\
+  \text{s.c.}\;\;\;\;&\begin{cases}
+    &e^{T} x = 1\\
+  &r^{T} x = \rho\\
+  &x \geq 0
+  \end{cases}
+\end{align*}
+
+par la méthode du gradient projeté. Pour toutes les fonctions à coder,
+on déclarera les variables nécessaires ($A, r, \rho, e$) comme
+globales.
+\begin{questions}
+\item Écrire un oracle \verb+oracle+ qui renvoie la valeur et le
+  gradient de la fonction objectif.
+\item Écrire une fonction \verb+proj+ qui projette $x$ sur l'ensemble
+  des contraintes. Plutôt que d'effectuer la projection complète,
+  difficile à calculer, on pourra se contenter de projeter sur les
+  deux contraintes d'égalité, puis de projeter sur les contraintes
+  d'inégalité.
+\end{questions}
+
+\end{exercice}
+
+\section{Compléments}
+\begin{exercice}[(m\'ethode du gradient r\'eduit)]
+On souhaite minimiser la fonction
+\on F(x)=x^T A x \off
+sous les contraintes $e^{T} x=1, r^{T}x = \rho$.
+\begin{questions}
+\item Comment construire une matrice $P$ dont les colonnes forment une
+  base du noyau de l'application lin\'eaire $\R^{n} \to \R^{2}$ qui
+  \`a $x$ associe $e^{T} x$ et $r^{T} x$ ?
+\item Prouver alors que, si $x_{0}$ est un point admissible, minimiser
+  $F(x)$ sous les contraintes \'equivaut \`a minimiser $G(u)=F(x_0+P
+  u)$ \it sans \rm contrainte.
+\item Calculer $\grad G(u)$ et $\hess G(u)$ en fonction de $\grad
+  F(x)$ et $\hess F(x)$, o\`u $x=x_0 + P \star u$.
+\end{questions}
+\end{exercice}
+
+\end{document}
