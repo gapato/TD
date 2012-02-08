@@ -208,7 +208,7 @@ On résoud le problème
 par la méthode du gradient projeté à pas fixe. Les fichiers à
 télécharger sont disponibles sur
 
-\verb+http://ceremade.dauphine.fr/~levitt/optinum/+
+\verb+http://www.ceremade.dauphine.fr/~levitt/optinum/+
 
 \begin{enumerate}
 \item Coder les fonctions de l'exercice 4, et les tester.
@@ -230,7 +230,7 @@ télécharger sont disponibles sur
 \item L'analyse théorique de l'algorithme de gradient mène à un
   résultat de convergence linéaire du type
   \begin{align*}
-    ||x_{n} - x^{*}|| \approx_{n\to \infty} K \nu^{n}
+    ||x_{n} - x^{*}|| \leq K \nu^{n}
   \end{align*}
   où $K > 0$, et $\nu < 1$ est la constante de convergence.
 
@@ -239,13 +239,13 @@ télécharger sont disponibles sur
   
   Prouver que
   \begin{align*}
-    ||x_{n+1} - x_{n}|| \approx_{n \to \infty} K \nu^{n}
+    ||x_{n+1} - x_{n}|| \leq K' \nu^{n}
   \end{align*}
 
   Montrer qu'un tracé en échelle semi-logarithmique permet de vérifier
-  visuellement cet équivalent. Se documenter sur les possibilités de
-  régression linéaire en Matlab pour obtenir numériquement la constante
-  $\nu$.
+  visuellement cette inégalité. Se documenter sur les possibilités de
+  régression linéaire en Matlab pour obtenir numériquement la
+  constante $\nu$.
 \item Comment la constante de convergence $\nu$ varie-t-elle en
   fonction du pas $t$ ?
 \end{enumerate}
