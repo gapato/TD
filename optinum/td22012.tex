@@ -55,7 +55,7 @@ Licence maths applis      \hfill      Ann\'ee \textos{2011}/\textos{2012}
 
 \begin{center}
 
-\textbf{\huge TD/TP 2}
+\textbf{\huge TD 2}
 
 \smallskip
 
@@ -64,23 +64,31 @@ Licence maths applis      \hfill      Ann\'ee \textos{2011}/\textos{2012}
 \end{center}
 
 \section{Introduction}
-On se propose dans cette séquence de résoudre le problème
-suivant. Soit une somme fixe d'argent à répartir entre plusieurs
-investissements. Le rendement annuel de chaque investissement $i$ suit
-une loi aléatoire $X_{i}$. Comment investir son argent de façon à
-s'assurer un rendement annuel moyen $\rho$ tout en minimisant le
-risque encouru ?
+On se propose dans cette séquence de résoudre le problème de gestion
+de portefeuille suivant. Soit une somme fixe d'argent $S$ à répartir
+entre plusieurs investissements. On considère un modèle simplifié
+d'investissement annuel où chaque actif est modélisé par son rendement
+annuel par euro investi $X_{i}$. Ainsi, le rendement moyen $r_{i} =
+E[X_{i}]$ représente le profit réalisé en investissant un euro sur
+l'actif $i$. En contrepartie de ce profit, l'investisseur encourt un
+risque, mesuré par la variance $\sigma_{i}^{2} = \text{Var}(X_{i})$.
+
+Le problème est alors le suivant : comment investir son argent de
+façon à s'assurer un rendement annuel moyen $\rho$ tout en minimisant
+le risque encouru ?
 
 Modéliser ce problème sous la forme d'un problème d'optimisation, en
-explicitant les variables, la fonction objectif et les contraintes. De
-quelles caractéristiques des variables $X_{i}$ a-t-on besoin ?
+explicitant les variables, la fonction objectif et les
+contraintes. Peut-on considérer les actifs comme indépendants les uns
+des autres ? De quelles caractéristiques des variables $X_{i}$ a-t-on
+besoin dans la modélisation ?
 
 \section{Étude théorique}
 La modélisation a conduit à un problème de forme
 \begin{align*}
   \text{min} \;\;\;\;&x^{T} A x\\
   \text{s.c.}\;\;\;\;&\begin{cases}
-    &e^{T} x = 1\\
+    &e^{T} x = S\\
   &r^{T} x \geq \rho\\
   &x \geq 0
   \end{cases}
@@ -89,6 +97,8 @@ où $x, r \in \R^{n}$, $A \in M_{n}(\R)$, et $e = (1,1,\dots,1)$
 
 \begin{exercice}
 \begin{questions}
+\item Pourquoi peut-on se restreindre au cas où la somme d'argent à
+  investir $S$ vaut 1 ?
 \item Quelles propriétés mathématiques la matrice $A$ vérifie-t-elle ?
 \item Que se passe-t-il si $\rho$ est très grand ? Très petit ?
 \item Quand l'ensemble admissible est non vide et que $A$ est
@@ -115,14 +125,14 @@ où $x, r \in \R^{n}$, $A \in M_{n}(\R)$, et $e = (1,1,\dots,1)$
 \end{exercice}
 
 \begin{exercice}[(projection)]
-  On se place maintenant dans le cas où la contrainte $r^{T} x \geq \rho$
-  est active.
-  Pour $x$ donn\'e on veut calculer sa projection sur l'espace affine
-  des contraintes
+  On se place maintenant dans le cas où la contrainte $r^{T} x \geq
+  \rho$ est active.  Pour $x$ donn\'e on veut calculer sa projection
+  orthogonale $p_{F}(x)$ sur l'espace affine des contraintes
   \[F = \{x \; | \; r^{T} x = \rho, e^{T} x = 1\}.\]
-  Ecrire $p_F(x)$ comme solution d'un problème d'optimisation, et le r\'esoudre.
-  Dans quel cas peut-on projeter sur les deux
-  contraintes successivement, au lieu de simultanément ?
+  
+  Ecrire $p_F(x)$ comme solution d'un problème d'optimisation, et le
+  r\'esoudre.  Dans quel cas peut-on projeter sur les deux contraintes
+  successivement, au lieu de simultanément ?
 \end{exercice}
 
 \section{Implémentation Matlab}
@@ -137,13 +147,17 @@ où $x, r \in \R^{n}$, $A \in M_{n}(\R)$, et $e = (1,1,\dots,1)$
   \end{cases}
 \end{align*}
 
-par la méthode du gradient projeté. Pour toutes les fonctions à coder,
+par la méthode du gradient projeté. On rappelle que cette itération
+s'écrit $x_{n+1} = p_{C}(x_{n} - t \nabla F(x_{n}))$, où $p_{C}$ est
+la projection orthogonale sur l'espace des contraintes $C$.
+
+Pour toutes les fonctions à coder,
 on déclarera les variables nécessaires ($A, r, \rho, e$) comme
 globales.
 \begin{questions}
-\item Écrire un oracle \verb+oracle+ qui renvoie la valeur et le
+\item Écrire un oracle \verb+oracle_tp2+ qui renvoie la valeur et le
   gradient de la fonction objectif.
-\item Écrire une fonction \verb+proj+ qui projette $x$ sur l'ensemble
+\item Écrire une fonction \verb+proj_tp2+ qui projette $x$ sur l'ensemble
   des contraintes. Plutôt que d'effectuer la projection complète,
   difficile à calculer, on pourra se contenter de projeter sur les
   deux contraintes d'égalité, puis de projeter sur les contraintes
@@ -169,4 +183,70 @@ sous les contraintes $e^{T} x=1, r^{T}x = \rho$.
 \end{questions}
 \end{exercice}
 
+\newpage
+
+\begin{center}
+
+\textbf{\huge TP 2}
+
+\smallskip
+
+\rule{10cm}{0.4pt}
+
+\end{center}
+
+On résoud le problème
+\begin{align*}
+  \text{min} \;\;\;\;&x^{T} A x\\
+  \text{s.c.}\;\;\;\;&\begin{cases}
+    &e^{T} x = 1\\
+  &r^{T} x = \rho\\
+  &x \geq 0
+  \end{cases}
+\end{align*}
+
+par la méthode du gradient projeté à pas fixe. Les fichiers à
+télécharger sont disponibles sur
+
+\verb+http://ceremade.dauphine.fr/~levitt/optinum/+
+
+\begin{enumerate}
+\item Coder les fonctions de l'exercice 4, et les tester.
+\item Télécharger le fichier \verb+gradfix.m+, et l'utiliser comme
+  modèle pour une fonction \verb+gradproj+ qui accepte en paramètre
+  une fonction \verb+proj+ chargée de réaliser la projection. Que se
+  passerait-il si on avait utilisé la norme du gradient comme critère
+  d'arrêt ?
+\item Comment choisir le pas de la méthode de gradient ? Le point
+  initial ?
+\item Télécharger le fichier \verb+data.m+, et tester votre algorithme
+  avec les jeux de données fournis.
+\item Tracer la fonction de recherche linéaire $\phi(t) = F(x-t\nabla
+  F(x))$ pour différentes valeurs de $x$, et pour différents jeux de
+  données. Que constatez-vous ? Expliquez.
+\item Modifier la procédure \verb+gradproj+ pour qu'elle retourne la
+  liste des itérés $x_{n}$. Tracer la courbe de convergence $||x_{n+1}
+  - x_{n}||$ en fonction de $n$.
+\item L'analyse théorique de l'algorithme de gradient mène à un
+  résultat de convergence linéaire du type
+  \begin{align*}
+    ||x_{n} - x^{*}|| \approx_{n\to \infty} K \nu^{n}
+  \end{align*}
+  où $K > 0$, et $\nu < 1$ est la constante de convergence.
+
+  Combien d'itérations faut-il pour obtenir une précision de
+  $10^{-16}$ sur $x$ ?
+  
+  Prouver que
+  \begin{align*}
+    ||x_{n+1} - x_{n}|| \approx_{n \to \infty} K \nu^{n}
+  \end{align*}
+
+  Montrer qu'un tracé en échelle semi-logarithmique permet de vérifier
+  visuellement cet équivalent. Se documenter sur les possibilités de
+  régression linéaire en Matlab pour obtenir numériquement la constante
+  $\nu$.
+\item Comment la constante de convergence $\nu$ varie-t-elle en
+  fonction du pas $t$ ?
+\end{enumerate}
 \end{document}
