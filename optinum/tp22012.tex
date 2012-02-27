@@ -6,7 +6,7 @@
 \usepackage[T1]{fontenc}
 \usepackage{lmodern}
 \usepackage{oldstyle}
-\usepackage{url}
+\usepackage{hyperref}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \usepackage{GLtd}
 \renewcommand{\thesection}{ \textbf{\Large \arabic{section}.}}
@@ -65,8 +65,8 @@ Licence maths applis      \hfill      Ann\'ee \textos{2011}/\textos{2012}
 
 On résoud le problème
 \begin{align*}
-  \text{min} \;\;\;\;&x^{T} A x\\
-  \text{s.c.}\;\;\;\;&\begin{cases}
+  \text{min} \quad&F(x)=x^{T} A x\\
+  \text{s.c.}\quad&\begin{cases}
     &e^{T} x = 1\\
   &r^{T} x = \rho\\
   &x \geq 0
@@ -76,48 +76,80 @@ On résoud le problème
 par la méthode du gradient projeté à pas fixe. Les fichiers à
 télécharger sont disponibles sur
 
-\verb+http://www.ceremade.dauphine.fr/~levitt/optinum/+
+\url{http://www.ceremade.dauphine.fr/~levitt/optinum/}
 
 \begin{enumerate}
-\item Coder les fonctions de l'exercice 4, et les tester.
+\item Coder les fonctions \verb+oracle_tp2+ et \verb+proj_tp2+
+    de l'exercice 5, et les tester.
 \item Télécharger le fichier \verb+gradfix.m+, et l'utiliser comme
   modèle pour une fonction \verb+gradproj+ qui accepte en paramètre
-  une fonction \verb+proj+ chargée de réaliser la projection. Que se
-  passerait-il si on avait utilisé la norme du gradient comme critère
-  d'arrêt ?
+  une fonction \verb+proj+ chargée de réaliser la projection.
+  Peut-on utiliser la norme du gradient comme critère d'arrêt ? Pourquoi ?
 \item Comment choisir le pas de la méthode de gradient ? Le point
   initial ?
-\item Tester votre algorithme avec $A =
+\item Tester votre algorithme avec
+    \[A =
   \begin{pmatrix}
     4&0&0\\0&64&0\\0&0&100
-  \end{pmatrix}, b =
+  \end{pmatrix},\;r =
   \begin{pmatrix}
     5\\10\\15
-  \end{pmatrix}$. Étudier l'impact de $\rho$ et $\mu$.
+  \end{pmatrix}.\]
+  Pour ceci, télécharger le fichier de données \verb+data.m+ (à placer dans votre répertoire
+  courant), où sont définis 3 jeux de données, la matrice $A$ et le vecteur $r$ ci-dessus
+  correspondent au premier. Voici un exemple d'utilisation :
+  \begin{verbatim}
+  ...
+  global A r
+  data                      % initialisation de la structure stocks
+  A = stocks(1).covar       % on utilise le premier jeu de données...
+  r = stocks(1).returns
+  ...
+  \end{verbatim}
+
+  Étudier l'impact de $\rho$ et $\mu$. Idéalement, comment devrait-on choisir $\mu$, le paramètre de
+  pénalisation ?
 \item Modifier la procédure \verb+gradproj+ pour qu'elle retourne la
-  liste des itérés $x_{n}$. Tracer la courbe de convergence $||x_{n+1}
-  - x_{n}||$ en fonction de $n$.
+  liste des itérés $x_{n}$ et tracer la courbe de convergence
+  $\left\Vert x_{n+1} - x_{n}\right\Vert$ en fonction de $n$.
 \item L'analyse théorique de l'algorithme de gradient mène à un
   résultat de convergence linéaire du type
   \begin{align*}
-    ||x_{n} - x^{*}|| \leq K \nu^{n}
+    \left\Vert x_{n} - x^{*}\right\Vert \leq K \nu^{n}
   \end{align*}
   où $K > 0$, et $\nu < 1$ est la constante de convergence.
 
   Combien d'itérations faut-il pour obtenir une précision de
   $10^{-16}$ sur $x$ ?
-  
+
   Prouver que
   \begin{align*}
-    ||x_{n+1} - x_{n}|| \leq K' \nu^{n}
+    \left\Vert x_{n+1} - x_{n}\right\Vert \leq K' \nu^{n}
   \end{align*}
 
   Montrer qu'un tracé en échelle semi-logarithmique permet de vérifier
-  visuellement cette inégalité. Se documenter sur les possibilités de
-  régression linéaire en Matlab pour obtenir numériquement la
-  constante $\nu$.
+  visuellement cette inégalité, et en utilisant la fonction \verb+polyfit+ de Matlab,
+  obtenir num\'eriquement une majoration de la constante $\nu$.
+
 \item Comment la constante de convergence $\nu$ varie-t-elle en
   fonction du pas $t$ ?
-\item Faire varier le pas t, goldensearch, autre jeu de données ...
+\item Recommencer l'analyse de la question de 4 avec les 2 autres jeux de données, et tracer les
+    courbes de convergence. Qu'est-ce qui change ?
+\item On souhaite maintenant utiliser une autre méthode que la descente à pas fixe. Pour cela, on va
+    utiliser un algorithme de recherche linéaire qui est une variante de la méthode de dichotomie :
+    ``golden section search''\footnote{Introduite en 1953 par Keifer :
+    \url{http://en.wikipedia.org/wiki/Golden_section_search}}.
+    Télécharger le fichier \verb+goldensearch.m+ qui définie une procédure prenant en paramètre une
+    fonction $f$ et une tolérance $\delta$, et qui rend le minimum de cette fonction dans
+    l'intervalle $\left[0;1\right]$, et écrire une fonction \verb+gradproj_gold+ (basée la fonction \verb+gradproj+)
+    qui utilise \verb+goldensearch+.
 \end{enumerate}
+
+\begin{verbatim}
+% TODO %
+- dire comment utiliser goldensearch, le modifier pour que ça fasse pas de la merde
+(t=a au lieu de t=(a+b)/2)
+- faire retracer les courbes de convergences
+- regarder l'influence sur le nombre total d'appels à l'oracle.
+\end{verbatim}
 \end{document}
