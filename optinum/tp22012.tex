@@ -65,19 +65,17 @@ On rappelle qu'on veut résoudre le problème
   \text{min} \quad&F(x)=x^{T} A x\\
   \text{s.c.}\quad&\begin{cases}
     &e^{T} x = 1\\
-  &r^{T} x = \rho\\
-  &x \geq 0,
+  &r^{T} x \geq \rho\\
+  &x \geq 0.
   \end{cases}
 \end{align*}
-pour cela on a introduit la fonction objectif pénalisée
-\[F_\mu(x) = F(x) - \mu \sum_i \log(x_i) -\mu \log(r^T x - \rho),\]
-où $\mu \in \mathbb{R}_+^*$.
+Pour cela on a introduit la fonction objectif pénalisée
+\[F_\mu(x) = x^{T} A x - \mu \sum_i \log(x_i) -\mu \log(r^T x - \rho),\]
+où $\mu \in \mathbb{R}_+^*$ est un petit paramètre.
 On est donc ramené au problème
 \begin{align*}
   \text{min} \quad&F_\mu(x)\\
-  \text{s.c.}\quad&\begin{cases}
-    &e^{T} x = 1,
-  \end{cases}
+  \text{s.c.}\quad&e^{T} x = 1
 \end{align*}
 
 qu'on va résoudre par la méthode du gradient projeté à pas fixe. Les fichiers à
@@ -85,12 +83,15 @@ télécharger sont disponibles sur la page web :
 \url{http://www.ceremade.dauphine.fr/~levitt/optinum/}
 
 \begin{enumerate}
-\item Coder les fonctions \verb+oracle_tp2+ et \verb+proj_tp2+
-    de l'exercice 5, et les tester.
+\item Écrire les fonctions \verb+oracle_tp2+ et \verb+proj_tp2+ de
+  l'exercice 5, qui codent respectivement l'oracle de $F_{\mu}$ et la projection sur
+  l'ensemble $e^{T} x = 1$. Prendre soin de renvoyer $+\infty$ dans
+  l'oracle si le point est en-dehors du domaine de définition de
+  $F_{\mu}$. Tester ces fonctions.
 \item Télécharger le fichier \verb+gradfix.m+, et l'utiliser comme
   modèle pour une fonction \verb+gradproj+ qui accepte en paramètre
   une fonction \verb+proj+ chargée de réaliser la projection.
-  Pourquoi ne peut-on pas utiliser la norme du gradient comme critère d'arrêt ?
+  Pourquoi ne peut-on plus utiliser la norme du gradient comme critère d'arrêt ?
 \item Comment choisir le pas de la méthode de gradient ? Le point
   initial ?
 \item Tester votre algorithme avec
@@ -113,8 +114,8 @@ télécharger sont disponibles sur la page web :
   ...
   \end{verbatim}
 
-  Étudier l'impact de $\rho$ et $\mu$. Idéalement, comment devrait-on choisir $\mu$, le paramètre de
-  pénalisation ?
+  Étudier l'impact de $\rho$, $\mu$ et du pas de la méthode de
+  gradient.
 \item Modifier la procédure \verb+gradproj+ pour qu'elle retourne la
   liste des itérés $x_{n}$ et tracer la courbe de convergence
   $\left\Vert x_{n+1} - x_{n}\right\Vert$ en fonction de $n$.
@@ -139,20 +140,24 @@ télécharger sont disponibles sur la page web :
 
 \item Comment la constante de convergence $\nu$ varie-t-elle en
   fonction du pas $t$ ?
-\item Recommencer l'analyse de la question de 4 avec les 2 autres jeux de données, et tracer les
+\item Recommencer l'analyse avec les deux autres jeux de données
+  contenus dans \verb+data.m+, et tracer les
     courbes de convergence. Qu'est-ce qui change ?
-\item On souhaite maintenant utiliser une autre méthode que la descente à pas fixe. Pour cela, on va
-    utiliser un algorithme de recherche linéaire qui est une variante de la méthode de dichotomie :
-    ``golden section search''\footnote{Introduite en 1953 par Keifer :
-    \url{http://en.wikipedia.org/wiki/Golden_section_search}}.
+  \item On souhaite maintenant utiliser une descente de gradient à pas
+    optimal. Pour cela, on va utiliser un algorithme de recherche
+    linéaire qui est une variante de la méthode de dichotomie, la
+    recherche linéaire par section d'or\footnote{Introduite en 1953 par Keifer :
+      \url{http://en.wikipedia.org/wiki/Golden_section_search}}.
 
-    Télécharger le fichier \verb+goldensearch.m+ qui définit une procédure prenant en paramètre une
-    fonction $f:\mathbb{R}\rightarrow\mathbb{R}$ et une tolérance $\delta$, et qui rend la valeur approchée
-    du minimum de cette fonction dans l'intervalle
-    $[0,\infty)$. Survoler le code pour comprendre le principe de la méthode.
+    Télécharger le fichier \verb+goldensearch.m+ qui définit une
+    procédure prenant en paramètre une fonction
+    $f:\mathbb{R^+}\rightarrow\mathbb{R}$ et une tolérance $\delta$,
+    et qui rend la valeur approchée du minimum de cette fonction dans
+    l'intervalle $[0,\infty)$. Survoler le code pour comprendre le
+    principe de la méthode.
 
-    Écrire une fonction \verb+gradproj_gold+ (basée sur la fonction \verb+gradproj+)
-    qui utilise \verb+goldensearch+.
+    Écrire une fonction \verb+gradproj_gold+ à partir de
+    \verb+gradproj+ qui utilise \verb+goldensearch+.
 
     \emph{Indication} : pour la recherche linéaire, on peut définir une fonction anonyme en Matlab en utilisant la syntaxe suivante :
     \begin{verbatim}
@@ -160,10 +165,7 @@ télécharger sont disponibles sur la page web :
     \end{verbatim}
     ce qui définit la fonction \verb+linesearch+ qui prend en
     paramètre \verb+t+ et renvoie \verb+oracle_tp2(x-t*g)+.
-\item Tracer les nouvelles courbes de convergence.
-\item Modifier les fonctions \verb+goldensearch+ et
-  \verb+gardproj_gold+ pour que cette dernière retourne le nombre
-  total d'appels à l'oracle, et le comparer au nombre d'appels pour le
-  gradient à pas fixe.
+\item Tracer les nouvelles courbes de convergence et comparer à la
+  méthode de gradient à pas fixe.
 \end{enumerate}
 \end{document}
