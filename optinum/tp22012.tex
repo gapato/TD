@@ -100,7 +100,7 @@ télécharger sont disponibles sur
   correspondent au premier. Voici un exemple d'utilisation :
   \begin{verbatim}
   ...
-  global A r
+  global A r e rho mu
   data                      % initialisation de la structure stocks
   A = stocks(1).covar       % on utilise le premier jeu de données...
   r = stocks(1).returns
@@ -139,17 +139,21 @@ télécharger sont disponibles sur
     utiliser un algorithme de recherche linéaire qui est une variante de la méthode de dichotomie :
     ``golden section search''\footnote{Introduite en 1953 par Keifer :
     \url{http://en.wikipedia.org/wiki/Golden_section_search}}.
-    Télécharger le fichier \verb+goldensearch.m+ qui définie une procédure prenant en paramètre une
-    fonction $f$ et une tolérance $\delta$, et qui rend le minimum de cette fonction dans
-    l'intervalle $\left[0;1\right]$, et écrire une fonction \verb+gradproj_gold+ (basée la fonction \verb+gradproj+)
-    qui utilise \verb+goldensearch+.
-\end{enumerate}
 
-\begin{verbatim}
-% TODO %
-- dire comment utiliser goldensearch, le modifier pour que ça fasse pas de la merde
-(t=a au lieu de t=(a+b)/2)
-- faire retracer les courbes de convergences
-- regarder l'influence sur le nombre total d'appels à l'oracle.
-\end{verbatim}
+    Télécharger le fichier \verb+goldensearch.m+ qui définie une procédure prenant en paramètre une
+    fonction $f:\mathbb{R}\rightarrow\mathbb{R}$ et une tolérance $\delta$, et qui rend la valeur approchée
+    du minimum de cette fonction dans l'intervalle $[0,\infty)$.
+
+    Écrire une fonction \verb+gradproj_gold+ (basée la fonction \verb+gradproj+)
+    qui utilise \verb+goldensearch+.
+
+    \emph{Indication} : on peut définir une fonction ``inline'' en Matlab en utilisant la syntaxe suivante :
+    \begin{verbatim}
+        oracle_1d = @(t) oracle_tp2(x-t*g)
+    \end{verbatim}
+    ce qui définit \verb+oracle_1d+ qui prend en paramètre \verb+t+.
+\item Tracer les nouvelles courbes de convergence.
+\item Modifier les fonctions \verb+goldensearch+ et \verb+gardproj_gold+ pour cette dernière retourne le nombre total d'appels à l'oracle,
+    et le comparer au nombre d'appels pour le gradient à pas fixe.
+\end{enumerate}
 \end{document}
