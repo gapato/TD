@@ -84,7 +84,7 @@ télécharger sont disponibles sur
 \item Télécharger le fichier \verb+gradfix.m+, et l'utiliser comme
   modèle pour une fonction \verb+gradproj+ qui accepte en paramètre
   une fonction \verb+proj+ chargée de réaliser la projection.
-  Peut-on utiliser la norme du gradient comme critère d'arrêt ? Pourquoi ?
+  Pourquoi ne peut-on pas utiliser la norme du gradient comme critère d'arrêt ?
 \item Comment choisir le pas de la méthode de gradient ? Le point
   initial ?
 \item Tester votre algorithme avec
@@ -140,20 +140,24 @@ télécharger sont disponibles sur
     ``golden section search''\footnote{Introduite en 1953 par Keifer :
     \url{http://en.wikipedia.org/wiki/Golden_section_search}}.
 
-    Télécharger le fichier \verb+goldensearch.m+ qui définie une procédure prenant en paramètre une
+    Télécharger le fichier \verb+goldensearch.m+ qui définit une procédure prenant en paramètre une
     fonction $f:\mathbb{R}\rightarrow\mathbb{R}$ et une tolérance $\delta$, et qui rend la valeur approchée
-    du minimum de cette fonction dans l'intervalle $[0,\infty)$.
+    du minimum de cette fonction dans l'intervalle
+    $[0,\infty)$. Survoler le code pour comprendre le principe de la méthode.
 
-    Écrire une fonction \verb+gradproj_gold+ (basée la fonction \verb+gradproj+)
+    Écrire une fonction \verb+gradproj_gold+ (basée sur la fonction \verb+gradproj+)
     qui utilise \verb+goldensearch+.
 
-    \emph{Indication} : on peut définir une fonction ``inline'' en Matlab en utilisant la syntaxe suivante :
+    \emph{Indication} : pour la recherche linéaire, on peut définir une fonction anonyme en Matlab en utilisant la syntaxe suivante :
     \begin{verbatim}
-        oracle_1d = @(t) oracle_tp2(x-t*g)
+        linesearch = @(t) oracle_tp2(x-t*g)
     \end{verbatim}
-    ce qui définit \verb+oracle_1d+ qui prend en paramètre \verb+t+.
+    ce qui définit la fonction \verb+linesearch+ qui prend en
+    paramètre \verb+t+ et renvoie \verb+oracle_tp2(x-t*g)+.
 \item Tracer les nouvelles courbes de convergence.
-\item Modifier les fonctions \verb+goldensearch+ et \verb+gardproj_gold+ pour cette dernière retourne le nombre total d'appels à l'oracle,
-    et le comparer au nombre d'appels pour le gradient à pas fixe.
+\item Modifier les fonctions \verb+goldensearch+ et
+  \verb+gardproj_gold+ pour que cette dernière retourne le nombre
+  total d'appels à l'oracle, et le comparer au nombre d'appels pour le
+  gradient à pas fixe.
 \end{enumerate}
 \end{document}
