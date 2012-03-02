@@ -1,20 +1,17 @@
 \documentclass[10pt,a4paper,fleqn]{report}
-\usepackage{a4wide}
+%\usepackage{a4wide}
 \usepackage{amsmath,amssymb}
 \usepackage[french]{babel}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage{lmodern}
 \usepackage{oldstyle}
-\usepackage{hyperref}
+\usepackage[pdfborder={0 0 0}]{hyperref}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \usepackage{GLtd}
 \renewcommand{\thesection}{ \textbf{\Large \arabic{section}.}}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\`u\`u
-\setlength{\oddsidemargin}{1pt}
-\setlength{\evensidemargin}{1pt}
-\setlength{\textheight}{590pt}
-\setlength{\textwidth}{470pt}
+\usepackage[margin=3cm]{geometry}
 
 \makeatletter
 \def\cleardoublepage{\clearpage\if@twoside\ifodd\c@page\else\hbox{}\thispagestyle{empty}\newpage\fi\fi}
@@ -63,19 +60,28 @@ Licence maths applis      \hfill      Ann\'ee \textos{2011}/\textos{2012}
 
 \end{center}
 
-On résoud le problème
+On rappelle qu'on veut résoudre le problème
 \begin{align*}
   \text{min} \quad&F(x)=x^{T} A x\\
   \text{s.c.}\quad&\begin{cases}
     &e^{T} x = 1\\
   &r^{T} x = \rho\\
-  &x \geq 0
+  &x \geq 0,
+  \end{cases}
+\end{align*}
+pour cela on a introduit la fonction objectif pénalisée
+\[F_\mu(x) = F(x) - \mu \sum_i \log(x_i) -\mu \log(r^T x - \rho),\]
+où $\mu \in \mathbb{R}_+^*$.
+On est donc ramené au problème
+\begin{align*}
+  \text{min} \quad&F_\mu(x)\\
+  \text{s.c.}\quad&\begin{cases}
+    &e^{T} x = 1,
   \end{cases}
 \end{align*}
 
-par la méthode du gradient projeté à pas fixe. Les fichiers à
-télécharger sont disponibles sur
-
+qu'on va résoudre par la méthode du gradient projeté à pas fixe. Les fichiers à
+télécharger sont disponibles sur la page web :
 \url{http://www.ceremade.dauphine.fr/~levitt/optinum/}
 
 \begin{enumerate}
