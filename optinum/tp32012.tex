@@ -1,0 +1,217 @@
+\documentclass[10pt,a4paper,fleqn]{report}
+\usepackage{a4wide}
+\usepackage{amsmath,amssymb}
+\usepackage[french]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{oldstyle}
+\usepackage{url}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\renewcommand{\thesection}{ \textbf{\Large \arabic{section}.}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\`{u}\`{u}
+\setlength{\oddsidemargin}{1pt}
+\setlength{\evensidemargin}{1pt}
+\setlength{\textheight}{590pt}
+\setlength{\textwidth}{470pt}
+
+\makeatletter
+\def\cleardoublepage{\clearpage\if@twoside\ifodd\c@page\else\hbox{}\thispagestyle{empty}\newpage\fi\fi}
+\makeatother
+\DeclareMathOperator*{\argmin}{arg\,min}
+\newcommand{\matlab}{\textsc{Matlab}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\dotp}[2]{\langle #1 , #2\rangle}
+\newcommand{\R}{\mathbb R}
+\newcommand{\onit}{\begin{enumerate}}
+\newcommand{\offit}{\end{enumerate}}
+\newcommand{\grad}{\nabla}
+\newcommand{\hess}{\nabla^2}
+\newcommand{\on}{\begin{displaymath}}
+\newcommand{\off}{\end{displaymath}}
+\renewcommand{\P}{\mathcal P}
+\newcommand{\push}[1]{\rule{0pt}{0pt}\hspace{#1pt}}
+\renewcommand{\footnote}{\stepcounter{footnote}\raisebox{5 pt}{\scriptsize(\thefootnote)}\footnotetext}
+\renewcommand{\tt}{\texttt}
+\newtheorem{question}{Question}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+\cleardoublepage
+
+\noindent
+Universit\'e Paris-Dauphine     \hfill      Optimisation num\'erique\\
+D\'epartement MIDO              \hfill      François-Xavier Vialard\\
+DUMI2E troisi\`eme ann\'ee      \hfill      ann\'ee \textos{2011}/\textos{2012}
+
+\medskip
+
+\hrule
+
+\medskip
+
+\begin{center}
+
+\textbf{\huge S\'{e}ance de TD/TP n\textsuperscript{o}3}
+
+\smallskip
+
+\rule{10cm}{0.4pt}
+
+\end{center}
+
+
+\section*{Objectif}
+On s'int\'eresse au probl\`eme de d\'ebruitage d'une image donn\'ee par des m\'ethodes variationnelles. La donn\'ee d'une image num\'erique est une matrice de taille $(n,m)$. On utilisera l'image test classique en traitement d'image \texttt{lena.jpg} de taille $(512,512)$ pour valider les algorithmes impl\'ement\'es. Les m\'ethodes de d\'ebruitage reposent souvent sur des m\'ethodes variationnelles qui passent par une repr\'esentation continue de l'image. C'est \`a dire que les mod\`eles sont introduits sur des espaces fonctionnels et une approximation discr\`ete est ensuite utilis\'ee pour les tests num\'eriques.
+
+
+\section{Mod\'elisation}
+
+On consid\`ere qu'une image est la representation discr\`ete d'une fonction $f:[0,a]\times[0,b] \mapsto \R^2$ qui est donn\'ee par une matrice $[f_{i,j}]_{(i,j)\in [1,n]\times[1,m]}$.
+On propose le premier mod\`ele suivant: l'image recherch\'ee appartient \`a l'espace des fonctions d\'erivables et dont la d\'eriv\'ee est dans $L^2([0,a]\times[0,b],\R^2)$. On suppose que la donn\'ee est une fonction $g \in L^2$ qui est la donn\'ee bruit\'ee (le manque de r\'egularit\'e de la fonction $g$ est du \`a la pr\'esence de bruit). A priori, on peut \'ecrire:
+\begin{equation}
+g = f+ \varepsilon 
+\end{equation}
+avec $\varepsilon \in L^2([0,a]\times[0,b],\R) $.
+
+ On formule maintenant un probl\`eme d'optimisation permettant de trouver un candidat not\'e $\hat{f}$ pour repr\'esenter la fonction $f$:
+\begin{equation}
+\hat{f} = \argmin \frac12 \| u -  g\|_{L^2}^2 + \frac{1}{2\beta}\| \nabla u \|^2_{L^2}\,,
+\end{equation}
+o\`u $\beta$ est un param\`etre r\'eel positif.
+Ce probl\`eme d'optimisation propose donc de trouver une fonction $\hat{f}$ qui va donner un bon compromis entre la donn\'ee (du fait du terme $ \| u -  g\|_{L^2}^2 $) et l'hypoth\`ese de mod\'elisation $\nabla u \in L^2$ (du fait du terme de droite $\| \nabla u \|^2_{L^2}$).
+
+\begin{question}
+\'Ecrire une version discr\`ete des termes $\frac12 \| u -  g\|_{L^2}^2$ et $\frac{1}{2\beta}\| \nabla u \|^2_{L^2}$ qui soient des fonctions quadratiques des valeurs $[u_{i,j}]_{(i,j)\in [1,n]\times[1,m]}$ et $[g_{i,j}]_{(i,j)\in [1,n]\times[1,m]}$.
+\end{question}
+
+\begin{question}
+Quelle est la r\'egularit\'e de la fonctionnelle en fonction des coefficients matriciels?
+Discuter de l'existence et de l'unicit\'e de solutions du probl\`eme discret.
+\end{question}
+
+\begin{question}
+Calculer le gradient de la fonctionnelle en fonction des coefficients de la matrice $u$ et de la matrice $g$.
+\end{question}
+
+\begin{question}
+Impl\'ementer l'algorithme du gradient conjugu\'e pour r\'esoudre num\'eriquement le probl\`eme discretis\'e. On rappelle l'algorithme pour minimiser $\frac12 \dotp{Ax}{x}+\dotp{b}{x}$:
+
+Initialisation de $k=0$,
+$x_0 \in \R^{nm}$,  $r_0 \leftarrow Ax_0 + b$ and $p_0 \leftarrow -r_0$ et it\'eration tant que $r_k\neq 0$ de
+\begin{equation}
+\begin{cases}
+    \alpha_k \leftarrow \frac{\dotp{r_k}{r_k} }{ \dotp{p_k}{A p_k} } \\
+    x_{k+1} \leftarrow x_k + \alpha_k p_k         \\
+    r_{k+1} \leftarrow r_k + \alpha_k A p_k       \\
+    \beta_{k+1} \leftarrow \frac{ \dotp{r_{k+1}}{r_{k+1}} }{ \dotp{r_k}{r_k} }   \\
+    p_{k+1} \leftarrow -r_{k+1} + \beta_{k+1} p_k\\
+    k \leftarrow k+1
+\end{cases}
+\end{equation}
+Pourquoi choisit-on cette m\'ethode? Qu'est-ce qui joue le r\^ole de $A$ et $b$ dans notre cas?
+Attention, impl\'ementer cet algorithme de fa\c{c}on \`a pouvoir changer facilement $A$ et $b$.
+\end{question}
+
+\begin{question}
+Utiliser l'agorithme pour \texttt{lena.jpg} \`a laquelle vous ajouterez un bruit gaussien, c'est \`a dire pour $ (i,j)\in [1,n]\times[1,m]$, on pose:
+\begin{equation}
+g_{i,j} = f_{i,j} + r_{i,j} 
+\end{equation}
+avec $r_{i,j}$ un tirage de variables gaussiennes ind\'ependantes de variance $\sigma$ et de moyenne nulle.
+\end{question}
+
+\begin{question}
+Comparer la convergence de l'algorithme avec une descente de gradient \`a pas fixe.
+\end{question}
+
+\begin{question}
+Discuter le r\'esultat en faisant varier les valeurs de $\beta$. Est-ce un probl\`eme de mod\'elisation ou un probl`eme num\'erique?
+\end{question}
+
+
+\section{Un autre mod\`ele}
+
+Dans cette partie, on consid\`ere un autre mod\`ele qui fait intervenir la norme $L_1$ sur les matrices:
+\begin{equation}
+\| f \|_{1} = \sum_{i=1}^n \sum_{i=1}^m |f_{i,j}| \,.
+\end{equation}
+
+On souhaite remplacer la norme $L_2$ du gradient par la norme $L_1$ pr\'ec\'edemment d\'efinie.
+
+\begin{question}
+Proposer une version discr\`ete (c'est \`a dire sur les matrices) de la fonctionnelle $$ \frac12 \| u -  g\|^2_{L^2} + \frac{1}{2\beta}\| \nabla u \|_{L^1}\,.$$
+\end{question}
+
+\begin{question}
+Pour $g=0$, $m=1$ et $n=2$, la fonctionelle est-elle (strictement) convexe comme fonction des coefficients de la matrice $u$?
+\end{question}
+
+\begin{question}
+G\'en\'eraliser la question pr\'ec\'edente et discuter l'existence et l'unicit\'e de solutions.
+\end{question}
+
+\begin{question}
+Pourquoi cette fonctionnelle ne rentre-t-elle pas dans le cadre d'applications des m\'ethodes \'etudi\'ees en cours?
+\end{question}
+
+\begin{question}
+On propose de remplacer la norme $L^1$ par 
+\begin{equation}\label{new}
+\| f \|_{\varepsilon} = \sum_{i=1}^n \sum_{i=1}^m \sqrt{\varepsilon^2 + |f_{i,j}|^2} \,,
+\end{equation}
+pour un param\`etre $\varepsilon$ r\'eel.
+\end{question}
+
+\begin{question}
+On propose de remplacer la norme $L^1$ par 
+\begin{equation}
+\| f \|_{\varepsilon} = \sum_{i=1}^n \sum_{i=1}^m \sqrt{\varepsilon^2 + |f_{i,j}|^2} \,,
+\end{equation}
+pour un param\`etre $\varepsilon$ r\'eel.
+Que dire de la nouvelle fonctionnelle (r\'egularit\'e, convexit\'e, existence d'un minimum...)?
+\end{question}
+
+\begin{question}
+Calculer le gradient de la fonctionnelle \eqref{new} et la hessienne.
+\end{question}
+
+\begin{question}
+La m\'ethode de Newton utilise la direction de descente d\'efinie par:
+$$ -[\nabla^2f(x)]^{-1}(\nabla f(x))\,.$$
+Utiliser la m\'ethode du gradient conjugu\'e pour impl\'ementer la m\'ethode de Newton \`a pas fixe.
+\end{question}
+
+\begin{question}
+Observer la vitesse de convergence et la comparer \`a une descente de gradient \`a pas fixe.
+Comme le calcul de la direction de descente pour l'algorithme de Newton est relativement longue, \'etablir une comparaison prenant en compte le temps de calcul de chaque algorithme.
+\end{question}
+
+\begin{question}
+Comparer les r\'esultats de ce nouveau mod\`ele avec le pr\'ec\'edent. Proposer une explication.
+\end{question}
+
+\end{document}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}
