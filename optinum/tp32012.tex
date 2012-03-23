@@ -129,23 +129,34 @@ et bleu. Pour chacun de ces canaux, la valeur $M^{k}_{i,j}$ est un
 entier entre 0 et 255 et représente l'intensité lumineuse (0 pour le
 noir, 255 pour le blanc). Ainsi, une couleur violette (rouge + bleu)
 très lumineuse au pixel $(i,j)$ sera encodée par $M^{1}(i,j) = 255,
-M^{2}(i,j) = 0, M^{3}(i,j) = 255$
+M^{2}(i,j) = 0, M^{3}(i,j) = 255$.
 
 \begin{question}
-  Télécharger le fichier \verb+lena_bw.jpg+ sur
+  Télécharger le fichier \verb+lena.jpg+ sur
 
   \url{http://www.ceremade.dauphine.fr/~levitt/optinum/}
 
   La charger sous la forme d'un tableau à trois dimensions $N \times M
   \times 3$ par la commande
+  \footnote{Vous pouvez utiliser n'importe quelle image de la même manière.}
+  \begin{center}
+      \verb+lena_rgb = imread('lena.jpg');+
+  \end{center}
+  Par soucis de simplicité, on ne veut travailler sur un seul canal; pour ceci
+  convertir l'image en niveaux de gris en faisant une moyenne sur les 3 canaux.
+  \footnote{C'est une opération grossière qui ne prend pas en compte les particularités de la vision
+  humaine : 2 lampes  bleue et verte de même puissance ne sont pas perçues comme ayant la même
+  clarté. Pour plus d'info :
 
-  \verb+lena = imread('lena_bw.jpg');+
+  \url{http://en.wikipedia.org/wiki/Grayscale}
 
-  Que donne \verb+lena(:,:,1) - lena(:,:,2)+ ? Pourquoi ?
-
-  Dans la suite, on n'utilisera qu'un seul canal pour ne travailler
-  que sur une seule matrice : \verb+lena = lena(:,:,1)+. On pourra
-  afficher l'image par la commande \verb+image(lena);colormap(grey);+
+  \url{http://fr.wikipedia.org/wiki/Efficacit\%C3\%A9_lumineuse_spectrale}
+  }
+  Attention aux dépassements d'entiers si on factorise la division !
+  \begin{center}
+      \verb!lena=lena_rgb(:,:,1)/3 + lena_rgb(:,:,2)/3 + lena_rgb(:,:,3)/3!
+  \end{center}
+  On peut afficher l'image par la commande \verb+imshow(lena);+
 \end{question}
 
 \begin{question}
@@ -180,7 +191,7 @@ Comparer la convergence de l'algorithme avec une descente de gradient \`a pas fi
 \end{question}
 
 \begin{question}
-Discuter le r\'esultat en faisant varier les valeurs de $\beta$. Est-ce un probl\`eme de mod\'elisation ou un problème num\'erique?
+Que se passe-t-il pour des valeurs extrêmes de $\beta$ et comment l'expliquez-vous ?
 \end{question}
 
 
