@@ -64,11 +64,20 @@ DUMI2E troisi\`eme ann\'ee      \hfill      ann\'ee \textos{2011}/\textos{2012}
 
 
 \section*{Objectif}
-On s'int\'eresse au probl\`eme de d\'ebruitage d'une image donn\'ee par des m\'ethodes variationnelles. La donn\'ee d'une image num\'erique est une matrice de taille $(n,m)$. On utilisera l'image test classique en traitement d'image \texttt{lena.jpg} de taille $(512,512)$ pour valider les algorithmes impl\'ement\'es. Les m\'ethodes de d\'ebruitage reposent souvent sur des m\'ethodes variationnelles qui passent par une repr\'esentation continue de l'image. C'est \`a dire que les mod\`eles sont introduits sur des espaces fonctionnels et une approximation discr\`ete est ensuite utilis\'ee pour les tests num\'eriques.
+On s'int\'eresse au probl\`eme de d\'ebruitage d'une image donn\'ee
+par des m\'ethodes variationnelles. La donn\'ee d'une image
+num\'erique est une matrice de taille $(n,m)$. On utilisera l'image
+test classique en traitement d'image \texttt{lena.jpg} de taille
+$(512,512)$ pour valider les algorithmes impl\'ement\'es. Les
+m\'ethodes de d\'ebruitage reposent souvent sur des m\'ethodes
+variationnelles qui passent par une repr\'esentation continue de
+l'image. C'est \`a dire que les mod\`eles sont introduits sur des
+espaces fonctionnels et une approximation discr\`ete est ensuite
+utilis\'ee pour les tests num\'eriques.
 
 
-\section{Mod\'elisation}
-
+\section{Norme $L^{2}$}
+\subsection{Partie théorique}
 On consid\`ere qu'une image est la representation discr\`ete d'une fonction $f:[0,a]\times[0,b] \mapsto \R^2$ qui est donn\'ee par une matrice $[f_{i,j}]_{(i,j)\in [1,n]\times[1,m]}$.
 On propose le premier mod\`ele suivant: l'image recherch\'ee appartient \`a l'espace des fonctions d\'erivables et dont la d\'eriv\'ee est dans $L^2([0,a]\times[0,b],\R^2)$. On suppose que la donn\'ee est une fonction $g \in L^2$ qui est la donn\'ee bruit\'ee (le manque de r\'egularit\'e de la fonction $g$ est du \`a la pr\'esence de bruit). A priori, on peut \'ecrire:
 \begin{equation}
@@ -94,6 +103,33 @@ Discuter de l'existence et de l'unicit\'e de solutions du probl\`eme discret.
 
 \begin{question}
 Calculer le gradient de la fonctionnelle en fonction des coefficients de la matrice $u$ et de la matrice $g$.
+\end{question}
+
+\subsection{Partie pratique}
+
+On rappelle qu'une image numérique au format RGB est composée de trois
+matrices $M^{k}$, représentant les trois canaux de couleur rouge, vert
+et bleu. Pour chacun de ces canaux, la valeur $M^{k}_{i,j}$ est un
+entier entre 0 et 255 et représente l'intensité lumineuse (0 pour le
+noir, 255 pour le blanc). Ainsi, une couleur violette (rouge + bleu)
+très lumineuse au pixel $(i,j)$ sera encodée par $M^{1}(i,j) = 255,
+M^{2}(i,j) = 0, M^{3}(i,j) = 255$
+
+\begin{question}
+  Télécharger le fichier \verb+lena_bw.jpg+ sur
+
+  \url{http://www.ceremade.dauphine.fr/~levitt/optinum/}
+
+  La charger sous la forme d'un tableau à trois dimensions $N \times M
+  \times 3$ par la commande
+
+  \verb+lena = imread('lena_bw.jpg');+
+
+  Que donne \verb+lena(:,:,1) - lena(:,:,2)+ ? Pourquoi ?
+
+  Dans la suite, on n'utilisera qu'un seul canal pour ne travailler
+  que sur une seule matrice : \verb+lena = lena(:,:,1)+. On pourra
+  afficher l'image par la commande \verb+image(lena);colormap(grey);+
 \end{question}
 
 \begin{question}
@@ -128,12 +164,12 @@ Comparer la convergence de l'algorithme avec une descente de gradient \`a pas fi
 \end{question}
 
 \begin{question}
-Discuter le r\'esultat en faisant varier les valeurs de $\beta$. Est-ce un probl\`eme de mod\'elisation ou un probl`eme num\'erique?
+Discuter le r\'esultat en faisant varier les valeurs de $\beta$. Est-ce un probl\`eme de mod\'elisation ou un problème num\'erique?
 \end{question}
 
 
-\section{Un autre mod\`ele}
-
+\section{Norme $L^{1}$}
+\subsection{Partie théorique}
 Dans cette partie, on consid\`ere un autre mod\`ele qui fait intervenir la norme $L_1$ sur les matrices:
 \begin{equation}
 \| f \|_{1} = \sum_{i=1}^n \sum_{i=1}^m |f_{i,j}| \,.
@@ -159,14 +195,6 @@ Pourquoi cette fonctionnelle ne rentre-t-elle pas dans le cadre d'applications d
 
 \begin{question}
 On propose de remplacer la norme $L^1$ par 
-\begin{equation}\label{new}
-\| f \|_{\varepsilon} = \sum_{i=1}^n \sum_{i=1}^m \sqrt{\varepsilon^2 + |f_{i,j}|^2} \,,
-\end{equation}
-pour un param\`etre $\varepsilon$ r\'eel.
-\end{question}
-
-\begin{question}
-On propose de remplacer la norme $L^1$ par 
 \begin{equation}
 \| f \|_{\varepsilon} = \sum_{i=1}^n \sum_{i=1}^m \sqrt{\varepsilon^2 + |f_{i,j}|^2} \,,
 \end{equation}
@@ -177,6 +205,8 @@ Que dire de la nouvelle fonctionnelle (r\'egularit\'e, convexit\'e, existence d'
 \begin{question}
 Calculer le gradient de la fonctionnelle \eqref{new} et la hessienne.
 \end{question}
+
+\subsection{Partie pratique}
 
 \begin{question}
 La m\'ethode de Newton utilise la direction de descente d\'efinie par:
