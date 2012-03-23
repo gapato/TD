@@ -109,14 +109,16 @@ Discuter de l'existence et de l'unicit\'e de solutions du probl\`eme discret.
 
 \begin{question}
   Écrire le terme issu de la discrétisation de $\| \nabla u
-  \|^2_{L^2}$ sous la forme $\|Tu\|^{2}_{M} + \|u T^{T}\|^{2}_{M}$, où
+  \|^2_{L^2}$ sous la forme $\|Tu\|^{2}_{M} + \|u T\|^{2}_{M}$, où
   $T$ est une matrice à expliciter et où $\|\cdot\|_{M}$ est la norme
   issue du produit scalaire canonique sur $M_{n \times m}$ donné par
   $\langle u,v \rangle = \sum_{i=1}^{n}\sum_{j=1}^{m} u_{ij} v_{ij}$.
 
   Réécrire le problème d'optimisation sous la forme : minimiser $\frac
   1 2 \langle u, Au\rangle + \langle b, u\rangle$, où $A$ est une
-  application linéaire sur $M_{n\times m}$
+  application linéaire sur $M_{n\times m}$. Quels algorithmes peut-on
+  utiliser pour résoudre ce problème ? (gradient à pas fixe, gradient
+  conjugué, Newton ...)
 \end{question}
 
 \subsection{Partie pratique}
