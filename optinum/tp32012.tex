@@ -78,19 +78,24 @@ utilis\'ee pour les tests num\'eriques.
 
 \section{Norme $L^{2}$}
 \subsection{Partie théorique}
-On consid\`ere qu'une image est la representation discr\`ete d'une fonction $f:[0,a]\times[0,b] \mapsto \R^2$ qui est donn\'ee par une matrice $[f_{i,j}]_{(i,j)\in [1,n]\times[1,m]}$.
-On propose le premier mod\`ele suivant: l'image recherch\'ee appartient \`a l'espace des fonctions d\'erivables et dont la d\'eriv\'ee est dans $L^2([0,a]\times[0,b],\R^2)$. On suppose que la donn\'ee est une fonction $g \in L^2$ qui est la donn\'ee bruit\'ee (le manque de r\'egularit\'e de la fonction $g$ est du \`a la pr\'esence de bruit). A priori, on peut \'ecrire:
-\begin{equation}
-g = f+ \varepsilon 
-\end{equation}
-avec $\varepsilon \in L^2([0,a]\times[0,b],\R) $.
+On consid\`ere qu'une image est la representation discr\`ete d'une
+fonction $f:[0,a]\times[0,b] \mapsto \R^2$ qui est donn\'ee par une
+matrice $[f_{i,j}]_{(i,j)\in [1,n]\times[1,m]}$.
 
- On formule maintenant un probl\`eme d'optimisation permettant de trouver un candidat not\'e $\hat{f}$ pour repr\'esenter la fonction $f$:
+On s'intéresse au problème de débruitage suivant. Soit une image
+originale $f$, qui a été bruitée : $g = f + \varepsilon$. Comment
+retrouver $f$, $g$ étant donné ?
+
+On formule un probl\`eme d'optimisation permettant de trouver un
+candidat not\'e $\hat{f}$ pour repr\'esenter la fonction $f$:
 \begin{equation}
 \hat{f} = \argmin \frac12 \| u -  g\|_{L^2}^2 + \frac{1}{2\beta}\| \nabla u \|^2_{L^2}\,,
 \end{equation}
-o\`u $\beta$ est un param\`etre r\'eel positif.
-Ce probl\`eme d'optimisation propose donc de trouver une fonction $\hat{f}$ qui va donner un bon compromis entre la donn\'ee (du fait du terme $ \| u -  g\|_{L^2}^2 $) et l'hypoth\`ese de mod\'elisation $\nabla u \in L^2$ (du fait du terme de droite $\| \nabla u \|^2_{L^2}$).
+o\`u $\beta$ est un param\`etre r\'eel positif.  Ce probl\`eme
+d'optimisation propose donc de trouver une fonction $\hat{f}$ qui va
+donner un bon compromis entre la donn\'ee (du fait du terme $ \| u -
+g\|_{L^2}^2 $) et le caractère lisse de l'image (du fait du terme de
+droite $\| \nabla u \|^2_{L^2}$).
 
 \begin{question}
 \'Ecrire une version discr\`ete des termes $\frac12 \| u -  g\|_{L^2}^2$ et $\frac{1}{2\beta}\| \nabla u \|^2_{L^2}$ qui soient des fonctions quadratiques des valeurs $[u_{i,j}]_{(i,j)\in [1,n]\times[1,m]}$ et $[g_{i,j}]_{(i,j)\in [1,n]\times[1,m]}$.
@@ -102,7 +107,15 @@ Discuter de l'existence et de l'unicit\'e de solutions du probl\`eme discret.
 \end{question}
 
 \begin{question}
-Calculer le gradient de la fonctionnelle en fonction des coefficients de la matrice $u$ et de la matrice $g$.
+  Écrire le terme issu de la discrétisation de $\| \nabla u
+  \|^2_{L^2}$ sous la forme $\|Tu\|^{2}_{M} + \|u T^{T}\|^{2}_{M}$, où
+  $T$ est une matrice à expliciter et où $\|\cdot\|_{M}$ est la norme
+  issue du produit scalaire canonique sur $M_{n \times m}$ donné par
+  $\langle u,v \rangle = \sum_{i=1}^{n}\sum_{j=1}^{m} u_{ij} v_{ij}$.
+  
+  Réécrire le problème d'optimisation sous la forme : minimiser $\frac
+  1 2 \langle u, Au\rangle + \langle b, u\rangle$, où $A$ est une
+  application linéaire sur $M_{n\times m}$
 \end{question}
 
 \subsection{Partie pratique}
