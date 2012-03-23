@@ -7,6 +7,7 @@
 \usepackage{lmodern}
 \usepackage{oldstyle}
 \usepackage{url}
+\usepackage[pdfborder=(0 0 0)]{hyperref}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \renewcommand{\thesection}{ \textbf{\Large \arabic{section}.}}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\`{u}\`{u}
@@ -112,7 +113,7 @@ Discuter de l'existence et de l'unicit\'e de solutions du probl\`eme discret.
   $T$ est une matrice à expliciter et où $\|\cdot\|_{M}$ est la norme
   issue du produit scalaire canonique sur $M_{n \times m}$ donné par
   $\langle u,v \rangle = \sum_{i=1}^{n}\sum_{j=1}^{m} u_{ij} v_{ij}$.
-  
+
   Réécrire le problème d'optimisation sous la forme : minimiser $\frac
   1 2 \langle u, Au\rangle + \langle b, u\rangle$, où $A$ est une
   application linéaire sur $M_{n\times m}$
@@ -167,7 +168,7 @@ Attention, impl\'ementer cet algorithme de fa\c{c}on \`a pouvoir changer facilem
 \begin{question}
 Utiliser l'agorithme pour \texttt{lena.jpg} \`a laquelle vous ajouterez un bruit gaussien, c'est \`a dire pour $ (i,j)\in [1,n]\times[1,m]$, on pose:
 \begin{equation}
-g_{i,j} = f_{i,j} + r_{i,j} 
+g_{i,j} = f_{i,j} + r_{i,j}
 \end{equation}
 avec $r_{i,j}$ un tirage de variables gaussiennes ind\'ependantes de variance $\sigma$ et de moyenne nulle.
 \end{question}
@@ -207,7 +208,7 @@ Pourquoi cette fonctionnelle ne rentre-t-elle pas dans le cadre d'applications d
 \end{question}
 
 \begin{question}
-On propose de remplacer la norme $L^1$ par 
+On propose de remplacer la norme $L^1$ par
 \begin{equation}
 \| f \|_{\varepsilon} = \sum_{i=1}^n \sum_{i=1}^m \sqrt{\varepsilon^2 + |f_{i,j}|^2} \,,
 \end{equation}
@@ -216,7 +217,7 @@ Que dire de la nouvelle fonctionnelle (r\'egularit\'e, convexit\'e, existence d'
 \end{question}
 
 \begin{question}
-Calculer le gradient de la fonctionnelle \eqref{new} et la hessienne.
+Calculer le gradient de la fonctionnelle et la hessienne.
 \end{question}
 
 \subsection{Partie pratique}
