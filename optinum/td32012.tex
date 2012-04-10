@@ -67,7 +67,7 @@ DUMI2E troisi\`eme ann\'ee      \hfill      ann\'ee \textos{2011}/\textos{2012}
 \section*{Objectif}
 On s'int\'eresse au probl\`eme de d\'ebruitage d'une image donn\'ee
 par des m\'ethodes variationnelles. La donn\'ee d'une image
-num\'erique est une matrice de taille $(n,n)$. On utilisera l'image
+num\'erique est une matrice de taille $(n,m)$. On utilisera l'image
 test classique en traitement d'image \texttt{lena.jpg} de taille
 $(512,512)$ pour valider les algorithmes impl\'ement\'es. Les
 m\'ethodes de d\'ebruitage reposent souvent sur des m\'ethodes
@@ -78,6 +78,50 @@ utilis\'ee pour les tests num\'eriques.
 
 
 \section{Norme $L^{2}$}
+\subsection{Partie théorique}
+On consid\`ere qu'une image est la representation discr\`ete d'une
+fonction $f:[0,a]\times[0,b] \mapsto \R^2$ qui est donn\'ee par une
+matrice $[f_{i,j}]_{(i,j)\in [1,n]\times[1,m]}$.
+
+On s'intéresse au problème de débruitage suivant. Soit une image
+originale $f$, qui a été bruitée : $g = f + \varepsilon$. Comment
+retrouver $f$, $g$ étant donné ?
+
+On formule un probl\`eme d'optimisation permettant de trouver un
+candidat not\'e $\hat{f}$ pour repr\'esenter la fonction $f$:
+\begin{equation}
+\hat{f} = \argmin \frac12 \| u -  g\|_{L^2}^2 + \frac{1}{2\beta}\| \nabla u \|^2_{L^2}\,,
+\end{equation}
+o\`u $\beta$ est un param\`etre r\'eel positif.  Ce probl\`eme
+d'optimisation propose donc de trouver une fonction $\hat{f}$ qui va
+donner un bon compromis entre la donn\'ee (du fait du terme $ \| u -
+g\|_{L^2}^2 $) et le caractère lisse de l'image (du fait du terme de
+droite $\| \nabla u \|^2_{L^2}$).
+
+\begin{question}
+\'Ecrire une version discr\`ete des termes $\frac12 \| u -  g\|_{L^2}^2$ et $\frac{1}{2\beta}\| \nabla u \|^2_{L^2}$ qui soient des fonctions quadratiques des valeurs $[u_{i,j}]_{(i,j)\in [1,n]\times[1,m]}$ et $[g_{i,j}]_{(i,j)\in [1,n]\times[1,m]}$.
+\end{question}
+
+\begin{question}
+Quelle est la r\'egularit\'e de la fonctionnelle en fonction des coefficients matriciels?
+Discuter de l'existence et de l'unicit\'e de solutions du probl\`eme discret.
+\end{question}
+
+\begin{question}
+  Écrire le terme issu de la discrétisation de $\| \nabla u
+  \|^2_{L^2}$ sous la forme $\|Tu\|^{2}_{M} + \|u T\|^{2}_{M}$, où
+  $T$ est une matrice à expliciter et où $\|\cdot\|_{M}$ est la norme
+  issue du produit scalaire canonique sur $M_{n \times m}$ donné par
+  $\langle u,v \rangle = \sum_{i=1}^{n}\sum_{j=1}^{m} u_{ij} v_{ij}$.
+
+  Réécrire le problème d'optimisation sous la forme : minimiser $\frac
+  1 2 \langle u, Au\rangle + \langle b, u\rangle$, où $A$ est une
+  application linéaire sur $M_{n\times m}$. Quels algorithmes peut-on
+  utiliser pour résoudre ce problème ? (gradient à pas fixe, gradient
+  conjugué, Newton ...)
+\end{question}
+
+\subsection{Partie pratique}
 
 On rappelle qu'une image numérique au format RGB est composée de trois
 matrices $M^{k}$, représentant les trois canaux de couleur rouge, vert
@@ -92,17 +136,12 @@ M^{2}(i,j) = 0, M^{3}(i,j) = 255$.
 
   \url{http://www.ceremade.dauphine.fr/~levitt/optinum/}
 
-  La charger sous la forme d'un tableau à trois dimensions $n \times n
+  La charger sous la forme d'un tableau à trois dimensions $N \times M
   \times 3$ par la commande
-  \footnote{Vous pouvez utiliser n'importe quelle image (carrée) de la même manière.}
+  \footnote{Vous pouvez utiliser n'importe quelle image de la même manière.}
   \begin{center}
       \verb+lena_rgb = imread('lena.jpg');+
   \end{center}
-  et la convertir en tableau de nombres à virgule flottante :
-  \begin{center}
-      \verb+lena_rgb = cast(lena_rgb, 'double');+
-  \end{center}
-
   Par soucis de simplicité, on ne veut travailler sur un seul canal; pour ceci
   convertir l'image en niveaux de gris en faisant une moyenne sur les 3 canaux.
   \footnote{C'est une opération grossière qui ne prend pas en compte les particularités de la vision
@@ -113,17 +152,18 @@ M^{2}(i,j) = 0, M^{3}(i,j) = 255$.
 
   \url{http://fr.wikipedia.org/wiki/Efficacit\%C3\%A9_lumineuse_spectrale}
   }
+  Attention aux dépassements d'entiers si on factorise la division !
   \begin{center}
-      \verb!lena = (lena_rgb(:,:,1) + lena_rgb(:,:,2) + lena_rgb(:,:,3))/3!
+      \verb!lena=lena_rgb(:,:,1)/3 + lena_rgb(:,:,2)/3 + lena_rgb(:,:,3)/3!
   \end{center}
-  On peut afficher l'image par la commande \verb+imagesc(lena);+
+  On peut afficher l'image par la commande \verb+imshow(lena);+
 \end{question}
 
 \begin{question}
 Impl\'ementer l'algorithme du gradient conjugu\'e pour r\'esoudre num\'eriquement le probl\`eme discretis\'e. On rappelle l'algorithme pour minimiser $\frac12 \dotp{Ax}{x}+\dotp{b}{x}$:
 
 Initialisation de $k=0$,
-$x_0 \in \R^{n^2}$,  $r_0 \leftarrow Ax_0 + b$ and $p_0 \leftarrow -r_0$ et it\'eration tant que $r_k\neq 0$ de
+$x_0 \in \R^{nm}$,  $r_0 \leftarrow Ax_0 + b$ and $p_0 \leftarrow -r_0$ et it\'eration tant que $r_k\neq 0$ de
 \begin{equation}
 \begin{cases}
     \alpha_k \leftarrow \frac{\dotp{r_k}{r_k} }{ \dotp{p_k}{A p_k} } \\
@@ -139,7 +179,7 @@ Attention, impl\'ementer cet algorithme de fa\c{c}on \`a pouvoir changer facilem
 \end{question}
 
 \begin{question}
-Utiliser l'agorithme pour \texttt{lena.jpg} \`a laquelle vous ajouterez un bruit gaussien, c'est \`a dire pour $ (i,j)\in [1,n]\times[1,n]$, on pose:
+Utiliser l'agorithme pour \texttt{lena.jpg} \`a laquelle vous ajouterez un bruit gaussien, c'est \`a dire pour $ (i,j)\in [1,n]\times[1,m]$, on pose:
 \begin{equation}
 g_{i,j} = f_{i,j} + r_{i,j}
 \end{equation}
@@ -156,6 +196,44 @@ Que se passe-t-il pour des valeurs extrêmes de $\beta$ et comment l'expliquez-v
 
 
 \section{Norme $L^{1}$}
+\subsection{Partie théorique}
+Dans cette partie, on consid\`ere un autre mod\`ele qui fait intervenir la norme $L_1$ sur les matrices:
+\begin{equation}
+\| f \|_{1} = \sum_{i=1}^n \sum_{i=1}^m |f_{i,j}| \,.
+\end{equation}
+
+On souhaite remplacer la norme $L_2$ du gradient par la norme $L_1$ pr\'ec\'edemment d\'efinie.
+
+\begin{question}
+Proposer une version discr\`ete (c'est \`a dire sur les matrices) de la fonctionnelle $$ \frac12 \| u -  g\|^2_{L^2} + \frac{1}{2\beta}\| \nabla u \|_{L^1}\,.$$
+\end{question}
+
+\begin{question}
+Pour $g=0$, $m=1$ et $n=2$, la fonctionelle est-elle (strictement) convexe comme fonction des coefficients de la matrice $u$?
+\end{question}
+
+\begin{question}
+G\'en\'eraliser la question pr\'ec\'edente et discuter l'existence et l'unicit\'e de solutions.
+\end{question}
+
+\begin{question}
+Pourquoi cette fonctionnelle ne rentre-t-elle pas dans le cadre d'applications des m\'ethodes \'etudi\'ees en cours?
+\end{question}
+
+\begin{question}
+On propose de remplacer la norme $L^1$ par
+\begin{equation}
+\| f \|_{\varepsilon} = \sum_{i=1}^n \sum_{i=1}^m \sqrt{\varepsilon^2 + |f_{i,j}|^2} \,,
+\end{equation}
+pour un param\`etre $\varepsilon$ r\'eel.
+Que dire de la nouvelle fonctionnelle (r\'egularit\'e, convexit\'e, existence d'un minimum...)?
+\end{question}
+
+\begin{question}
+Calculer le gradient de la fonctionnelle et la hessienne.
+\end{question}
+
+\subsection{Partie pratique}
 
 \begin{question}
 La m\'ethode de Newton utilise la direction de descente d\'efinie par:
