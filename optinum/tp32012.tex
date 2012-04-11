@@ -98,7 +98,8 @@ M^{2}(i,j) = 0, M^{3}(i,j) = 255$.
   \begin{center}
       \verb+lena_rgb = imread('lena.jpg');+
   \end{center}
-  et la convertir en tableau de nombres à virgule flottante :
+  Ce tableau est un tableau d'entiers non signés codés sur 8 bits, ce n'est pas adapté pour la manipulation
+  d'image. On va donc le convertir en tableau de nombres à virgule flottante :
   \begin{center}
       \verb+lena_rgb = cast(lena_rgb, 'double');+
   \end{center}
@@ -116,7 +117,7 @@ M^{2}(i,j) = 0, M^{3}(i,j) = 255$.
   \begin{center}
       \verb!lena = (lena_rgb(:,:,1) + lena_rgb(:,:,2) + lena_rgb(:,:,3))/3!
   \end{center}
-  On peut afficher l'image par la commande \verb+imagesc(lena);+
+  On peut afficher l'image par la commande \verb+imagesc(lena);colormap('gray');+
 \end{question}
 
 \begin{question}
